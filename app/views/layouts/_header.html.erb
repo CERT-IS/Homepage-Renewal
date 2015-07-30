@@ -24,8 +24,19 @@
                     </li>
                     <li class="topbar-devider"></li>   
                     <li><a href="page_faq.html">Help</a></li>  
-                    <li class="topbar-devider"></li>   
-                    <li><a href="<%= new_user_session_path %>">Login</a></li>   
+                    <li class="topbar-devider"></li>
+                    <% if user_signed_in? %>
+                        <li class="hoverSelector">
+                            <a><%= current_user.realname %></a>
+                            <ul class="languages hoverSelectorBlock">
+                                <li><a href="#">Profile</a> </li>
+                                <li><a href="#">Settings</a></li>
+                                <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
+                            </ul>
+                        </li> 
+                    <% else %>
+                        <li><a href="<%= new_user_session_path %>">Login</a></li>
+                    <% end %>
                 </ul>
             </div>
             <!-- End Topbar -->
