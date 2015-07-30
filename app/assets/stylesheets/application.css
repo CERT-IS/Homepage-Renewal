@@ -28,4 +28,6 @@
  * CSS Customization
  *= require bootstrap/css/custom.css
  *
+ * CSS Page Style
+ *= require bootstrap/css/pages/page_log_reg_v1.css
  */

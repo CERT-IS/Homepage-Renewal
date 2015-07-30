@@ -1,26 +1,56 @@
-<h2>Log in</h2>
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Login</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="<%= root_path %>">Home</a></li>
+            <li class="active">Login</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<!--=== Content Part ===-->
+<div class="container content">   
+  <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <%= form_for(resource, as: resource_name, html: { class: "reg-page" }, url: session_path(resource_name)) do |f| %>
+                <div class="reg-header">            
+                    <h2>Login to your account</h2>
+                </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <%= f.text_field :email, class: "form-control", placeholder: "Username", autofocus: true %>
+                </div>                    
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <%= f.password_field :password, class: "form-control", placeholder: "Password", autocomplete: "off" %>
+                </div>                    
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
+                <div class="row">
+                    <div class="col-md-6 checkbox">
+                        <label>
+                          <% if devise_mapping.rememberable? -%>
+                            <%= f.check_box :remember_me %> Stay signed in
+                          <% end -%>
+                        </label>                        
+                    </div>
+                    <div class="col-md-6">
+                        <%= f.submit "Login", class: "btn-u pull-right" %> 
+                    </div>
+                </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+                <hr>
 
-<%= render "devise/shared/links" %>
+                <h4>Forget your Password ?</h4>
+                <p>no worries, <a class="color-green" href="<%= new_password_path(resource_name) %>">click here</a> to reset your password.</p>
+            <% end %>          
+        </div>
+    </div><!--/row-->
+</div><!--/container-->   
+<!--=== End Content Part ===-->
+
+
+
+
