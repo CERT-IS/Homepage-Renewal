@@ -1,3 +1,4 @@
+
 /*   
  * Template Name: Unify - Responsive Bootstrap Template
  * Description: Business, Corporate, Portfolio, E-commerce, Blog and One Page Template.
@@ -13,7 +14,7 @@
   overflow: hidden;
   padding: 10px 0 6px;
   border-bottom: solid 1px #eee;
-  background: url(../img/patterns/breadcrumbs.png) repeat;
+  background: url(<%= asset_path 'bootstrap/patterns/breadcrumbs.png' %>) repeat;
 }
 
 .breadcrumbs h1 {
