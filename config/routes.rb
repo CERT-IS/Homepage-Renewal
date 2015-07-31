@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  # You can have the root of your site routed with "root"
   root 'base#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  devise_for :users
+
+  get '/privacy_policy' => 'base#privacy'
+  get '/terms_service' => 'base#terms'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
