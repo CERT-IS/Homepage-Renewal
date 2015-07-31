@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
 
   validates :uid, presence: true, uniqueness: { case_sensitive: false }
   validates :realname ,presence: true
-  validates :phone ,presence: true, length: { is: 13 }
+  validates :phone ,presence: true, length: { is: 11 }
 end

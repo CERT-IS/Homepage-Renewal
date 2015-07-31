@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
 
+  # , constraints: { subdomain: 'api' }
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
