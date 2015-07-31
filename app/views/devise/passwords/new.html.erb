@@ -1,16 +1,40 @@
-<h2>Forgot your password?</h2>
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">New Password</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="<%= root_path %>">Home</a></li>
+            <li class="active">New Password</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        	<%= devise_error_messages! %>
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "reg-page" }) do |f| %>
+                <div class="reg-header">
+                    <h2>Reset your password</h2>
+                    <p>Remember your password? Click <a href="<%= new_session_path(resource_name) %>" class="color-green">Sign In</a> to login your account.</p>                    
+                </div>
+               
+                <label>Email Address <span class="color-red">*</span></label>
+                <%= f.email_field :email, class: "form-control margin-bottom-20", autofocus: true %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+                <div class="row">
+                    <div class="col-lg-6 checkbox"></div>
+                    <div class="col-lg-6 text-right">
+                        <%= f.submit "Send Email", class: "btn-u" %>
+                    </div>
+                </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+                <br/><br/><br/>
 
-<%= render "devise/shared/links" %>
+            <% end %>
+        </div>
+    </div>
+</div><!--/container-->		
+<!--=== End Content Part ===-->
