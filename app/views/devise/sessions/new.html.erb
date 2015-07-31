@@ -19,6 +19,19 @@
                     <h2>Login to your account</h2>
                 </div>
 
+                <% if flash.present? %>
+                    <% flash.each do |key, value|  %>
+                        <li>
+                            <% if value.eql? "Invalid uid or password." %>
+                                <font color="red"><%= "아이디 혹은 비밀번호가 일치하지 않습니다." %></font>
+                            <% else %>
+                                <%= value %>
+                            <% end %>
+                        </li>
+                    <% end %>
+                    <br>
+                <% end %>
+
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     <%= f.text_field :uid, class: "form-control", placeholder: "ID", autofocus: true %>
