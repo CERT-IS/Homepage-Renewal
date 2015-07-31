@@ -83,7 +83,6 @@ for ( var i=0; i<msg.length; i++) {
 
         if ( msg[i].indexOf('has already been taken') > -1 ) {
             var tmp = $("#user_uid").val();
-            console.log(tmp);
             $("#user_uid").val("");
             $("#user_uid").attr("placeholder", tmp + "는 이미 사용 중인 아이디입니다.");
         }

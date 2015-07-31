@@ -14,15 +14,16 @@
 <div class="container content">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        	<%= devise_error_messages! %>
             <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "reg-page" }) do |f| %>
                 <div class="reg-header">
                     <h2>Reset your password</h2>
                     <p>Remember your password? Click <a href="<%= new_session_path(resource_name) %>" class="color-green">Sign In</a> to login your account.</p>                    
                 </div>
                
-                <label>Email Address <span class="color-red">*</span></label>
-                <%= f.email_field :email, class: "form-control margin-bottom-20", autofocus: true %>
+                <div id="email-form" class="">
+	                <label>Email Address <span class="color-red">*</span></label>
+	                <%= f.email_field :email, class: "form-control margin-bottom-20", autofocus: true %>
+                </div>
 
                 <div class="row">
                     <div class="col-lg-6 checkbox"></div>
@@ -38,3 +39,24 @@
     </div>
 </div><!--/container-->		
 <!--=== End Content Part ===-->
+
+<script>
+var msg = "<%= resource.errors.full_messages %>";
+msg = msg.replace(/&quot;/g, "\"");
+msg = msg.replace(/&#39;/g, "\'");
+msg = msg.substring(1, msg.length-1)
+msg = msg.split(", ");
+
+for ( var i=0; i<msg.length; i++) {
+	if ( msg[i].indexOf('not found') > -1 ) {
+		$("#email-form").addClass("has-error");
+		var tmp = $("#user_email").val();
+        $("#user_email").val("");
+        $("#user_email").attr("placeholder", tmp + "는 등록되지 않은 이메일입니다.");
+	}
+	else {
+		console.log(msg[i]);
+	}
+}
+
+</script>
