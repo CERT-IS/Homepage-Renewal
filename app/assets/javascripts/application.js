@@ -24,4 +24,6 @@
 //= require bootstrap/app.js
 //= require bootstrap/plugins/owl-carousel.js
 //= require bootstrap/plugins/parallax-slider.js
+//= require bootstrap/plugins/ladda-buttons/spin.min.js
+//= require bootstrap/plugins/ladda-buttons/ladda.min.js
 //= require turbolinks

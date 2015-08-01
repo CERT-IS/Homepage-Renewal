@@ -2,9 +2,9 @@
 
 function registerAllow() {
 	if ( $("input:checkbox[id='terms_agree']").is(":checked") ) {
-		$("input:submit").prop('disabled', false);
+		$("#reg_btn").prop('disabled', false);
 	}
 	else {
-		$("input:submit").prop('disabled', true);	
+		$("#reg_btn").prop('disabled', true);	
 	}
 }

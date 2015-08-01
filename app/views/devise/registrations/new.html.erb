@@ -60,8 +60,8 @@
                             I read <a href="<%= terms_service_path %>" target="_blank" class="color-green">Terms and Conditions</a>
                         </label>                        
                     </div>
-                    <div class="col-lg-6 text-right">
-                      <%= f.submit "Register", class: "btn-u", disabled: true %>
+                    <div class="col-lg-6 text-right ladda-btn">
+                      <button class="btn-u ladda-button" data-style="slide-down" disabled="true" id="reg_btn">Register</button>
                     </div>
                 </div>
             <% end %>
