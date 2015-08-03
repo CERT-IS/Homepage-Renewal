@@ -1,1 +1,39 @@
 /* Add here all your css styles (customizations) */
+
+/*
+ * Nanum Gothic (Korean) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/NanumGothic-Regular.eot');
+  src: url('/assets/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+       url('/assets/NanumGothic-Regular.woff2') format('woff2'),
+       url('/assets/NanumGothic-Regular.woff') format('woff'),
+       url('/assets/NanumGothic-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/assets/NanumGothic-Bold.eot');
+  src: url('/assets/NanumGothic-Bold.eot?#iefix') format('embedded-opentype'),
+       url('/assets/NanumGothic-Bold.woff2') format('woff2'),
+       url('/assets/NanumGothic-Bold.woff') format('woff'),
+       url('/assets/NanumGothic-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 800;
+  src: url('/assets/NanumGothic-ExtraBold.eot');
+  src: url('/assets/NanumGothic-ExtraBold.eot?#iefix') format('embedded-opentype'),
+       url('/assets/NanumGothic-ExtraBold.woff2') format('woff2'),
+       url('/assets/NanumGothic-ExtraBold.woff') format('woff'),
+       url('/assets/NanumGothic-ExtraBold.ttf') format('truetype');
+}
+
+body {
+    font-family: "Nanum Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
