@@ -1,0 +1,209 @@
+<!--=== Profile ===-->
+<div class="container content profile">	
+	<div class="row">
+        <!--Left Sidebar-->
+        <div class="col-md-3 md-margin-bottom-40">
+            <%= image_tag @user.avatar.url, height: "262", width: "262", class: "img-responsive profile-img margin-bottom-20" %>
+
+            <a class="btn-u btn-u-sm" onclick="javascript: { $('#user_avatar').click(); }">Change Picture</a>
+            <%= form_for @user, :url => update_avatar_user_path(@user.uid), :html => { :multipart => true, style: "display: none" } do |form| %>
+                <%= form.file_field :avatar, onchange: "this.form.submit();" %>
+            <% end %>
+
+            <div class="panel-heading-v1 overflow-h">
+                <h1 class="heading-xs"> <%= @user.uid %> </h1> 
+                <p> <%= @user.realname %> </p>
+            </div>
+            <hr>
+
+            <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                <li class="list-group-item">
+                    <a href="<%= user_path(@user.uid) %>"><i class="fa fa-bar-chart-o"></i> Overall</a>
+                </li>
+                <li class="list-group-item active">
+                    <a href="<%= user_profile_index_path(@user.uid) %>"><i class="fa fa-user"></i> Profile</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="page_profile_users.html"><i class="fa fa-group"></i> Users</a>
+                </li>                                        
+                <li class="list-group-item">
+                    <a href="page_profile_projects.html"><i class="fa fa-cubes"></i> My Projects</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="page_profile_comments.html"><i class="fa fa-comments"></i> Comments</a>
+                </li>                                        
+                <li class="list-group-item">
+                    <a href="page_profile_history.html"><i class="fa fa-history"></i> History</a>
+                </li>                                       
+                <li class="list-group-item">
+                    <a href="page_profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
+                </li> 
+            </ul>   
+
+            <hr>
+
+            <div class="panel panel-profile">
+                <div class="panel-heading overflow-h">
+                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-lightbulb-o"></i> Social Contacts </h2>
+                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled social-contacts-v3">
+                        <li><i class="rounded-x tw fa fa-twitter"></i> <a href="#">edward.rooster</a></li>
+                        <li><i class="rounded-x fb fa fa-facebook"></i> <a href="#">Edward Rooster</a></li>
+                        <li><i class="rounded-x gh fa fa-github"></i> <a href="#">edwardRooster77</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Left Sidebar-->
+        
+        <!-- Profile Content -->
+        <div class="col-md-9">
+            <div class="profile-body">
+                <div class="panel panel-profile">
+                    <div class="panel-heading overflow-h">
+                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-user"></i> Profile </h2>
+                        <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="profile-bio">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1><%= @user.uid %></h1>
+                                    <span><strong>Name:</strong> <%= @user.realname %></span>
+                                    <span><strong>Position:</strong> Web Designer</span>
+                                    <hr>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
+                                    <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
+                                </div>
+                            </div>    
+                        </div><!--/end row-->
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Skills -->
+                <div class="panel panel-profile">
+                    <div class="panel-heading overflow-h">
+                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-pencil"></i> Language Skills</h2>
+                        <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row pie-progress-charts margin-bottom-30">
+                            <div class="inner-pchart col-md-3">
+                                <div class="circle" id="circles-1"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="140" height="140"><path fill="transparent" stroke="#D3B6C6" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 69.90416038427306 1.0000665596838587 Z"></path><path fill="transparent" stroke="#9B6BCC" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 52.91551060221643 136.85147883193775 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:35px; height:140px; line-height:140px;"><span class="circles-number"><span class="circles-number">54</span></span><span class="circles-text">%</span></div></div></div>
+                                <h3 class="circle-title">Ruby on Rails</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            </div> 
+                            <div class="inner-pchart col-md-3">
+                                <div class="circle" id="circles-2"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="140" height="140"><path fill="transparent" stroke="#C9FF97" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 69.90416038427306 1.0000665596838587 Z"></path><path fill="transparent" stroke="#72c02c" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 19.730006348346947 117.26444475779613 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:35px; height:140px; line-height:140px;"><span class="circles-number"><span class="circles-number">63</span></span><span class="circles-text">%</span></div></div></div>
+                                <h3 class="circle-title">Cloud Computing</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            </div>       
+                            <div class="inner-pchart col-md-3">
+                                <div class="circle" id="circles-3"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="140" height="140"><path fill="transparent" stroke="#BEE3F7" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 69.90416038427306 1.0000665596838587 Z"></path><path fill="transparent" stroke="#3498DB" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 2.2364051601485784 83.0036615758971 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:35px; height:140px; line-height:140px;"><span class="circles-number"><span class="circles-number">72</span></span><span class="circles-text">%</span></div></div></div>
+                                <h3 class="circle-title">Linux</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            </div>
+                            <div class="inner-pchart col-md-3">
+                                <div class="circle" id="circles-4"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="140" height="140"><path fill="transparent" stroke="#FFC2BB" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 69.90416038427306 1.0000665596838587 Z"></path><path fill="transparent" stroke="#E74C3C" stroke-width="2" d="M 69.98594654894504 1.0000014311557095 A 69 69 0 1 1 5.83060525000252 44.63686183811247 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:35px; height:140px; line-height:140px;"><span class="circles-number"><span class="circles-number">81</span></span><span class="circles-text">%</span></div></div></div>
+                                <h3 class="circle-title">C/C++</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+                <!--/end skills -->
+
+                <hr>                                
+
+                <!--Timeline-->
+                <div class="panel panel-profile">
+                    <div class="panel-heading overflow-h">
+                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i> Experience</h2>
+                        <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                    </div>
+                    <div class="panel-body margin-bottom-40">
+                        <ul class="timeline-v2 timeline-me">
+                            <li>
+                                <time datetime="" class="cbp_tmtime"><span>Mobile Design</span> <span>2012 - Current</span></time>
+                                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                                <div class="cbp_tmlabel">
+                                    <h2>BFC NYC Partners</h2>
+                                    <p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Peasprouts wattle seed rutabaga okra yarrow cress avocado grape.</p> 
+                                </div>
+                            </li>
+                            <li>
+                                <time datetime="" class="cbp_tmtime"><span>Web Designer</span> <span>2007 - 2012</span></time>
+                                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                                <div class="cbp_tmlabel">
+                                <h2>Freelance</h2>
+                                    <p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <time datetime="" class="cbp_tmtime"><span>Photodesigner</span> <span>2003 - 2007</span></time>
+                                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                                <div class="cbp_tmlabel">
+                                <h2>Toren Condo</h2>
+                                    <p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>    
+                </div>
+                <!--End Timeline-->
+
+                <!--Timeline-->
+                <div class="panel panel-profile">
+                    <div class="panel-heading overflow-h">
+                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-mortar-board"></i> Education</h2>
+                        <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="timeline-v2 timeline-me">
+                            <li>
+                                <time datetime="" class="cbp_tmtime"><span>Bachelor of IT</span> <span>2003 - 2000</span></time>
+                                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                                <div class="cbp_tmlabel">
+                                    <h2>Harvard University</h2>
+                                    <p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Peasprouts wattle seed rutabaga okra yarrow cress avocado grape.</p> 
+                                </div>
+                            </li>
+                            <li>
+                                <time datetime="" class="cbp_tmtime"><span>Web Design</span> <span>1997 - 2000</span></time>
+                                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                                <div class="cbp_tmlabel">
+                                <h2>Imperial College London</h2>
+                                    <p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <time datetime="" class="cbp_tmtime"><span>High School</span> <span>1988 - 1997</span></time>
+                                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                                <div class="cbp_tmlabel">
+                                <h2>Chicago High School</h2>
+                                    <p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>    
+                </div>
+                <!--End Timeline--> 
+
+            </div>
+        </div>
+        <!-- End Profile Content -->
+    </div>
+</div>		
+<!--=== End Profile ===-->
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initScrollBar();
+        CirclesMaster.initCirclesMaster1();
+        CirclesMaster.initCirclesMaster2();
+        });
+</script>

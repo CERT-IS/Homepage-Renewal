@@ -29,7 +29,7 @@
                         <li class="hoverSelector">
                             <a><%= current_user.realname %></a>
                             <ul class="languages hoverSelectorBlock">
-                                <li><a href="#">Profile</a> </li>
+                                <li><a href="<%= user_path(current_user.uid) %>">Profile</a> </li>
                                 <li><a href="#">Settings</a></li>
                                 <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
                             </ul>

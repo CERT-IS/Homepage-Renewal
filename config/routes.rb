@@ -3,6 +3,14 @@ Rails.application.routes.draw do
   root 'base#index'
 
   devise_for :users
+  resources :users, only: [:show, :update] do
+    member do
+      patch 'update_avatar'
+      put 'update_avatar'
+    end
+
+    resources :profile, only: [:index]
+  end
 
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'

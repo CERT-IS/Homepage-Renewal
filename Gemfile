@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 
 # Rails authentication solution
 gem 'devise'
+# File attachment
+gem "paperclip", "~> 4.1"
 
 
 group :development, :test do

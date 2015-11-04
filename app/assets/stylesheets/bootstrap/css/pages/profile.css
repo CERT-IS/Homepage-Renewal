@@ -512,7 +512,7 @@
 
 /*Circle in Responsive*/
 @media (max-width: 450px) {
-	.p-chart.col-xs-6 {
+	.p-chart.col-xs-4 {
 		width: 100%;
 	}
 }
@@ -601,6 +601,9 @@
 .profile .social-contacts-v2 li i.gm {
 	color: #c6574b;
 }
+.profile .social-contacts-v2 li i.gh {
+	color: #666666;
+}
 
 /*Social Contacts v3*/
 .profile .social-contacts-v3 {
@@ -645,6 +648,9 @@
 }
 .profile .social-contacts-v3 li i.gm {
 	background: #c6574b;
+}
+.profile .social-contacts-v3 li i.gh {
+	background: #666666;
 }
 
 /*Profile Blog

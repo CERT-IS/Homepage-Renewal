@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150801051530) do
+ActiveRecord::Schema.define(version: 20151104105145) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(version: 20150801051530) do
     t.string   "realname",               limit: 255, default: "", null: false
     t.string   "phone",                  limit: 255, default: "", null: false
     t.string   "authentication_token",   limit: 255
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 4
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree

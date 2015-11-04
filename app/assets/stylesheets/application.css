@@ -26,10 +26,15 @@
  *= require bootstrap/owl.carousel.css
  *= require bootstrap/plugins/custom-lada-btn.css
  *= require bootstrap/plugins/custom-hover-effects.css
+ *= require bootstrap/plugins/scrollbar/css/jquery.mCustomScrollbar.css
+ *= require bootstrap/plugins/sky-forms-pro/skyforms/css/sky-forms.css
+ *= require bootstrap/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css
  *
  * CSS Customization
  *= require bootstrap/css/custom.css
  *
  * CSS Page Style
  *= require bootstrap/css/pages/page_log_reg_v1.css
+ *= require bootstrap/css/pages/profile.css
+ *= require bootstrap/css/pages/shortcode_timeline2.css
  */
