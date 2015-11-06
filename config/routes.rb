@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :profile, only: [:index]
   end
 
+  resources :notices, controller: 'board_notice'
+
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
   get '/test' => 'base#test'

@@ -3,7 +3,7 @@
 	<div class="row">
         <!--Left Sidebar-->
         <div class="col-md-3 md-margin-bottom-40">
-            <img class="img-responsive profile-img margin-bottom-20" src="/assets/bootstrap/team/img1-md.jpg" alt="">
+            <%= image_tag @user.avatar.url, height: "262", width: "262", class: "img-responsive profile-img margin-bottom-20" %>
 
             <div class="panel-heading-v1 overflow-h">
                 <h1 class="heading-xs"> <%= @user.uid %> </h1> 
@@ -17,21 +17,15 @@
                 </li>
                 <li class="list-group-item">
                     <a href="<%= user_profile_index_path(@user.uid) %>"><i class="fa fa-user"></i> Profile</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="page_profile_users.html"><i class="fa fa-group"></i> Users</a>
-                </li>                                        
-                <li class="list-group-item">
-                    <a href="page_profile_projects.html"><i class="fa fa-cubes"></i> My Projects</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="page_profile_comments.html"><i class="fa fa-comments"></i> Comments</a>
-                </li>                                        
-                <li class="list-group-item">
-                    <a href="page_profile_history.html"><i class="fa fa-history"></i> History</a>
                 </li>                                       
                 <li class="list-group-item">
-                    <a href="page_profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fa fa-cubes"></i> My Projects</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#"><i class="fa fa-comments"></i> Comments</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#"><i class="fa fa-cog"></i> Settings</a>
                 </li> 
             </ul>   
 
