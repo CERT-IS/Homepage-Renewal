@@ -34,6 +34,26 @@
        url('/assets/NanumGothic-ExtraBold.ttf') format('truetype');
 }
 
-body {
-    font-family: "Nanum Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-face {
+  font-family: 'nanumbarunpenr';
+  src: url('/assets/nanumbarunpenr.eot');
+  src: url('/assets/nanumbarunpenr.eot?#iefix') format('embedded-opentype'),
+       url('/assets/nanumbarunpenr.woff2') format('woff2'),
+       url('/assets/nanumbarunpenr.woff') format('woff'),
+       url('/assets/nanumbarunpenr.ttf') format('truetype'),
+       url('/assets/nanumbarunpenr.svg#nanumbarunpenr') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nanumbarunpenb';
+  src: url('nanumbarunpenb.eot');
+  src: url('nanumbarunpenb.eot?#iefix') format('embedded-opentype'),
+       url('nanumbarunpenb.woff2') format('woff2'),
+       url('nanumbarunpenb.woff') format('woff'),
+       url('nanumbarunpenb.ttf') format('truetype'),
+       url('nanumbarunpenb.svg#nanumbarunpenb') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }

@@ -649,11 +649,40 @@ h3.heading-xs {
   right: -2px;
 }
 
+.create-board {
+  -webkit-box-shadow:1px 1px 10px silver;
+  -moz-box-shadow:1px 1px 10px silver;
+  box-shadow:1px 1px 10px silver;
+  width: 60px;
+  height: 60px;
+  border-radius: 50% !important;
+  position: fixed; 
+  bottom: 5px; 
+  right: 5px; 
+  opacity: 1; 
+  cursor: pointer;
+}
 
 @media (min-width: 768px) {
   .carousel-indicators {
     bottom: 10px;
   }  
+}
+
+@media (min-width: 1200px) {
+  .create-board {
+    -webkit-box-shadow:1px 1px 10px silver;
+    -moz-box-shadow:1px 1px 10px silver;
+    box-shadow:1px 1px 10px silver;
+    width: 60px;
+    height: 60px;
+    border-radius: 50% !important;
+    position: fixed; 
+    bottom: 100px; 
+    right: 100px; 
+    opacity: 1; 
+    cursor: pointer;
+  }
 }
 
 /*Tabs

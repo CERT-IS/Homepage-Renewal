@@ -1,0 +1,51 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Blog Item 2</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Blog</a></li>
+            <li class="active">Blog Item 2</li>
+        </ul>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<div class="bg-color-light">
+    <div class="container content-sm">
+        <div class="tag-box tag-box-v3 form-page">
+            <div class="headline"><h3>Standard Form Controls</h3></div>                
+
+            <form action="#">
+                <!--Inputs-->
+                <h4>Title</h4>
+                <input type="text" class="form-control" name="required">
+                <!--End Inputs-->
+
+                <div class="margin-bottom-40"></div>
+
+                <!--Textarea-->
+                <h4>Contents</h4>
+                <div id="summernote" class=""></div>
+                <!--End Textarea-->
+
+                <div class="margin-bottom-40"></div>
+
+                <footer style="text-align: right;">
+                    <button type="submit" class="btn-u" onclick="summernote_submit()">Submit</button>
+                    <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                </footer>
+                
+            </form>
+        </div>
+        
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        $('#summernote').summernote({
+            height: 500
+        });
+    });
+</script>

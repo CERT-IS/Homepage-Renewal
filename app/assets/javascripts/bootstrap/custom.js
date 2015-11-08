@@ -8,3 +8,8 @@ function registerAllow() {
 		$("#reg_btn").prop('disabled', true);	
 	}
 }
+
+function summernote_submit() {
+	var t =  $('#summernote').code();
+    console.log(t);
+}

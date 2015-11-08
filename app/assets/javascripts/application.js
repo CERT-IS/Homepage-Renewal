@@ -18,14 +18,16 @@
 //= require bootstrap/bootstrap.min.js
 
 // JS Implementing Plugins
-//= require bootstrap/back-to-top.js
 //= require bootstrap/smoothScroll.js
 //= require bootstrap/modernizr.js
 //= require bootstrap/jquery.cslider.js
 //= require bootstrap/owl.carousel.js
 //= require bootstrap/plugins/circles-master/circles.js
+//= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js
 //= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js
+//= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js
 //= require bootstrap/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js
+//= require bootstrap/plugins/summernote/summernote.min.js
 
 // JS Customization
 //= require bootstrap/custom.js
@@ -38,5 +40,6 @@
 //= require bootstrap/plugins/ladda-buttons/ladda.min.js
 //= require bootstrap/plugins/datepicker.js
 //= require bootstrap/plugins/circles-master.js
+//= require bootstrap/plugins/validation.js
 
 //= require turbolinks

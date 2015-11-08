@@ -11,17 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106083620) do
+ActiveRecord::Schema.define(version: 20151106153933) do
 
-  create_table "boards", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.integer  "user_id",    limit: 4
-    t.text     "contents",   limit: 4294967295
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+  create_table "board_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
+  create_table "boards", force: :cascade do |t|
+    t.string   "title",         limit: 255
+    t.integer  "user_id",       limit: 4
+    t.text     "contents",      limit: 4294967295
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "board_type_id", limit: 4
+    t.integer  "like_counts",   limit: 4,          default: 0
+    t.integer  "share_counts",  limit: 4,          default: 0
+  end
+
+  add_index "boards", ["board_type_id"], name: "index_boards_on_board_type_id", using: :btree
   add_index "boards", ["user_id"], name: "index_boards_on_user_id", using: :btree
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "board_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "likes", ["board_id"], name: "index_likes_on_board_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "shares", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "board_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "shares", ["board_id"], name: "index_shares_on_board_id", using: :btree
+  add_index "shares", ["user_id"], name: "index_shares_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -52,5 +82,10 @@ ActiveRecord::Schema.define(version: 20151106083620) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", unique: true, using: :btree
 
+  add_foreign_key "boards", "board_types"
   add_foreign_key "boards", "users"
+  add_foreign_key "likes", "boards"
+  add_foreign_key "likes", "users"
+  add_foreign_key "shares", "boards"
+  add_foreign_key "shares", "users"
 end
