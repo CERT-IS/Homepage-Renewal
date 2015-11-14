@@ -1,6 +1,4 @@
 class BoardNoticeController < BoardsController
-	before_action :authenticate
-	
 	def index
 		super
 		@boards = BoardType.where(name: "notice").first.boards

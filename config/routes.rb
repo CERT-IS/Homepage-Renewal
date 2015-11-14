@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
     get '/authenticate' => 'auth#get_token'
+    resources :notices, only: [:index]
   end
 
   # , constraints: { subdomain: 'api' }

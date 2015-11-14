@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate
+	before_action :authenticate_user!
 	
 	def show
 		@user = User.where(uid: params[:id]).first

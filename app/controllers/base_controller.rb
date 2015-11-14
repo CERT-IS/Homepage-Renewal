@@ -1,5 +1,5 @@
 class BaseController < ApplicationController
-	before_action :authenticate, only: :test
+	before_action :authenticate_user!, only: :test
 
 	def index
 	end

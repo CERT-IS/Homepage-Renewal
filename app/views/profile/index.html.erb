@@ -3,7 +3,7 @@
 	<div class="row">
         <!--Left Sidebar-->
         <div class="col-md-3 md-margin-bottom-40">
-            <%= image_tag @user.avatar.url, height: "262", width: "262", class: "img-responsive profile-img margin-bottom-20" %>
+            <%= image_tag @user.avatar.url, class: "img-responsive profile-img margin-bottom-20", style: "height:264px;" %>
 
             <a class="btn-u btn-u-sm" onclick="javascript: { $('#user_avatar').click(); }">Change Picture</a>
             <%= form_for @user, :url => update_avatar_user_path(@user.uid), :html => { :multipart => true, style: "display: none" } do |form| %>
