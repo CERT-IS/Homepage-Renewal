@@ -18,7 +18,9 @@
             <%= form_for @board, url: url_for(controller: controller.controller_name, action: 'create') do |f| %>
                 <!--Inputs-->
                 <h4>Title</h4>
-                <%= f.text_field :title , class: "form-control" %>
+                <div id="board-title" class=""> 
+                    <%= f.text_field :title , class: "form-control" %>
+                </div>
                 <!--End Inputs-->
 
                 <div class="margin-bottom-40"></div>

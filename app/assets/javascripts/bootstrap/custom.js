@@ -10,7 +10,13 @@ function registerAllow() {
 }
 
 function summernote_submit() {
+	var title = $('#board_title').val();
+	if (!title) {
+		$('#board-title').addClass("has-error");
+		$('#board-title').append('<p style="color:red">제목을 입력하세요.</p>')
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		event.preventDefault();
+	}
 	var t =  $('#summernote').code();
-    console.log(t);
     $('#board_contents').val(t);
 }
