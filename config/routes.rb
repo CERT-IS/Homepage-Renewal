@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
+    get '/authenticate' => 'auth#get_token'
+    resources :notices, only: [:index]
+  end
+
   root 'base#index'
 
   devise_for :users
@@ -18,10 +23,7 @@ Rails.application.routes.draw do
   get '/terms_service' => 'base#terms'
   get '/test' => 'base#test'
 
-  namespace :api, path: '/', constraints: { subdomain: 'api' } do
-    get '/authenticate' => 'auth#get_token'
-    resources :notices, only: [:index]
-  end
+
 
   # , constraints: { subdomain: 'api' }
 
