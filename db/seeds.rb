@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+BoardType.create(
+	name: "notice",
+	realname: "공지사항")
+
+BoardType.create(
+	name: "free",
+	realname: "자유게시판")

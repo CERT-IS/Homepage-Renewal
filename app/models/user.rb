@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include Tokenable
   has_many :likes
+  has_many :boards
 
   has_attached_file :avatar,
   :path => ":rails_root/public/avatar/:id/:filename",

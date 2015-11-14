@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 # File attachment
 gem "paperclip", "~> 4.1"
+# HTML parser
+gem "nokogiri"
 
 
 group :development, :test do

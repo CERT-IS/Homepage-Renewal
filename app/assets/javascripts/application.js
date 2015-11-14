@@ -16,6 +16,11 @@
 //= require jquery.turbolinks
 //= require jquery_ujs	
 //= require bootstrap/bootstrap.min.js
+//= require bootstrap/jquery.pjax.js
+//= require bootstrap/tooltip.js
+//= require bootstrap/alert.js
+//= reqruie bootstrap/plugins/messenger/jquery.slimscroll.min.js
+//= reqruie bootstrap/plugins/messenger/widgster.js
 
 // JS Implementing Plugins
 //= require bootstrap/smoothScroll.js
@@ -28,6 +33,9 @@
 //= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js
 //= require bootstrap/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js
 //= require bootstrap/plugins/summernote/summernote.min.js
+//= require bootstrap/plugins/messenger/build/js/messenger.js
+//= require bootstrap/plugins/messenger/build/js/messenger-theme-flat.js
+//= require bootstrap/plugins/messenger/ui-notifications.js
 
 // JS Customization
 //= require bootstrap/custom.js

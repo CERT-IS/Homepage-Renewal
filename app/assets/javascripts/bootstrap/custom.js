@@ -12,4 +12,5 @@ function registerAllow() {
 function summernote_submit() {
 	var t =  $('#summernote').code();
     console.log(t);
+    $('#board_contents').val(t);
 }
