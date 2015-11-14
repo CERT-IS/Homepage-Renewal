@@ -2,6 +2,11 @@ class BoardNoticeController < BoardsController
 	def index
 		super
 		@boards = BoardType.where(name: "notice").first.boards
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @boards, except: [:contents, :updated_at, :user_id], include: {user:{only: :uid}}, status: 200 } 
+		end
 	end
 
 	def show

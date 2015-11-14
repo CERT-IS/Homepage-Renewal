@@ -1,5 +1,5 @@
 class BaseController < ApplicationController
-	before_action :authenticate_user!, only: :test
+	before_action :authenticate, only: :test
 
 	def index
 	end
@@ -11,5 +11,9 @@ class BaseController < ApplicationController
 	end
 
 	def test
+		respond_to do |format|
+			format.html
+			format.json { render json: 'This is test respond', status: 200 }
+		end
 	end
 end
