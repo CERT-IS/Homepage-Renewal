@@ -33,13 +33,13 @@
                     <div class="carousel-inner" role="listbox">
                         <% images.each_with_index do |image, index| %>
                         <div class="<%= index == 0 ? 'item active' : 'item' %>">
-                            <%= image_tag image.contents.url %>
+                            <%= image_tag image.contents.url, class: "img-responsive", style: "width: 457.5px;height: 289.156px;" %>
                         </div>
                         <% end %>
                     </div>
                 </div>
             <% elsif images_count == 1 %>
-                <%= image_tag images.first.contents.url, class: "img-responsive" %>
+                <%= image_tag images.first.contents.url, class: "img-responsive", style: "width: 457.5px;height: 289.156px;" %>
             <% else %>
                 <img class="img-responsive" src="/assets/bootstrap/main/img12.jpg" alt="">
             <% end %>
@@ -50,7 +50,7 @@
                 <ul class="list-inline posted-info">
                     <li>By <%= board.user.uid %></li>
                     <!-- <li>In <a href="#">Design</a></li> -->
-                    <li>Posted <%= board.created_at.strftime("%B %-m, %Y")%></li>
+                    <li>Posted <%= board.created_at.strftime("%B %-d, %Y")%></li>
                 </ul>
                 <h2><a href="#"><%= board.title %></a></h2>
                 <p><%= truncate((strip_tags board.contents), length: 350, separator: ' ', escape: false) %></p>
