@@ -29,7 +29,8 @@
  *= require bootstrap/plugins/scrollbar/css/jquery.mCustomScrollbar.css
  *= require bootstrap/plugins/sky-forms-pro/skyforms/css/sky-forms.css
  *= require bootstrap/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css
- //= require bootstrap/plugins/summernote/summernote.css
+ *= require bootstrap/css/pages/page_404_error.css
+ *= require bootstrap/plugins/summernote/summernote.css
  *
  * CSS Customization
  *= require bootstrap/css/custom.css

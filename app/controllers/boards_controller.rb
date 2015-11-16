@@ -5,6 +5,7 @@ class BoardsController < ApplicationController
 	end
 
 	def show
+		@board = Board.where(id: params[:id]).first
 	end
 
 	def new
@@ -20,9 +21,10 @@ class BoardsController < ApplicationController
 				attachment = @board.attachments.build
 				attachment.contents 			 = Paperclip.io_adapters.for(f["src"])
 				attachment.contents_file_name    = f["data-filename"]
+
 				if attachment.save
 					# p attachment.contents.url
-					new_node = doc.create_element "img", src: attachment.contents.url
+					new_node = doc.create_element "img", src: attachment.contents.url, class: f["class"], style: f["style"]
 					f.replace new_node
 				end
 			end

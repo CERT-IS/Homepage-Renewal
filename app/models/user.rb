@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  default_scope -> { order('created_at DESC') }
+  
   include Tokenable
   has_many :likes
   has_many :boards

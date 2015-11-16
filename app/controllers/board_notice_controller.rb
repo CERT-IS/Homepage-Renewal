@@ -1,7 +1,8 @@
 class BoardNoticeController < BoardsController
 	def index
 		super
-		@boards = BoardType.where(name: "notice").first.boards
+		@type   = BoardType.where(name: "notice").first
+		@boards = @type.boards
 
 		respond_to do |format|
 			format.html
