@@ -1,4 +1,7 @@
 /* Write here your custom javascript codes */
+jQuery(document).ready(function() {
+    App.init();
+});
 
 function registerAllow() {
 	if ( $("input:checkbox[id='terms_agree']").is(":checked") ) {
