@@ -27,6 +27,8 @@ gem 'devise'
 gem "paperclip", "~> 4.1"
 # HTML parser
 gem "nokogiri"
+# Pagination
+gem 'will_paginate', '~> 3.0.6'
 
 
 group :development, :test do

@@ -78,9 +78,13 @@
 
     <!-- Pager v3 -->
     <ul class="pager pager-v3 pager-md no-margin-bottom">
-        <li class="previous"><a href="#">&larr; Older</a></li>
-        <li class="page-amount">1 of 7</li>
-        <li class="next"><a href="#">Newer &rarr;</a></li>
+        <li class="previous">
+            <%= link_to "&larr; Older".html_safe, { controller: controller.controller_name, action: "index", page: @page-1 } if @page > 1 %>
+        </li>
+        <li class="page-amount"><%= "#{@page} of #{@page_max}" %></li>
+        <li class="next">
+            <%= link_to "Newer &rarr;".html_safe, { controller: controller.controller_name, action: "index", page: @page+1 } if @page < @page_max %>
+        </li>
     </ul>
     <!-- End Pager v3 -->
 </div><!--/end container-->
