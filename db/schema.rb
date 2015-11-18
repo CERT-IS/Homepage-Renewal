@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114042154) do
+ActiveRecord::Schema.define(version: 20151118185230) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20151114042154) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.integer  "board_type_id", limit: 4
-    t.integer  "like_counts",   limit: 4,          default: 0
     t.integer  "share_counts",  limit: 4,          default: 0
   end
 

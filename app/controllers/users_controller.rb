@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate
+	before_action :authenticate_user!
 	
 	def show
 		@user = User.where(uid: params[:id]).first
@@ -16,5 +16,23 @@ class UsersController < ApplicationController
 		end
 
 		redirect_to :back
+	end
+
+	def like
+		@board = Board.find_by_id(params[:board_id])
+		current_user.like!(@board)
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def unlike
+		@board = Board.find_by_id(params[:board_id])
+		current_user.unlike!(@board)
+
+		respond_to do |format|
+			format.js
+		end
 	end
 end

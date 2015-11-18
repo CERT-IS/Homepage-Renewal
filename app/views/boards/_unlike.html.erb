@@ -1,0 +1,9 @@
+<%= form_for(current_user, url: unlike_user_path(current_user), method: :delete, remote: true, authenticity_token: true, html: { class: "likes_form", id: "likes_form_#{board.id}" }) do |f| %>
+	<a href="javascript:{};" onclick="$(this).parent().submit();">
+	    <i class="rounded-x fa fa-heart"></i>
+	    <% unless board.likes.count == 0 %>
+	        <span><%= board.likes.count %></span>
+	    <% end %>
+	</a>
+	<input type="hidden" name="board_id" value=<%= board.id %> />
+<% end %>

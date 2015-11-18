@@ -23,31 +23,22 @@ class User < ActiveRecord::Base
   validates_attachment_size :avatar, :in => 0..10.megabytes
 
   def like?(board)
-    likes.find_by(board_id: board.id)
+    likes.find_by(board: board).present?
   end
  
   def like!(board)
-    likes.create!(board_id: board.id)
-    board = Board.where(board_id: board.id).first
-    board.like_counts += 1
-    board.save
+    likes.create!(board: board)
   end
  
   def unlike!(board)
-    likes.find_by(board_id: board.id).destroy
-    board = Board.where(board_id: board.id).first
-    board.like_counts -= 1
-    board.save
+    likes.find_by(board: board).destroy
   end
 
   def share?(board)
-    likes.find_by(board_id: board.id)
+    likes.find_by(board: board).present?
   end
  
   def share!(board)
-    shares.create!(board_id: board.id)
-    board = Board.where(board_id: board.id).first
-    board.share_counts += 1
-    board.save
+    shares.create!(board: board)
   end
 end

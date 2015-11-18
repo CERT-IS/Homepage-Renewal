@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     member do
       patch 'update_avatar'
       put 'update_avatar'
+      post 'like'
+      delete 'unlike'
     end
 
     resources :profile, only: [:index]
