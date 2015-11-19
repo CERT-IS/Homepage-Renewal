@@ -4,10 +4,12 @@ class User < ActiveRecord::Base
   include Tokenable
   has_many :likes
   has_many :boards
+  has_many :comments, dependent: :destroy
 
   has_attached_file :avatar,
-  :path => ":rails_root/public/avatar/:id/:filename",
-  :url  => "/avatar/:id/:filename"
+    :path => ":rails_root/public/avatar/:id/:filename",
+    :url  => "/avatar/:id/:filename",
+    :default_url => "bootstrap/testimonials/user.jpg"
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

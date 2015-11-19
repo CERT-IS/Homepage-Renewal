@@ -22,28 +22,30 @@
                         <li>By <a href="#"><%= @board.user.uid %></a></li>
                         <li>Posted <%= @board.created_at.strftime("%B %-d, %Y") %></li>
                     </ul>
-                    <h2><a><%= @board.title %></a></h2>
+                    <h2><a href="/<%= @board.board_type.name %>/<%= @board.id %>"><%= @board.title %></a></h2>
                     <div class="bg-color-white">
                         <%= @board.contents.html_safe %>
                     </div>
                     <ul class="post-shares post-shares-lg">
                         <li>
-                            <a href="#">
+                            <a href="#comments" id="comments_count_parent">
                                 <i class="rounded-x icon-speech"></i>
-                                <span>28</span>
+                                <% if @board.comments.present? %>
+                                    <span id="comments_count"><%= @board.comments.count %></span>
+                                <% end %>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <i class="rounded-x icon-share"></i>
-                                <span>355</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="rounded-x icon-heart"></i>
-                                <span>107</span>
-                            </a>
+                        <li id="likes_<%= @board.id %>">
+                            <% if current_user.like?(@board) %>
+                                <%= render 'unlike', board: @board %>
+                            <% else %>
+                                <%= render 'like', board: @board %>
+                            <% end %>
                         </li>
                     </ul>
                 </div>
@@ -51,11 +53,13 @@
             <!-- End News v3 -->
 
             <!-- Blog Post Author -->
-            <div class="blog-author margin-bottom-30">
-                <img src="/assets/bootstrap/team/img1-md.jpg" alt="">
+            <div class="blog-author margin-bottom-30 testimonials">
+                <div class="testimonial-info">
+                    <%= image_tag @board.user.avatar.url, class: "rounded-x", style: "height:80px;width:80px;" %>
+                </div>
                 <div class="blog-author-desc">
                     <div class="overflow-h">
-                        <h4>Alexander Jenni</h4>
+                        <h4><%= @board.user.uid %></h4>
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -117,91 +121,27 @@
             <hr>
 
             <h2 class="margin-bottom-20">Comments</h2>
-            <!-- Blog Comments -->
-            <div class="row blog-comments margin-bottom-30">
-                <div class="col-sm-2 sm-margin-bottom-40">
-                    <img src="/assets/bootstrap/team/img1-sm.jpg" alt="">
-                </div>
-                <div class="col-sm-10">
-                    <div class="comments-itself">
-                        <h4>
-                            Jalen Davenport
-                            <span>5 hours ago / <a href="#">Reply</a></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod..</p>
-                    </div>
-                </div>
+
+            <div id="comments">
+                <%= render partial: 'comments/index', collection: @comments, as: :comment %>
             </div>
-            <!-- End Blog Comments -->
 
-            <!-- Blog Comments -->
-            <div class="row blog-comments blog-comments-reply margin-bottom-30">
-                <div class="col-sm-2 sm-margin-bottom-40">
-                    <img src="/assets/bootstrap/team/img3-sm.jpg" alt="">
-                </div>
-                <div class="col-sm-10">
-                    <div class="comments-itself">
-                        <h4>
-                            Jorny Alnordussen
-                            <span>6 hours ago / <a href="#">Reply</a></span>
-                        </h4>
-                        <p>Gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod..</p>
-                    </div>
-                </div>
-            </div>
-            <!-- End Blog Comments -->
+            <%= render 'comments/new' %>
 
-            <!-- Blog Comments -->
-            <div class="row blog-comments margin-bottom-50">
-                <div class="col-sm-2 sm-margin-bottom-40">
-                    <img src="/assets/bootstrap/team/img5-sm.jpg" alt="">
-                </div>
-                <div class="col-sm-10">
-                    <div class="comments-itself">
-                        <h4>
-                            Marcus Farrell
-                            <span>7 hours ago / <a href="#">Reply</a></span>
-                        </h4>
-                        <p>Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod..</p>
-                    </div>
-                </div>
-            </div>
-            <!-- End Blog Comments -->
-
-            <hr>
-
-            <h2 class="margin-bottom-20">Post a Comment</h2>
-            <!-- Form -->
-            <form action="assets/php/sky-forms-pro/demo-comment-process.php" method="post" id="sky-form3" class="sky-form comment-style">
-                <fieldset>
-                    <div class="row sky-space-30">
-                        <div class="col-md-6">
-                            <div>
-                                <input type="text" name="name" id="name" placeholder="Name" class="form-control">
-                            </div>
-                        </div>                
-                        <div class="col-md-6">
-                            <div>
-                                <input type="text" name="email" id="email" placeholder="Email" class="form-control">
-                            </div>
-                        </div>                
-                    </div>
-                    
-                    <div class="sky-space-30">
-                        <div>
-                            <textarea rows="8" name="message" id="message" placeholder="Write comment here ..." class="form-control"></textarea>
-                        </div>
-                    </div>
-                    
-                    <p><button type="submit" class="btn-u">Submit</button></p>
-                </fieldset>
-
-                <div class="message">
-                    <i class="rounded-x fa fa-check"></i>
-                    <p>Your comment was successfully posted!</p>
-                </div>
-            </form>
-            <!-- End Form -->
         </div><!--/end container-->
     </div>
     <!--=== End Blog Posts ===-->
+
+<script>
+    function reply_new(comment_id) {
+
+        if($('#comment_reply_new').length) {
+            console.log($('#comment_reply_new').length);
+            $('#comment_reply_new').fadeOut();
+        }
+
+        $('#comments_' + comment_id + '_parent').append("<%=j render 'comments/reply' %>");
+
+        $('#comment_reply_new').append('<input type="hidden" name="comment_id" value="' + comment_id +'">')
+    }
+</script>

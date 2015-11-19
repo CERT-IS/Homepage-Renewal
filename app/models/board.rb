@@ -4,7 +4,8 @@ class Board < ActiveRecord::Base
   belongs_to :board_type
   has_many :likes
   has_many :attachments, as: :attachable, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
-  validates :title ,presence: true
-  validates :contents ,presence: true
+  validates :title, presence: true
+  validates :contents, presence: true
 end

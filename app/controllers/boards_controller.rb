@@ -6,6 +6,7 @@ class BoardsController < ApplicationController
 
 	def show
 		@board = Board.where(id: params[:id]).first
+		@comments = @board.comments.where(comment_id: nil)
 	end
 
 	def new

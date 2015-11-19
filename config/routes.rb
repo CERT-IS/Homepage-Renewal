@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :profile, only: [:index]
   end
 
+  resources :boards, only: [] do
+    resources :comments, only: [:create, :edit, :destroy, :update]
+  end
   resources :notices, controller: 'board_notice'
 
   get '/privacy_policy' => 'base#privacy'

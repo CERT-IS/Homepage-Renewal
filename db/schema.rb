@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118185230) do
+ActiveRecord::Schema.define(version: 20151119070922) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 20151118185230) do
 
   add_index "boards", ["board_type_id"], name: "index_boards_on_board_type_id", using: :btree
   add_index "boards", ["user_id"], name: "index_boards_on_user_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "board_id",   limit: 4
+    t.text     "contents",   limit: 65535
+    t.integer  "comment_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "comments", ["board_id"], name: "index_comments_on_board_id", using: :btree
+  add_index "comments", ["comment_id"], name: "index_comments_on_comment_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -95,6 +108,9 @@ ActiveRecord::Schema.define(version: 20151118185230) do
 
   add_foreign_key "boards", "board_types"
   add_foreign_key "boards", "users"
+  add_foreign_key "comments", "boards"
+  add_foreign_key "comments", "comments"
+  add_foreign_key "comments", "users"
   add_foreign_key "likes", "boards"
   add_foreign_key "likes", "users"
   add_foreign_key "shares", "boards"

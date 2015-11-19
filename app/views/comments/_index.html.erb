@@ -1,0 +1,35 @@
+<div id="comments_<%= comment.id %>_parent">
+    <!-- Blog Comments -->
+    <div class="row blog-comments margin-bottom-30" id="comments_<%= comment.id %>">
+        <div class="col-sm-2 sm-margin-bottom-40">
+            <%= image_tag comment.user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;" %>
+        </div>
+        <div class="col-sm-10">
+            <div class="comments-itself">
+                <h4>
+                    <%= comment.user.uid %>
+                    <span><%= time_ago_in_words(comment.created_at) %> ago / <a href="javscript:{};" onclick="reply_new(<%= comment.id %>);">Reply</a></span>
+                </h4>
+                <p><%= comment.contents %></p>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog Comments -->
+
+    <% comment.replys.each do |reply| %>
+        <div class="row blog-comments blog-comments-reply margin-bottom-30" id="comments_<%= reply.id %>">
+            <div class="col-sm-2 sm-margin-bottom-40">
+                <%= image_tag reply.user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;" %>
+            </div>
+            <div class="col-sm-10">
+                <div class="comments-itself">
+                    <h4>
+                        <%= reply.user.uid %>
+                        <span><%= time_ago_in_words(reply.created_at) %> ago</span>
+                    </h4>
+                    <p><%= reply.contents %></p>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

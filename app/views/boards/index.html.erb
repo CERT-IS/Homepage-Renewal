@@ -59,12 +59,14 @@
                 <p><%= truncate((strip_tags board.contents), length: 350, separator: ' ', escape: false) %></p>
                 <ul class="post-shares">
                     <li>
-                        <a href="#">
+                        <a href="/<%= board.board_type.name %>/<%= board.id %>#comments">
                             <i class="rounded-x icon-speech"></i>
-                            <span>5</span>
+                            <% if board.comments.present? %>
+                                <span><%= board.comments.count %></span>
+                            <% end %>
                         </a>
                     </li>
-                    <li><a href="#"><i class="rounded-x icon-share"></i></a></li>
+                    <li><a href="javascript:{};"><i class="rounded-x icon-share"></i></a></li>
                     <li id="likes_<%= board.id %>">
                         <% if current_user.like?(board) %>
                             <%= render 'unlike', board: board %>

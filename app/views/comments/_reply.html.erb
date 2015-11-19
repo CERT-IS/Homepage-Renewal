@@ -1,0 +1,20 @@
+<%= form_for [@board, Comment.new], html: {class: "row blog-comments blog-comments-reply margin-bottom-30", id: "comment_reply_new", style: "border:none;"}, remote: true, authenticity_token: true do |f| %>
+    <div class="col-sm-2 sm-margin-bottom-40">
+        <%= image_tag current_user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;" %>
+    </div>
+    <div class="col-sm-10">
+        <div class="comments-itself">
+            <h4>
+                <%= current_user.uid %>
+            </h4>
+            <div class="margin-bottom-30">
+                <div>
+                    <%= f.text_field :contents, class: "form-control", placeholder: "Write comment here ..." %>
+                </div>
+            </div>
+
+            <%= f.submit 'Submit', class: "btn-u" %>
+            
+        </div>
+    </div>
+<% end %>

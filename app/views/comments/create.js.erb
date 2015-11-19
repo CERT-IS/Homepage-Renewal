@@ -1,0 +1,23 @@
+<% if @comment.origin.present? %>
+console.log("origin present");
+$('#comments_<%= @comment.id %>_parent').val();
+
+<% else %>
+console.log("origin no present");
+$('#comments').append("<%=j render 'comments/index', comment: @comment %>");
+$('#comment_contents').val('');
+
+<% end %>
+
+
+$('html, body').animate({
+        scrollTop: $('#comments_<%= @comment.id %>').offset().top 
+    }, 'slow');
+
+if ($('#comments_count').length) {
+    $('#comments_count').text(parseInt($('#comments_count').text())+1);
+}
+else {
+    $('#comments_count_parent').append('<span id="comments_count">1</span>');
+}
+

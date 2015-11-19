@@ -1,0 +1,33 @@
+<hr>
+
+<h2 class="margin-bottom-20">Post a Comment</h2>
+<!-- Form -->
+<%= form_for [@board, Comment.new], html: {class: "sky-form comment-style"}, remote: true, authenticity_token: true do |f| %>
+    <fieldset>
+        <div class="row sky-space-30 testimonials">
+            <div class="testimonial-info">
+                <%= image_tag current_user.avatar.url, class: "rounded-x" %>
+                <span class="testimonial-author">
+                    <%= current_user.uid %> 
+                    <em>Web Developer, Unify Theme.</em>
+                </span>
+            </div>             
+        </div>
+        
+        <div class="sky-space-30">
+            <div>
+                <%= f.text_area :contents, class: "form-control", placeholder: "Write comment here ...", rows: 8 %>
+            </div>
+        </div>
+        
+        <p>
+            <%= f.submit 'Submit', class: "btn-u" %>
+        </p>
+    </fieldset>
+
+    <div class="message">
+        <i class="rounded-x fa fa-check"></i>
+        <p>Your comment was successfully posted!</p>
+    </div>
+<% end %>
+<!-- End Form -->
