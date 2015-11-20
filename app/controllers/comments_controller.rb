@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
 		board 	 = Board.find_by_id(params[:board_id])
 
 		if params[:comment_id].present?
-			origin = Comment.find_by_id(params[:comment_id])
-			@comment = origin.replys.create(
+			@origin = Comment.find_by_id(params[:comment_id])
+			@comment = @origin.replys.create(
 				user: current_user,
 				board: board,
 				contents: params[:comment][:contents]

@@ -16,6 +16,7 @@
     </div>
     <!-- End Blog Comments -->
 
+    <!-- 댓글의 댓글 index -->
     <% comment.replys.each do |reply| %>
         <div class="row blog-comments blog-comments-reply margin-bottom-30" id="comments_<%= reply.id %>">
             <div class="col-sm-2 sm-margin-bottom-40">
@@ -32,4 +33,5 @@
             </div>
         </div>
     <% end %>
+    <!-- End 댓글의 댓글 index -->
 </div>

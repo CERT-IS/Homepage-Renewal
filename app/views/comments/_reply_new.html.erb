@@ -1,3 +1,4 @@
+<!-- 댓글의 댓글 작성 페이지 -->
 <%= form_for [@board, Comment.new], html: {class: "row blog-comments blog-comments-reply margin-bottom-30", id: "comment_reply_new", style: "border:none;"}, remote: true, authenticity_token: true do |f| %>
     <div class="col-sm-2 sm-margin-bottom-40">
         <%= image_tag current_user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;" %>
@@ -8,7 +9,7 @@
                 <%= current_user.uid %>
             </h4>
             <div class="margin-bottom-30">
-                <div>
+                <div id="comment_reply_validation">
                     <%= f.text_field :contents, class: "form-control", placeholder: "Write comment here ..." %>
                 </div>
             </div>

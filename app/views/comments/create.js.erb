@@ -1,17 +1,15 @@
 <% if @comment.origin.present? %>
-console.log("origin present");
-$('#comments_<%= @comment.id %>_parent').val();
-
+	$('#comment_reply_new').fadeOut();
+	$('#comment_reply_new').remove();
+	$('#comments_<%= @origin.id %>_parent').append("<%=j render 'reply_show', comment: @comment %>");
 <% else %>
-console.log("origin no present");
-$('#comments').append("<%=j render 'comments/index', comment: @comment %>");
-$('#comment_contents').val('');
-
+	$('#comments').append("<%=j render 'comments/index', comment: @comment %>");
+	$('#comment_contents').val('');
 <% end %>
 
 
 $('html, body').animate({
-        scrollTop: $('#comments_<%= @comment.id %>').offset().top 
+        scrollTop: $('#comments_<%= @comment.id %>').offset().top - 100
     }, 'slow');
 
 if ($('#comments_count').length) {

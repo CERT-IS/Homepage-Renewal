@@ -136,12 +136,26 @@
     function reply_new(comment_id) {
 
         if($('#comment_reply_new').length) {
-            console.log($('#comment_reply_new').length);
             $('#comment_reply_new').fadeOut();
+            $('#comment_reply_new').remove();
         }
 
-        $('#comments_' + comment_id + '_parent').append("<%=j render 'comments/reply' %>");
+        $('#comments_' + comment_id + '_parent').append("<%=j render 'comments/reply_new' %>");
 
         $('#comment_reply_new').append('<input type="hidden" name="comment_id" value="' + comment_id +'">')
+
+        $('html, body').animate({
+            scrollTop: $('#comment_reply_new').offset().top - 100
+        }, 'slow');
+
+        // 댓글의 댓글 presence 유효성 검사
+        $('#comment_reply_new').submit(function(event) {
+            if($('#comment_contents').val() == '') {
+                $('#comment_contents').parent().addClass("has-error");
+                $('#comment_contents').parent().append('<p style="display: block;margin-top: 6px;padding: 0 1px;font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393;">Please enter something</p>');
+                event.preventDefault();
+            }
+        });
     }
+
 </script>
