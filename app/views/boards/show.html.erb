@@ -158,4 +158,13 @@
         });
     }
 
+
+    // 댓글 Enter 시 Submit
+    $('#comment_contents').on('keyup', function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $(this).submit();
+        }
+    });
+
 </script>
