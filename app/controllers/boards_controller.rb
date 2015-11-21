@@ -6,6 +6,12 @@ class BoardsController < ApplicationController
 
 	def show
 		@board = Board.where(id: params[:id]).first
+
+		# 부정접근 처리
+		unless @board.present?
+			redirect_to root_path
+		end
+
 		@comments = @board.comments.where(comment_id: nil)
 	end
 
