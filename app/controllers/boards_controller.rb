@@ -27,13 +27,13 @@ class BoardsController < ApplicationController
 				if attachment.save
 					# 이미지 반응형
 					style 	  = f["style"]
-					width 	  = style[/width:.px;/]
+					width 	  = style[/width:.*px;/]
 					if width.present?
 						style = style.gsub(width, "max-" + width)
 						style << "width:100%;"
 					end
 
-					height = style[/height:.px;/]
+					height = style[/height:.*px;/]
 					if height.present?
 						style = style.gsub(height, "max-" + height)
 						style << "height:100%;"
