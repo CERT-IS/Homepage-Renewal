@@ -6,7 +6,7 @@
 
 	<% if user_signed_in? %>
 		ga('create', 'UA-70444790-1', {
-			'userId' : <%= current_user.uid %>
+			'userId' : '<%= current_user.uid %>'
 		});
 	<% else %>
 		ga('create', 'UA-70444790-1', 'auto');
