@@ -1,0 +1,56 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">New Board</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Blog</a></li>
+            <li class="active">Blog Item 2</li>
+        </ul>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<div class="bg-color-light">
+    <div class="container content-sm">
+        <div class="tag-box tag-box-v3 form-page">
+            <div class="headline"><h3><%= @board_type.realname %></h3></div>                
+            <%= form_for @board, url: url_for(controller: controller.controller_name, action: 'update') do |f| %>
+                <!--Inputs-->
+                <h4>Title</h4>
+                <div id="board-title" class=""> 
+                    <%= f.text_field :title , class: "form-control" %>
+                </div>
+                <!--End Inputs-->
+
+                <div class="margin-bottom-40"></div>
+
+                <!--Textarea-->
+                <h4>Contents</h4>
+                <div id="summernote" class=""></div>
+                <%= f.hidden_field :contents %>
+                <!--End Textarea-->
+
+                <div class="margin-bottom-40"></div>
+
+                <footer style="text-align: right;">
+                    <div class="ladda-btn">
+                        <button type="submit" class="btn-u pull-right ladda-button" data-style="slide-down" onclick="summernote_submit()" style="border:0;font-weight:400;margin-left:5px;">Submit</button>
+                    </div>
+
+                    <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                </footer>
+
+            <% end %>
+        </div>
+        
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        $('#summernote').summernote({
+            height: 500
+        });
+        $('#summernote').code('<%= @board.contents.gsub(/^\s+|\n|\s+$/, "").html_safe %>');
+    });
+</script>
