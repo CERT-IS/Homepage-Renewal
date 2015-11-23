@@ -10,10 +10,6 @@ class BaseController < ApplicationController
 	def terms
 	end
 
-	def test
-		respond_to do |format|
-			format.html
-			format.json { render json: 'This is test respond', status: 200 }
-		end
+	def contact
 	end
 end

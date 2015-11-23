@@ -50,6 +50,6 @@ class User < ActiveRecord::Base
   private
   
   def set_default_role
-    add_role :user
+    add_role :associate_member
   end
 end

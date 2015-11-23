@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
-  get '/test' => 'base#test'
+  get '/contact' => 'base#contact'
 
 
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
