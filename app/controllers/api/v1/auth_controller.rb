@@ -28,7 +28,7 @@ module API
 				authenticate_with_http_token do |token, options|
 					user = User.find_by(authentication_token: token)
 
-					unless user.present? or user.member?
+					unless user.present? and user.member?
 						respond_to do |format|
 				  			format.json { render json: 'Bad credentials', status: 401 }
 				  		end
