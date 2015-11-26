@@ -10,6 +10,7 @@
             <!-- Topbar -->
             <div class="topbar">
                 <ul class="loginbar pull-right">
+                    <% if user_signed_in? %>
                     <li class="hoverSelector">
                         <i class="fa fa-globe"></i>
                         <a>SiteMap</a>
@@ -25,7 +26,6 @@
                     <li class="topbar-devider"></li>   
                     <li><a href="page_faq.html">Report</a></li>  
                     <li class="topbar-devider"></li>
-                    <% if user_signed_in? %>
                         <li class="hoverSelector">
                             <a><%= current_user.realname %></a>
                             <ul class="languages hoverSelectorBlock">
@@ -36,6 +36,8 @@
                         </li> 
                     <% else %>
                         <li><a href="<%= new_user_session_path %>">Login</a></li>
+                        <li class="topbar-devider"></li>
+                        <li><a href="<%= new_user_registration_path %>">SignUp</a></li>
                     <% end %>
                 </ul>
             </div>
@@ -53,6 +55,9 @@
         <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
             <div class="container">
                 <ul class="nav navbar-nav">
+
+                    <!-- 회원일 경우 -->
+                    <% if user_signed_in? %>
                     <li class="dropdown active">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             CERT-IS
@@ -113,7 +118,7 @@
                         </a> 
                     </li>
 
-                    <li>
+                     <li>
                         <a href="<%= contact_path %>">
                             Contact
                         </a> 
@@ -132,6 +137,39 @@
                         </div>    
                     </li>
                     <!-- End Search Block -->
+
+                    <% else %>
+                    <!-- 비회원일 경우 -->
+
+                    <li>
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            About
+                        </a> 
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            Member
+                        </a> 
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            Partership
+                        </a> 
+                    </li>
+
+                    <li>
+                        <a href="<%= contact_path %>">
+                            Contact
+                        </a> 
+                    </li>                     
+
+
+
+                    <% end %>
+
+                   
                 </ul>
             </div><!--/end container-->
         </div><!--/navbar-collapse-->
