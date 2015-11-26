@@ -5,15 +5,11 @@ module API
 				authenticate_or_request_with_http_basic do |uid, password|
 					user = User.find_by_uid(uid)
 					
-					if user.present?
-						if user.valid_password?(password)
-							render json: user, status: 200
-						else
-							head 401
-						end
+					if user.present? and user.valid_password?(password) and user.member?
+						render json: user, status: 200
 					else
 						head 401
-					end
+					end		
 				end
 			end
 

@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def member?
-    has_role?(:associate_member) || has_role?(:regular_member) || has_role?(:honorary_member) || operator?
+    has_role?(:regular_member) || has_role?(:honorary_member) || operator?
   end
 
   def operator?
