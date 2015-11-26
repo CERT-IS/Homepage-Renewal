@@ -32,8 +32,10 @@ Rails.application.routes.draw do
 
   # API ROUTES
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
-    get '/authenticate' => 'auth#get_token'
-    resources :notices, controller: 'board_notice'
+    namespace :v1 do
+      get '/authenticate' => 'auth#get_token'
+      resources :notices, controller: 'board_notice'
+    end
   end
 
   # , constraints: { subdomain: 'api' }

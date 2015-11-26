@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+	before_action :authenticate_user!
+	
 	def membership
 		@users = User.all
 	end

@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
     shares.create!(board: board)
   end
 
+  def member?
+    has_role?(:associate_member) || has_role?(:regular_member) || has_role?(:honorary_member) || operator?
+  end
+
+  def operator?
+    has_role?(:president) || has_role?(:vice_president) || has_role?(:manager) || has_role?(:librarian) || has_role?(:admin)
+  end
+
   private
   
   def set_default_role

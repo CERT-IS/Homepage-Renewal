@@ -122,7 +122,15 @@
                         <a href="<%= contact_path %>">
                             Contact
                         </a> 
-                    </li>                     
+                    </li>
+
+                    <% if current_user.operator? %>
+                        <li>
+                            <a href="<%= admin_membership_path %>">
+                                Admin
+                            </a> 
+                        </li>
+                    <% end %>                     
 
                     <!-- Search Block -->
                     <li>
@@ -164,7 +172,6 @@
                             Contact
                         </a> 
                     </li>                     
-
 
 
                     <% end %>

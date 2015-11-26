@@ -12,21 +12,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate
-  	unless authenticate_token || authenticate_user!
-  		respond_to do |format|
-  			format.json { render json: 'Bad credentails', status: 401 }
-  			format.html { redirect_to new_user_session_path }
-  		end
-  	end
-  end
-
-  def authenticate_token
-		authenticate_with_http_token do |token, options|
-			User.find_by(authentication_token: token).present?
-		end
-	end
-
   def uri?(string)
     uri = URI.parse(string)
     %w( http https ).include?(uri.scheme)
