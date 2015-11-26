@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /^image\/(jpeg|jpg|png|gif)$/
   validates_attachment_size :avatar, :in => 0..10.megabytes
 
-  after_create :set_default_role
+  after_create :set_default_role, if: Proc.new { User.count > 1 }
 
   def like?(board)
     likes.find_by(board: board).present?

@@ -5,6 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+admin_user = User.create( uid: "admin", realname: "관리자", email: 'admin@email.com', password: '12341234', confirmed_at: Time.now )
+admin_user.add_role :admin
+
 BoardType.create(
 	name: "notices",
 	realname: "공지사항")
