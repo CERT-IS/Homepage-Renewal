@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
   include Authority::UserAbilities
   include Tokenable
-  has_many :likes
-  has_many :boards
-  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :boards, dependent: :nullify
+  has_many :comments, dependent: :nullify
 
   has_attached_file :avatar,
     :path => ":rails_root/public/avatar/:id/:filename",

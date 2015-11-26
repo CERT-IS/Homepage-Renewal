@@ -24,6 +24,12 @@ Rails.application.routes.draw do
   get '/contact' => 'base#contact'
 
 
+  # ADMIN ROUTES
+  get '/admin/membership'
+  patch '/admin/membership' => 'admin#membership_update'
+  put '/admin/membership' => 'admin#membership_update'
+
+  # API ROUTES
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
     get '/authenticate' => 'auth#get_token'
     resources :notices, controller: 'board_notice'

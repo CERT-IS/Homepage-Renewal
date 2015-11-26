@@ -49,7 +49,7 @@
         <div class="col-sm-7">
             <div class="news-v3">
                 <ul class="list-inline posted-info">
-                    <li>By <%= board.user.uid %></li>
+                    <li>By <%= board.user.present? ? board.user.uid : "탈퇴회원" %></li>
                     <!-- <li>In <a href="#">Design</a></li> -->
                     <li>Posted <%= board.created_at.strftime("%B %-d, %Y") %></li>
                 </ul>

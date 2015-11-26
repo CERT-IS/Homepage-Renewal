@@ -19,7 +19,7 @@
                 <!-- <img class="img-responsive full-width" src="/assets/bootstrap/main/img12.jpg" alt=""> -->
                 <div class="news-v3-in">
                     <ul class="list-inline posted-info">
-                        <li>By <a href="#"><%= @board.user.uid %></a></li>
+                        <li>By <a href="#"><%= @board.user.present? ? @board.user.uid : "탈퇴회원" %></a></li>
                         <li>Posted <%= @board.created_at.strftime("%B %-d, %Y") %></li>
                     </ul>
                     <h2><a href="/<%= @board.board_type.name %>/<%= @board.id %>"><%= @board.title %></a></h2>
@@ -64,6 +64,7 @@
             </div>                        
             <!-- End News v3 -->
 
+            <% if @board.user.present? %>
             <!-- Blog Post Author -->
             <div class="blog-author margin-bottom-30 testimonials">
                 <div class="testimonial-info">
@@ -129,6 +130,7 @@
                 </div>
             </div>
             <!-- End Authored Blog -->
+            <% end %>
 
             <hr>
 
