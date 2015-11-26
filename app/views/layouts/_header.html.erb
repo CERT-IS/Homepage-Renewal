@@ -64,7 +64,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">소개</a></li>
-                            <li><a href="#">회원 목록</a></li>
+                            <li><a href="<%= members_path %>">회원 목록</a></li>
                             <li><a href="#">파트너십</a></li>
                         </ul>
                     </li>
@@ -142,19 +142,19 @@
                     <!-- 비회원일 경우 -->
 
                     <li>
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0);">
                             About
                         </a> 
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            Member
+                        <a href="<%= members_path %>">
+                            Members
                         </a> 
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="javascript:void(0);">
                             Partership
                         </a> 
                     </li>

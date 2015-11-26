@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
   get '/contact' => 'base#contact'
+  get '/members' => 'users#index'
 
 
   # ADMIN ROUTES
