@@ -27,7 +27,7 @@ module API
 			end
 
 			def authenticate_token!
-				authenticate_with_http_token do |token, options|
+				authenticate_or_request_with_http_token do |token, options|
 					user = User.find_by(authentication_token: token)
 
 					unless user.present? and user.member?
