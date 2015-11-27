@@ -1,6 +1,8 @@
 module API
 	module V1
 		class AuthController < ApplicationController
+			before_action :check_format, except: :get_token
+
 			def get_token
 				authenticate_or_request_with_http_basic do |uid, password|
 					user = User.find_by_uid(uid)
@@ -35,6 +37,12 @@ module API
 				  		return
 					end
 				end
+			end
+
+			private
+
+			def check_format
+				render :nothing => true, :status => 406 unless params[:format] == 'json' || request.headers["Accept"] =~ /json/
 			end
 
 		end

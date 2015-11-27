@@ -34,13 +34,13 @@ Rails.application.routes.draw do
   end
 
   # API ROUTES
-  namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: { format: 'json' } do
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
     namespace :v1 do
       get '/authenticate' => 'auth#get_token'
       resources :notices, controller: 'board_notice'
     end
   end
-
+    
   # Unnormal access
   namespace :api, path: '/', constraints: { subdomain: 'api', format: false } do
     match '(*foo)' => redirect("http://www.cert-is.ga"), via: :all
