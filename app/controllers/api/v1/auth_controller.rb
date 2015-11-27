@@ -18,28 +18,20 @@ module API
 			protected
 
 			def authenticate!
-			  	unless authenticate_token
-			  		respond_to do |format|
-			  			format.json { render json: 'Bad credentails', status: 401 }
-			  			format.html { redirect_to new_user_session_path }
-			  		end
-			  	end
+			  	authenticate_token || render_unauthorized
 			end
 
-			def authenticate_token!
-				authenticate_or_request_with_http_token do |token, options|
+			def authenticate_token
+				authenticate_with_http_token do |token, options|
 					user = User.find_by(authentication_token: token)
-
-					unless user.present? and user.member?
-						respond_to do |format|
-				  			format.json { render json: 'Bad credentials', status: 401 }
-				  		end
-				  		return
-					end
+					user.present? and user.member?
 				end
 			end
 
-			private
+			def render_unauthorized
+		      	self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+		      	render json: 'Bad credentials', status: 401
+		    end
 
 			def check_format
 				render :nothing => true, :status => 406 unless params[:format] == 'json' || request.headers["Accept"] =~ /json/
