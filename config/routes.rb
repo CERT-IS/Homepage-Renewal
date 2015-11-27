@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       resources :notices, controller: 'board_notice'
     end
 
-    match '*' => redirect("http://www.cert-is.ga")
+    match '*' => redirect("http://www.cert-is.ga"), via: :all
   end
 
   # , constraints: { subdomain: 'api' }
