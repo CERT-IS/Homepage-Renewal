@@ -1,7 +1,7 @@
 module API
 	module V1
 		class BoardsController < AuthController
-			before_action :authenticate_token!
+			before_action :authenticate!
 
 			def index
 			end
