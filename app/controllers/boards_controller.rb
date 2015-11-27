@@ -66,7 +66,6 @@ class BoardsController < ApplicationController
 			p f["src"]
 			if f["src"].start_with?("/attaches")
 				# 이미 서버에 저장된 이미지인 경우
-				break
 			elsif uri?(f["src"])
 				# 외부 이미지 참조인 경우
 				new_node = doc.create_element "img", src: f["src"], class: f["class"], style: f["style"] + "width:100%;"
