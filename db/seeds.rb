@@ -13,3 +13,19 @@ admin_user.add_role :admin
 BoardType.create(
 	name: "notices",
 	realname: "공지사항")
+
+BoardType.create(
+	name: "frees",
+	realname: "자유게시판")
+
+BoardType.create(
+	name: "genealogies",
+	realname: "족보게시판")
+
+BoardType.create(
+	name: "reviews",
+	realname: "후기게시판")
+
+BoardType.create(
+	name: "galleries",
+	realname: "사진첩")

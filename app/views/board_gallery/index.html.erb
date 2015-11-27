@@ -1,0 +1,61 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left"><%= @type.realname %></h1>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<% if @boards.present? %>
+<!--=== Content Part ===-->
+<div class="container content">     
+    <div class="row">
+        <div class="md-margin-bottom-50">
+            
+            <!-- Recent Works -->
+            <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
+
+                <% @boards.each_with_index do |board, index| %>
+	                <div class="col-md-4">
+		                <div class="owl-recent-works-v1">
+		                    <div class="item">
+		                        <a href="/<%= @type.name %>/<%= board.id %>">
+		                            <em class="overflow-hidden">
+		                                <% if board.attachments.present? %>
+		                                	<%= image_tag board.attachments.first.contents.url, class: "img-responsive", style: "width: 350px;height: 221.219px;" %>
+		                                <% else %>
+		                                	<img class="img-responsive" src="/assets/bootstrap/main/img12.jpg" alt="">
+		                                <% end %>
+		                            </em>    
+		                            <span>
+		                                <strong><%= board.title %></strong>
+		                                <i>By <%= board.user.present? ? board.user.uid : "탈퇴회원" %> / Posted <%= board.created_at.strftime("%B %-d, %Y") %></i>
+		                            </span>
+		                            
+		                        </a>    
+		                    </div>
+		                </div>
+		            </div>
+
+		            <% if (index+1) % 3 == 0 %>
+		            	<div class="margin-bottom-60"></div>
+		            <% end %>
+
+	            <% end %>
+
+            </div>    
+            <!-- End Recent Works -->
+        </div><!--/col-md-4-->
+
+    </div><!--/row-->        
+
+</div><!--/container-->     
+<!--=== End Content Part ===-->
+
+<% else %>
+	<%= render 'boards/noresults' %>
+<% end %>
+
+<a class="create-board" href="/<%= @type.name %>/new">
+    <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;" href="<%= new_notice_path %>"></i>
+</a>

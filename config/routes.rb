@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :destroy, :update]
   end
   resources :notices, controller: 'board_notice'
+  resources :frees, controller: 'board_free'
+  resources :reviews, controller: 'board_review'
+  resources :genealogies, controller: 'board_genealogy'
+  resources :galleries, controller: 'board_gallery'
 
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
