@@ -39,6 +39,8 @@ Rails.application.routes.draw do
       get '/authenticate' => 'auth#get_token'
       resources :notices, controller: 'board_notice'
     end
+
+    match '*' => redirect("http://www.cert-is.ga")
   end
 
   # , constraints: { subdomain: 'api' }
