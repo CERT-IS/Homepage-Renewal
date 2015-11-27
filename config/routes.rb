@@ -1,34 +1,37 @@
 Rails.application.routes.draw do
 
-  root 'base#index'
+  # GENERAL ROUTES
+  constraints subdomain: 'www' do
+    root 'base#index'
 
-  devise_for :users
-  resources :users, only: [:show, :update] do
-    member do
-      patch 'update_avatar'
-      put 'update_avatar'
-      post 'like'
-      delete 'unlike'
+    devise_for :users
+    resources :users, only: [:show, :update] do
+      member do
+        patch 'update_avatar'
+        put 'update_avatar'
+        post 'like'
+        delete 'unlike'
+      end
+
+      resources :profile, only: [:index]
     end
 
-    resources :profile, only: [:index]
+    resources :boards, only: [] do
+      resources :comments, only: [:create, :edit, :destroy, :update]
+    end
+    resources :notices, controller: 'board_notice'
+
+    get '/privacy_policy' => 'base#privacy'
+    get '/terms_service' => 'base#terms'
+    get '/contact' => 'base#contact'
+    get '/members' => 'users#index'
+
+
+    # ADMIN ROUTES
+    get '/admin/membership'
+    patch '/admin/membership' => 'admin#membership_update'
+    put '/admin/membership' => 'admin#membership_update'
   end
-
-  resources :boards, only: [] do
-    resources :comments, only: [:create, :edit, :destroy, :update]
-  end
-  resources :notices, controller: 'board_notice'
-
-  get '/privacy_policy' => 'base#privacy'
-  get '/terms_service' => 'base#terms'
-  get '/contact' => 'base#contact'
-  get '/members' => 'users#index'
-
-
-  # ADMIN ROUTES
-  get '/admin/membership'
-  patch '/admin/membership' => 'admin#membership_update'
-  put '/admin/membership' => 'admin#membership_update'
 
   # API ROUTES
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
