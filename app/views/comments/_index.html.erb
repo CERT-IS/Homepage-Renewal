@@ -2,7 +2,7 @@
     <!-- Blog Comments -->
     <div class="row blog-comments margin-bottom-30" id="comments_<%= comment.id %>">
         <div class="col-sm-2 sm-margin-bottom-40">
-            <%= image_tag comment.user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;" %>
+            <%= image_tag comment.user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;height:80px;width:80px;" %>
         </div>
         <div class="col-sm-10">
             <div class="comments-itself">
@@ -20,7 +20,7 @@
     <% comment.replys.each do |reply| %>
         <div class="row blog-comments blog-comments-reply margin-bottom-30" id="comments_<%= reply.id %>">
             <div class="col-sm-2 sm-margin-bottom-40">
-                <%= image_tag reply.user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;" %>
+                <%= image_tag reply.user.avatar.url, class: "rounded-x", style: "padding:2px; border:solid 1px #ccc;height:80px;width:80px;" %>
             </div>
             <div class="col-sm-10">
                 <div class="comments-itself">
