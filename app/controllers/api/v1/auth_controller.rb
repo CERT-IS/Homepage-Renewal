@@ -17,8 +17,8 @@ module API
 
 			protected
 
-			def authenticate!
-				logger.debug "DEBUG::API::V1 authenticate! function called."
+			def authenticate_api
+				logger.debug "DEBUG::API::V1 authenticate_api function called."
 			  	authenticate_token || render_unauthorized
 			end
 
