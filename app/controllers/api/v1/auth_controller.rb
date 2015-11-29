@@ -18,14 +18,22 @@ module API
 			protected
 
 			def authenticate!
+				logger.debug "DEBUG::API::V1 authenticate! function called."
 			  	authenticate_token || render_unauthorized
 			end
 
 			def authenticate_token
+				logger.debug "DEBUG::API::V1 authenticate_token function called."
+				token_log    = ""
+				return_value = ""
 				authenticate_with_http_token do |token, options|
-					user = User.find_by(authentication_token: token)
-					return (user.present? and user.member?)
+					token_log    = token 
+					user         = User.find_by(authentication_token: token)
+					return_value = (user.present? and user.member?)
 				end
+				logger.debug "DEBUG::API::V1 token=#{token_log}"
+				logger.debug "DEBUG::API::V1 return=#{return_value}"
+				return return_value
 			end
 
 			def render_unauthorized
