@@ -24,7 +24,7 @@
                     </ul>
                     <h2><a href="/<%= @board.board_type.name %>/<%= @board.id %>"><%= @board.title %></a></h2>
                     <div class="bg-color-white">
-                        <%= @board.contents.html_safe %>
+                        <%= sanitize @board.contents.html_safe %>
                     </div>
                     <ul class="post-shares post-shares-lg">
                         <li>
