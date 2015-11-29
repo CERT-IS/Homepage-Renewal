@@ -70,7 +70,7 @@ class BoardsController < ApplicationController
 				# 외부 이미지 참조인 경우
 				style = f["style"]
 				style += "width:100%;" if style.present?
-				new_node = doc.create_element "img", src: f["src"], class: f["class"], style: f["style"] + "width:100%;"
+				new_node = doc.create_element "img", src: f["src"], class: f["class"], style: style
 				f.replace new_node
 			else
 				# 직접 업로드한 경우
