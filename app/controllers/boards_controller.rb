@@ -23,8 +23,10 @@ class BoardsController < ApplicationController
 		@board 		 	= current_user.boards.new
 		@board.title 	= params[:board][:title]
 
-		doc				= image_parsing
-		@board.contents = doc.xpath('//body').inner_html
+		if params[:board][:contents].present?
+			doc				= image_parsing
+			@board.contents = doc.xpath('//body').inner_html
+		end
 		@board.save
 	end
 

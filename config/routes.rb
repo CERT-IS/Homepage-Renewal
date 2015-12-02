@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :reviews, controller: 'board_review'
   resources :genealogies, controller: 'board_genealogy'
   resources :galleries, controller: 'board_gallery'
+  resources :lines, controller: 'board_line', only: [:index, :create]
 
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'

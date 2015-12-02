@@ -29,3 +29,7 @@ BoardType.create(
 BoardType.create(
 	name: "galleries",
 	realname: "사진첩")
+
+BoardType.create(
+	name: "lines",
+	realname: "한줄게시판")
