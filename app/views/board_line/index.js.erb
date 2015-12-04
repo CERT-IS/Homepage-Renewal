@@ -1,0 +1,11 @@
+$('#oneline_body').append("<%=j render partial: 'oneline', collection: @boards, as: :board %>");
+
+<% if @page.equal?(@page_max) %>
+	$('#oneline_loadmore').fadeOut();
+	$('#oneline_loadmore').remove();
+<% else %>
+	var href = $('#oneline_loadmore').attr("href");
+	href     = parseInt( href.slice(-1) ) + 1 
+	href     = "/lines?page=" + href
+	$('#oneline_loadmore').attr("href", href);
+<% end %>
