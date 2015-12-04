@@ -23,8 +23,9 @@
                         <!--<a href="#"><i class="fa fa-cog pull-right"></i></a>-->
                     </div>
 
-                    <%= form_for @board, url: url_for(controller: controller.controller_name, action: 'create'), html: {class: "sky-form"} do |f| %>
                     <div class="panel-body margin-bottom-50">
+
+                        <%= form_for @board, url: url_for(controller: controller.controller_name, action: 'create'), html: {class: "sky-form"} do |f| %>
                         <div class="media media-v2">
                             <a class="pull-left" href="#">
                                 <%= image_tag current_user.avatar.url, class: "media-object rounded-x" %>

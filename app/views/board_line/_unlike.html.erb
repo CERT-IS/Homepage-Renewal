@@ -1,0 +1,6 @@
+<%= form_for(current_user, url: unlike_user_path(current_user), method: :delete, remote: true, authenticity_token: true) do |f| %>
+	<a href="javascript:{};" onclick="$(this).parent().submit();">
+	    <i class="expand-list rounded-x fa fa-heart"></i>
+	</a>
+	<input type="hidden" name="board_id" value="<%= board.id %>" />
+<% end %>

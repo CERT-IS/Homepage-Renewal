@@ -1,1 +1,5 @@
-$('#likes_<%= @board.id %>').html("<%=j render 'boards/like', board: @board %>")
+<% if @board.board_type.name.eql?("lines") %>
+$('#likes_<%= @board.id %>').html("<%=j render 'board_line/like', board: @board %>");
+<% else %>
+$('#likes_<%= @board.id %>').html("<%=j render 'boards/like', board: @board %>");
+<% end %>

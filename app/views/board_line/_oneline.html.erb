@@ -9,11 +9,17 @@
         </h4>
         <p><%= board.title %></p>
         <ul class="list-inline results-list pull-left">
-            <li><a href="#">5 Likes</a></li>
-            <li><a href="#">1 Share</a></li>
+            <li><a href="#"><%= board.likes.count %> Likes</a></li>
+            <li><a href="#">0 Share</a></li>
         </ul>
         <ul class="list-inline pull-right">
-            <li><a href="#"><i class="expand-list rounded-x fa fa-heart"></i></a></li>
+            <li id="likes_<%= board.id %>">
+                <% if current_user.like?(board) %>
+                    <%= render 'unlike', board: board %>
+                <% else %>
+                    <%= render 'like', board: board %>
+                <% end %>
+            </li>
             <li><a href="#"><i class="expand-list rounded-x fa fa-retweet"></i></a></li>
         </ul>
 
