@@ -11,4 +11,8 @@ class Board < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   validates :title, presence: true
+
+  def like_members
+    User.joins(:likes).merge(self.likes)
+  end
 end

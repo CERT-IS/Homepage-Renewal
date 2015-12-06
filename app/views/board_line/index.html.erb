@@ -26,7 +26,7 @@
                     <div class="panel-body margin-bottom-50">
 
                         <%= form_for @board, url: url_for(controller: controller.controller_name, action: 'create'), html: {class: "sky-form"} do |f| %>
-                        <div class="media media-v2">
+                        <div class="media media-v2" style="border-bottom:1px solid #eee; border-top:none;">
                             <a class="pull-left" href="#">
                                 <%= image_tag current_user.avatar.url, class: "media-object rounded-x" %>
                             </a>
