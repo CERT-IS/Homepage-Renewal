@@ -22,4 +22,8 @@ class BoardLineController < BoardsController
 
 		redirect_to lines_path
 	end
+
+	def destroy
+		super
+	end
 end
