@@ -1,7 +1,7 @@
 <% if @board.board_type.name.eql?("lines") %>
 $('#likes_<%= @board.id %>').html("<%=j render 'board_line/unlike', board: @board %>");
 $('#likes_count_<%= @board.id %>').html("<%= @board.likes.count %> Likes");
-$('#likes_count_<%= @board.id %>').attr("data-original-title", "<%= @board.like_members.limit(3).map(&:realname).join(', ') %> <%= ' 외 '+ (@board.likes.count - 3).to_s + '명' if @board.likes.count > 3 %>");
+$('#likes_count_<%= @board.id %>').attr("data-original-title", "<%= @board.like_members.limit(3).map(&:realname).join(', ') %><%= ' 외 '+ (@board.likes.count - 3).to_s + '명' if @board.likes.count > 3 %>");
 <% else %>
 $('#likes_<%= @board.id %>').html("<%=j render 'boards/unlike', board: @board %>");
 <% end %>

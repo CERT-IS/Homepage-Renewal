@@ -10,7 +10,7 @@
         <p><%= board.title %></p>
         <ul class="list-inline results-list pull-left">
             <li>
-                <a class="tooltips" data-toggle="tooltip" data-original-title="<%= board.like_members.limit(3).map(&:realname).join(', ') %> <%= ' 외 '+ (board.likes.count - 3).to_s + '명' if board.likes.count > 3 %>" id="likes_count_<%= board.id %>"><%= board.likes.count %> Likes</a>
+                <a class="tooltips" data-toggle="tooltip" data-original-title="<%= board.like_members.limit(3).map(&:realname).join(', ') %><%= ' 외 '+ (board.likes.count - 3).to_s + '명' if board.likes.count > 3 %>" id="likes_count_<%= board.id %>"><%= board.likes.count %> Likes</a>
             </li>
             <li><a href="#">0 Share</a></li>
         </ul>
