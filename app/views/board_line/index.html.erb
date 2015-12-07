@@ -47,7 +47,7 @@
                         <div id="oneline_body">
                             <%= render partial: 'oneline', collection: @boards, as: :board %>
                         </div>
-                        <%= link_to "Load More", { controller: controller.controller_name, action: "index", page: @page+1 }, class: "btn-u btn-u-default btn-block", remote: true, id: "oneline_loadmore" unless @page.equal?(@page_max) %>
+                        <%= link_to "Load More", { controller: controller.controller_name, action: "index", page: @page+1 }, class: "btn-u btn-u-default btn-block", remote: true, id: "oneline_loadmore", style: "color: #fff;" unless @page.equal?(@page_max) %>
                     </div>
                 </div>    
             </div>

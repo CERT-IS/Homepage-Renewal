@@ -1,0 +1,5 @@
+<%= form_for(current_user, url: like_user_path(current_user), method: :post, remote: true, authenticity_token: true, html: {id: "like_form_#{board.id}"}) do |f| %>
+	    <i class="fa fa-heart"></i> <%= board.likes.count %>
+	<input type="hidden" name="board_id" value="<%= board.id %>" />
+	<input type="hidden" name="board_type" value="users_timeline" />
+<% end %>

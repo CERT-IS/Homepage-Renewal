@@ -1,0 +1,51 @@
+<li <%= "class=timeline-inverted" if board_counter.odd? %>>
+    <div class="timeline-badge primary"><i class="glyphicon glyphicon-record"></i></div>
+    <div class="timeline-panel">
+        <div class="timeline-heading">
+            <% images = board.attachments.where("lower(contents_content_type) LIKE ?", "image%") %>
+            <% images_count = images.count %>
+            <% if images_count > 1 %>
+                <div class="carousel slide carousel-v1" id="myCarousel<%= board.id %>">
+                    <div class="carousel-inner">
+                        <% images.each_with_index do |image, index| %>
+                        <div class="<%= index == 0 ? 'item active' : 'item' %>">
+                            <%= image_tag image.contents.url, class: "img-responsive", style: "width: 386.313px;height: 244px;" %>
+                        </div>
+                        <% end %>
+                    </div>
+                    
+                    <div class="carousel-arrow">
+                        <a data-slide="prev" href="#myCarousel<%= board.id %>" class="left carousel-control">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a data-slide="next" href="#myCarousel<%= board.id %>" class="right carousel-control">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            <% elsif images_count == 1 %>
+                <%= image_tag images.first.contents.url, class: "img-responsive", style: "width: 386.313px;height: 244px;" %>
+            <% else %>
+                <img class="img-responsive" src="/assets/bootstrap/main/img10.jpg" alt=""/>
+            <% end %>
+        </div>
+        <div class="timeline-body text-justify">
+            <h2><a href="/frees/<%= board.id %>"><%= board.title %></a></h2>
+            <p><%= truncate((strip_tags board.contents), length: 100, separator: ' ', escape: false) %></p>
+            <a class="btn-u btn-u-sm" href="/frees/<%= board.id %>">Read More</a>
+        </div>
+        <div class="timeline-footer">
+            <ul class="list-unstyled list-inline blog-info">
+                <li><i class="fa fa-clock-o"></i> <%= board.created_at.strftime("%B %-d, %Y") %></li>
+                <li><i class="fa fa-comments-o"></i> <a href="/notices/<%= board.id %>#comments"><%= board.comments.count %> Comments</a></li>
+            </ul>
+            <a class="likes" href="javascript:{};" id="likes_<%= board.id %>" onclick="$('#like_form_<%= board.id %>').submit();">
+                <% if current_user.like?(board) %>
+                    <%= render 'unlike', board: board %>
+                <% else %>
+                    <%= render 'like', board: board %>
+                <% end %>
+            </a>
+        </div>
+    </div>
+</li>

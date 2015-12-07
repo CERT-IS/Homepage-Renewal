@@ -1,0 +1,11 @@
+$("<%=j render partial: 'timeline', collection: @boards, as: :board %>").insertAfter($('.timeline-v1>li:nth-last-child(2)'));
+
+<% if @page.equal?(@page_max) %>
+	$('#timeline_loadmore').fadeOut();
+	$('#timeline_loadmore').remove();
+<% else %>
+	var href = $('#timeline_loadmore').attr("href");
+	href     = parseInt( href.slice(-1) ) + 1 
+	href     = "/users/admin?page=" + href
+	$('#timeline_loadmore').attr("href", href);
+<% end %>
