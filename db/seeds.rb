@@ -33,3 +33,7 @@ BoardType.create(
 BoardType.create(
 	name: "lines",
 	realname: "한줄게시판")
+
+BoardType.create(
+	name: "grades",
+	realname: "등업게시판")

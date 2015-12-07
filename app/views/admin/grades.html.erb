@@ -14,11 +14,11 @@
             <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
 
                 <!-- 멤버·스텝 -->
-                <li class="list-group-item active"><a href="<%= admin_membership_path %>">멤버·스텝</a></li>
+                <li class="list-group-item"><a href="<%= admin_membership_path %>">멤버·스텝</a></li>
                 <!-- End 멤버·스텝 -->
 
                 <!-- 멤버·스텝 -->
-                <li class="list-group-item"><a href="<%= admin_grades_path %>">등업신청</a></li>
+                <li class="list-group-item active"><a href="<%= admin_grades_path %>">등업신청</a></li>
                 <!-- End 멤버·스텝 -->
 
                 <!-- Maps -->                    
@@ -50,7 +50,7 @@
         <!-- Begin Content -->
         <div class="col-md-9">
 
-            <div class="headline"><h2>전체 멤버 관리</h2></div>
+            <div class="headline"><h2>등업신청 관리</h2></div>
 
             
 
@@ -76,29 +76,16 @@
 
             <div class="margin-bottom-40"></div>
 
-            <%= form_tag "/admin/membership", method: :patch, class: "sky-form" do %>
+            <%= form_tag "/admin/grades", method: :patch, class: "sky-form" do %>
                 <fieldset>                  
                     <div class="row">
                         <label class="label col col-2">선택 멤버를</label>
                         <section class="col col-3">
-                            <%= select_tag "membership[grade]", "<option value='associate_member'>준회원</option><option value='regular_member'>정회원</option><option value='honorary_member'>명예회원</option><option value='president'>회장</option><option value='vice_president'>부회장</option><option value='manager'>총무</option><option value='librian'>도서관리자</option><option value='admin'>서버관리자</option>".html_safe, class: "form-control" %>
+                            <%= select_tag "grades[grade]", "<option value='associate_member'>준회원</option><option value='regular_member'>정회원</option><option value='honorary_member'>명예회원</option><option value='president'>회장</option><option value='vice_president'>부회장</option><option value='manager'>총무</option><option value='librian'>도서관리자</option><option value='admin'>서버관리자</option>".html_safe, class: "form-control" %>
                         </section>
                         <label class="label col col-1">(으)로</label>
                         <section class="col col-1"><%= submit_tag "변경", class: "btn-u" %></section>
                         <section class="col col-2"><%= submit_tag "강제 탈퇴", class: "btn-u btn-u-red" %></section>
-                        <section class="col col-3">
-                            <select class="form-control">
-                                <option>전체 멤버</option>
-                                <option>준회원</option>
-                                <option>정회원</option>
-                                <option>명예회원</option>
-                                <option>회장</option>
-                                <option>부회장</option>
-                                <option>총무</option>
-                                <option>도서관리자</option>
-                                <option>서버관리자</option>
-                            </select>
-                        </section>
                     </div>
                 </fieldset>
             
@@ -110,19 +97,25 @@
                             <th>IDX</th>
                             <th>ID</th>
                             <th>이름</th>
+                            <th>제목</th>
+                            <th>신청일</th>
                             <th>등급</th>
-                            <th>가입일</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% @users.each do |user| %>
+                        <% @boards.each do |board| %>
                             <tr>
-                                <td><input type="checkbox" name="membership[member][]" value="<%= user.id %>"></td>
-                                <td><%= user.id %></td>
-                                <td><%= user.uid %></td>
-                                <td><%= user.realname %></td>
-                                <td><%= user_roles(user) %></td>
-                                <td><%= user.created_at.strftime("%Y.%m.%-d") %></td>                          
+                                <td><input type="checkbox" name="grades[member][]" value="<%= board.id %>"></td>
+                                <td><%= board.id %></td>
+                                <td><%= board.user.uid %></td>
+                                <td><%= board.user.realname %></td>
+                                <td><%= board.title %></td>
+                                <td><%= board.created_at.strftime("%Y.%m.%-d") %></td>   
+                                <td><%= user_roles(board.user) %></td>
+                                <td><%= link_to '<i class="rounded-x fa fa-eye"></i>'.html_safe, grade_path(board) %></td>
+                                <td><%= link_to '<i class="rounded-x fa fa-trash"></i>'.html_safe, "/#{board.board_type.name}/#{board.id}", method: :delete, data: { confirm: "정말 삭제 하시겠습니까?" } %></td>
                             </tr>
                         <% end %>
                     </tbody>

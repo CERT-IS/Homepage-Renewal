@@ -1,0 +1,2 @@
+module BoardGradeHelper
+end

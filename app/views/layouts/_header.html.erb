@@ -11,21 +11,22 @@
             <div class="topbar">
                 <ul class="loginbar pull-right">
                     <% if user_signed_in? %>
-                    <li class="hoverSelector">
-                        <i class="fa fa-globe"></i>
-                        <a>SiteMap</a>
-                        <ul class="languages hoverSelectorBlock">
-                            <li class="active">
-                                <a href="#">English <i class="fa fa-check"></i></a> 
-                            </li>
-                            <li><a href="#">Spanish</a></li>
-                            <li><a href="#">Russian</a></li>
-                            <li><a href="#">German</a></li>
-                        </ul>
-                    </li>
-                    <li class="topbar-devider"></li>   
-                    <li><a href="page_faq.html">Report</a></li>  
-                    <li class="topbar-devider"></li>
+                        <% if current_user.member? %>
+                        <li class="hoverSelector">
+                            <i class="fa fa-globe"></i>
+                            <a>SiteMap</a>
+                            <ul class="languages hoverSelectorBlock">
+                                <li class="active">
+                                    <a href="#">English <i class="fa fa-check"></i></a> 
+                                </li>
+                                <li><a href="#">Spanish</a></li>
+                                <li><a href="#">Russian</a></li>
+                                <li><a href="#">German</a></li>
+                            </ul>
+                        </li>
+                        <li class="topbar-devider"></li>   
+                        <li><a href="page_faq.html">Report</a></li>  
+                        <li class="topbar-devider"></li>
                         <li class="hoverSelector">
                             <a><%= current_user.uid %></a>
                             <ul class="languages hoverSelectorBlock">
@@ -33,7 +34,14 @@
                                 <li><a href="#">Settings</a></li>
                                 <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
                             </ul>
-                        </li> 
+                        </li>
+                        <% else %>
+                            <li><a><%= current_user.uid %></a></li>
+                            <li class="topbar-devider"></li>
+                            <li><a style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">준회원</a></li>
+                            <li class="topbar-devider"></li>
+                            <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
+                        <% end %>
                     <% else %>
                         <li><a href="<%= new_user_session_path %>">Login</a></li>
                         <li class="topbar-devider"></li>
@@ -57,7 +65,7 @@
                 <ul class="nav navbar-nav">
 
                     <!-- 회원일 경우 -->
-                    <% if user_signed_in? %>
+                    <% if user_signed_in? and current_user.member? %>
                     <li class="dropdown active">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             CERT-IS
@@ -171,7 +179,15 @@
                         <a href="<%= contact_path %>">
                             Contact
                         </a> 
-                    </li>                     
+                    </li> 
+
+                        <% if user_signed_in? and current_user.has_role?(:associate_member) %>
+                            <li>
+                                <a href="<%= new_grade_path %>">
+                                    등업게시판
+                                </a> 
+                            </li>   
+                        <% end %>                    
 
 
                     <% end %>

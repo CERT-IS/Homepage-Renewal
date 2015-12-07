@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :genealogies, controller: 'board_genealogy'
   resources :galleries, controller: 'board_gallery'
   resources :lines, controller: 'board_line', only: [:index, :create, :destroy]
+  resources :grades, controller: 'board_grade', except: [:index]
 
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
@@ -35,6 +36,9 @@ Rails.application.routes.draw do
   get '/admin/membership'
   patch '/admin/membership' => 'admin#membership_update'
   put '/admin/membership' => 'admin#membership_update'
+  get '/admin/grades'
+  patch '/admin/grades' => 'admin#grades_update'
+  put '/admin/grades' => 'admin#grades_update'
   
   # API ROUTES
   namespace :api, path: '/', constraints: { subdomain: 'api' } do
