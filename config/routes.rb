@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :reviews, controller: 'board_review'
   resources :genealogies, controller: 'board_genealogy'
   resources :galleries, controller: 'board_gallery'
+  resources :presentations, controller: 'board_presentation'
   resources :lines, controller: 'board_line', only: [:index, :create, :destroy]
   resources :grades, controller: 'board_grade', except: [:index]
 

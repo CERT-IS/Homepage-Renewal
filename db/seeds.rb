@@ -37,3 +37,7 @@ BoardType.create(
 BoardType.create(
 	name: "grades",
 	realname: "등업게시판")
+
+BoardType.create(
+	name: "presentations",
+	realname: "정기 발표자료")
