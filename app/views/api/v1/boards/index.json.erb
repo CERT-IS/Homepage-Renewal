@@ -1,4 +1,9 @@
 [
+	{
+		"type": "notices",
+		"current_page": "<%= @page %>",
+		"total_page": "<%= @page_max %>"
+	}<% if @boards.present? %>,<% end %>
 	<% @boards.each do |board| %>
 	{
 		"id": "<%= board.id %>",
