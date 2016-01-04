@@ -45,3 +45,7 @@ BoardType.create(
 BoardType.create(
 	name: "blogs",
 	realname: "기술블로그")
+
+BoardType.create(
+	name: "documents",
+	realname: "공문자료")

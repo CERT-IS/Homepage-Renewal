@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :genealogies, controller: 'board_genealogy'
   resources :galleries, controller: 'board_gallery'
   resources :presentations, controller: 'board_presentation'
+  resources :documents, controller: 'board_document'
   resources :blogs, controller: 'board_blog'
   resources :lines, controller: 'board_line', only: [:index, :create, :destroy]
   resources :grades, controller: 'board_grade', except: [:index]
