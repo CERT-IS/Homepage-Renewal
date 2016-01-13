@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /^image\/(jpeg|jpg|png|gif)$/
   validates_attachment_size :avatar, :in => 0..10.megabytes
 
-  after_create :set_default_role, if: Proc.new { User.count > 1 }
+  after_create :init_user
 
   def like?(board)
     likes.find_by(board: board).present?
@@ -57,7 +57,9 @@ class User < ActiveRecord::Base
 
   private
   
-  def set_default_role
-    add_role :associate_member
+  def init_user
+    add_role :associate_member if User.count > 1 
+    self.nickname = self.uid
+    self.save
   end
 end

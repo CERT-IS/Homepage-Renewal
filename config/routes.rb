@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     end
 
     resources :profile, only: [:index]
+    # 프로필 정보 수정 (닉네임, 한줄소개)
+    put   '/profile' => 'profile#update'
+    patch '/profile' => 'profile#update'
   end
 
   resources :boards, only: [] do

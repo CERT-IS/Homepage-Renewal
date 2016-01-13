@@ -24,7 +24,7 @@
             <% end %>
 
             <div class="panel-heading-v1 overflow-h">
-                <h1 class="heading-xs"> <%= @user.uid %> </h1> 
+                <h1 class="heading-xs"> <%= @user.nickname %> </h1> 
                 <p> <%= @user.realname %> </p>
             </div>
             <hr>
@@ -71,18 +71,47 @@
                 <div class="panel panel-profile">
                     <div class="panel-heading overflow-h">
                         <h2 class="panel-title heading-sm pull-left"><i class="fa fa-user"></i> Profile </h2>
-                        <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                        <a href="javascript:{};" data-toggle="modal" data-target="#profile_edit"><i class="fa fa-cog pull-right"></i></a>
+                        <div class="modal fade bs-example-modal-sm" id="profile_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <%= form_tag "/users/#{current_user.uid}/profile", method: :put, remote: true do %>
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel4">프로필 정보 수정</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>아이디</h4>
+                                                    <p><input class="form-control" type="text" value="<%= @user.uid %>" readonly/></p>
+
+                                                    <h4>닉네임</h4>
+                                                    <p><%= text_field_tag 'profile[nickname]', "#{@user.nickname}", class: 'form-control' %></p>
+
+                                                    <h4>한 줄 소개</h4>
+                                                    <p><%= text_field_tag 'profile[introduce]', "#{@user.introduce}", class: 'form-control' %></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn-u btn-u-primary" data-dismiss="modal">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="profile-bio">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h1><%= @user.uid %></h1>
+                                    <h1><%= @user.nickname %></h1>
                                     <span><strong>Name:</strong> <%= @user.realname %></span>
-                                    <span><strong>Position:</strong> Web Designer</span>
+                                    <span><strong>Position:</strong> <%= user_roles(@user) %></span>
                                     <hr>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                                    <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
+                                    <p><%= @user.introduce %></p>
                                 </div>
                             </div>    
                         </div><!--/end row-->
