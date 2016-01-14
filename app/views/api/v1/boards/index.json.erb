@@ -10,7 +10,8 @@
 		"title": "<%= board.title %>",
 		"created_at": "<%= board.created_at.strftime("%Y년 %-m월 %-d일") %>",
 		"uid": <% if  board.user.present? %>"<%= board.user.uid %>"<% else %>null<% end %>,
-		"image": <% if board.attachments.present? %>"<%= board.attachments.first.contents.url %>"<% else %>null<% end %>
+		"image": <% if board.attachments.present? %>"<%= board.attachments.first.contents.url %>"<% else %>null<% end %>,
+		"read_more": "<%= api_v1_notice_path(board) %>"
 	}<% unless board == @boards.last %>,<% end %>
 	<% end %>
 ]

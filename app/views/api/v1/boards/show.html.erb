@@ -1,0 +1,105 @@
+<!--=== Blog Posts ===-->
+<div class="bg-color-light">
+    <div class="container content-sm" style="padding-top: 0px;">
+        <!-- News v3 -->
+        <div class="news-v3 margin-bottom-30">
+            <!-- <img class="img-responsive full-width" src="/assets/bootstrap/main/img12.jpg" alt=""> -->
+            <div class="news-v3-in">
+                <ul class="list-inline posted-info">
+                    <li>By <a href="#"><%= @board.user.present? ? @board.user.uid : "탈퇴회원" %></a></li>
+                    <li>Posted <%= @board.created_at.strftime("%B %-d, %Y") %></li>
+                </ul>
+                <h2><a href="/<%= @board.board_type.name %>/<%= @board.id %>"><%= @board.title %></a></h2>
+                <div class="bg-color-white">
+                    <%= sanitize @board.contents.html_safe %>
+                </div>
+                <ul class="post-shares post-shares-lg">
+                    <li>
+                        <a href="#comments" id="comments_count_parent">
+                            <i class="rounded-x icon-speech"></i>
+                            <% if @board.comments.present? %>
+                                <span id="comments_count"><%= @board.comments.count %></span>
+                            <% end %>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="rounded-x icon-share"></i>
+                        </a>
+                    </li>
+                    <li id="likes_<%= @board.id %>">
+                        <% if @current_user.like?(@board) %>
+                            <%= render '/boards/unlike', board: @board %>
+                        <% else %>
+                            <%= render '/boards/like', board: @board %>
+                        <% end %>
+                    </li>
+
+                    <!-- 수정 및 삭제 -->
+                    <% if @board.deletable_by? @current_user %>
+                        <li style="float: right;">
+                            <%= link_to '<i class="rounded-x icon-trash"></i>'.html_safe, "/#{@board.board_type.name}/#{@board.id}", method: :delete, data: { confirm: "정말 삭제 하시겠습니까?" } %>
+                        </li>
+                    <% end %>
+                    <% if @board.updatable_by? @current_user %>
+                        <li style="float: right;">
+                            <%= link_to '<i class="rounded-x icon-pencil"></i>'.html_safe, "/#{@board.board_type.name}/#{@board.id}/edit" %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>                        
+        <!-- End News v3 -->
+
+        <hr>
+
+        <h2 class="margin-bottom-20">Comments</h2>
+
+        <div id="comments">
+            <%= render partial: 'comments/index', collection: @comments, as: :comment %>
+        </div>
+
+        <%= render 'comments/new' %>
+
+    </div><!--/end container-->
+</div>
+<!--=== End Blog Posts ===-->
+
+<script>
+    function reply_new(comment_id) {
+
+        if($('#comment_reply_new').length) {
+            $('#comment_reply_new').fadeOut();
+            $('#comment_reply_new').remove();
+        }
+
+        $('#comments_' + comment_id + '_parent').append("<%=j render 'comments/reply_new' %>");
+
+        $('#comment_reply_new').append('<input type="hidden" name="comment_id" value="' + comment_id +'">')
+
+        $('html, body').animate({
+            scrollTop: $('#comment_reply_new').offset().top - 100
+        }, 'slow');
+
+        // 댓글의 댓글 presence 유효성 검사
+        $('#comment_reply_new').submit(function(event) {
+            if($('#comment_contents').val() == '') {
+                $('#comment_contents').parent().addClass("has-error");
+                $('#comment_contents').parent().append('<p style="display: block;margin-top: 6px;padding: 0 1px;font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393;">Please enter something</p>');
+                event.preventDefault();
+            }
+        });
+    }
+
+
+    // 댓글 Enter 시 Submit
+    $('#comment_contents').on('keyup', function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $(this).submit();
+        }
+    });
+
+</script>
+
+<%= javascript_include_tag 'bootstrap/lightbox/lightbox' %>

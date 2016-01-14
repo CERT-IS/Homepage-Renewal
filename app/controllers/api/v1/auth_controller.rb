@@ -1,7 +1,7 @@
 module API
 	module V1
 		class AuthController < ApplicationController
-			before_action :check_format, except: :get_token
+			# before_action :check_format, except: :get_token
 
 			def get_token
 				authenticate_or_request_with_http_basic do |uid, password|
@@ -27,10 +27,11 @@ module API
 				token_log    = ""
 				return_value = ""
 				authenticate_with_http_token do |token, options|
-					token_log    = token 
-					user         = User.find_by(authentication_token: token)
-					return_value = (user.present? and user.member?)
+					token_log     = token 
+					@current_user = User.find_by(authentication_token: token)
+					return_value  = (@current_user.present? && @current_user.member?)
 				end
+				return_value = false unless return_value.present?
 				logger.debug "DEBUG::API::V1 token=#{token_log}"
 				logger.debug "DEBUG::API::V1 return=#{return_value}"
 				return return_value

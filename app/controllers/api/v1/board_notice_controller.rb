@@ -10,6 +10,10 @@ module API
 				@page_max	= (@boards.count-1) / 6 + 1 if @boards.present?
 				@boards 	= @boards.paginate(:page => params[:page], :per_page => 6)
 			end
+
+			def show
+				super
+			end
 		end
 	end
 end
