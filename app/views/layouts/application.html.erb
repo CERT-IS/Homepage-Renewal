@@ -25,9 +25,9 @@
 <body>
   <%= render 'shared/analytics'%>
   <div class="wrapper">
-	  <%= render 'layouts/header' unless request.path == api_v1_notice_path %>
+	  <%= render 'layouts/header' unless request.path.start_with?("/v1/notices/") %>
 	  <%= yield %>
-	  <%= render 'layouts/footer' unless request.path == api_v1_notice_path %>
+	  <%= render 'layouts/footer' unless request.path.start_with?("/v1/notices/") %>
   </div>
   <script type="text/javascript">
     // Bind normal buttons
