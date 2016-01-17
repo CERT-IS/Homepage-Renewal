@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     patch '/profile' => 'profile#update'
   end
 
+  # 게시판 형태
   resources :boards, only: [] do
     resources :comments, only: [:create, :edit, :destroy, :update]
   end
@@ -32,6 +33,10 @@ Rails.application.routes.draw do
   resources :lines, controller: 'board_line', only: [:index, :create, :destroy]
   resources :grades, controller: 'board_grade', except: [:index]
 
+  # 캘린더
+  resources :calendar
+
+  # Static Pages
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
   get '/contact' => 'base#contact'
