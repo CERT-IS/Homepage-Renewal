@@ -14,5 +14,3 @@ Rails.application.config.assets.precompile += %w( bootstrap/lightbox/lightbox.js
 # Bootstrap Calender Library
 Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/fullcalendar.css )
 Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/fullcalendar.print.css )
-Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/fullcalendar.min.js )
-Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/moment.js )

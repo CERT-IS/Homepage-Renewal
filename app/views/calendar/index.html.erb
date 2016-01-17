@@ -18,15 +18,10 @@
 <a class="create-board" href="/calendar/new">
     <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;" href="<%= new_calendar_path %>"></i>
 </a>
-  
 
-<%= javascript_include_tag "bootstrap/fullcalendar/moment.js" %>
-<%= javascript_include_tag "bootstrap/fullcalendar/fullcalendar.min.js" %>
-
-<script>
-
-	$(document).ready(function() {
-		
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+    	console.log("11");
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -93,7 +88,5 @@
 				}
 			]
 		});
-		
 	});
-
 </script>

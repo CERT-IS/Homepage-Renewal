@@ -23,7 +23,7 @@
 //= reqruie bootstrap/plugins/messenger/widgster.js
 
 // JS Implementing Plugins
-//= require bootstrap/smoothScroll.js
+// require bootstrap/smoothScroll.js
 //= require bootstrap/modernizr.js
 //= require bootstrap/jquery.cslider.js
 //= require bootstrap/owl.carousel.js
@@ -50,5 +50,9 @@
 //= require bootstrap/plugins/datepicker.js
 //= require bootstrap/plugins/circles-master.js
 //= require bootstrap/plugins/validation.js
+
+// Bootstrap fullcalendar
+//= require bootstrap/fullcalendar/moment.js
+//= require bootstrap/fullcalendar/fullcalendar.min.js
 
 //= require turbolinks
