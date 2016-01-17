@@ -1,4 +1,6 @@
-<%= stylesheet_link_tag "calendar" %>
+<%= stylesheet_link_tag "bootstrap/fullcalendar/fullcalendar.css" %>
+<%= stylesheet_link_tag "bootstrap/fullcalendar/fullcalendar.print.css", media: 'print' %>
+
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs">
     <div class="container">
@@ -12,108 +14,86 @@
 	<div id="calendar"></div>
 	<div class="margin-bottom-50"></div>
 </div>
-  
-  <script>
-    // sandbox disable popups
-    if (window.self !== window.top && window.name!="view1") {;
-      window.alert = function(){/*disable alert*/};
-      window.confirm = function(){/*disable confirm*/};
-      window.prompt = function(){/*disable prompt*/};
-      window.open = function(){/*disable open*/};
-    }
-    
-    // prevent href=# click jump
-    document.addEventListener("DOMContentLoaded", function() {
-      var links = document.getElementsByTagName("A");
-      for(var i=0; i < links.length; i++) {
-        if(links[i].href.indexOf('#')!=-1) {
-          links[i].addEventListener("click", function(e) {
-          console.debug("prevent href=# click");
-              if (this.hash) {
-                if (this.hash=="#") {
-                  e.preventDefault();
-                  return false;
-                }
-                else {
-                  /*
-                  var el = document.getElementById(this.hash.replace(/#/, ""));
-                  if (el) {
-                    el.scrollIntoView(true);
-                  }
-                  */
-                }
-              }
-              return false;
-          })
-        }
-      }
-    }, false);
-    
-  </script>
 
-<%= javascript_include_tag "calendar.min.js" %>
+<a class="create-board" href="/calendar/new">
+    <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;" href="<%= new_calendar_path %>"></i>
+</a>
+  
+
+<%= javascript_include_tag "bootstrap/fullcalendar/moment.js" %>
+<%= javascript_include_tag "bootstrap/fullcalendar/fullcalendar.min.js" %>
+
 <script>
 
-  
-  var date = new Date();
-  var d = date.getDate();
-  var m = date.getMonth();
-  var y = date.getFullYear();
-  
-  $('#calendar').fullCalendar({
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      // month,agendaWeek,agendaDay
-      right: ''
-    },
-    editable: true,
-    events: [
-      {
-        title: 'All Day Event',
-        start: new Date('<%= DateTime.now %>')
-      },
-      {
-        title: 'Long Event',
-        start: new Date(y, m, d-5),
-        end: new Date(y, m, d-2)
-      },
-      {
-        id: 999,
-        title: 'Repeating Event',
-        start: new Date(y, m, d-3, 16, 0),
-        allDay: false
-      },
-      {
-        id: 999,
-        title: 'Repeating Event',
-        start: new Date(y, m, d+4, 16, 0),
-        allDay: false
-      },
-      {
-        title: 'Meeting',
-        start: new Date(y, m, d, 10, 30),
-        allDay: false
-      },
-      {
-        title: 'Lunch',
-        start: new Date(y, m, d, 12, 0),
-        end: new Date(y, m, d, 14, 0),
-        allDay: false
-      },
-      {
-        title: 'Birthday Party',
-        start: new Date(y, m, d+1, 19, 0),
-        end: new Date(y, m, d+1, 22, 30),
-        allDay: false
-      },
-      {
-        title: 'Click for Google',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        url: 'http://google.com/'
-      }
-    ]
-  });
+	$(document).ready(function() {
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: '2016-01-12',
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2016-01-01'
+				},
+				{
+					title: 'Long Event',
+					start: '2016-01-07',
+					end: '2016-01-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2016-01-09T16:00:00'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2016-01-16T16:00:00'
+				},
+				{
+					title: 'Conference',
+					start: '2016-01-11',
+					end: '2016-01-13'
+				},
+				{
+					title: 'Meeting',
+					start: '2016-01-12T10:30:00',
+					end: '2016-01-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2016-01-12T12:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2016-01-12T14:30:00'
+				},
+				{
+					title: 'Happy Hour',
+					start: '2016-01-12T17:30:00'
+				},
+				{
+					title: 'Dinner',
+					start: '2016-01-12T20:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2016-01-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2016-01-28'
+				}
+			]
+		});
+		
+	});
 
 </script>

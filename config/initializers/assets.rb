@@ -10,5 +10,9 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( bootstrap/lightbox/lightbox.js )
-Rails.application.config.assets.precompile += %w( calendar.css )
-Rails.application.config.assets.precompile += %w( calendar.min.js )
+
+# Bootstrap Calender Library
+Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/fullcalendar.css )
+Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/fullcalendar.print.css )
+Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/fullcalendar.min.js )
+Rails.application.config.assets.precompile += %w( bootstrap/fullcalendar/moment.js )
