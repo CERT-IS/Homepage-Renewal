@@ -56,10 +56,10 @@
         <h2 class="margin-bottom-20">Comments</h2>
 
         <div id="comments">
-            <%= render partial: 'comments/index', collection: @comments, as: :comment %>
+            <%= render partial: '/comments/index', collection: @comments, as: :comment %>
         </div>
 
-        <%= render 'comments/new' %>
+        <%= render '/comments/new' %>
 
     </div><!--/end container-->
 </div>
