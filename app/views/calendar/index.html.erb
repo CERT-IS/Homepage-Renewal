@@ -15,55 +15,174 @@
 	<div class="margin-bottom-50"></div>
 </div>
 
-<a class="create-board tooltips" data-toggle="tooltip" data-original-title="달력에서 해당 날짜의 공간을 클릭하시면 좀 더 편리하게 일정을 등록하실 수 있습니다." onclick="$('#eventNew').modal('show');">
+<a class="create-board tooltips" data-toggle="tooltip" data-original-title="달력에서 해당 날짜의 공간을 클릭하시면 좀 더 편리하게 일정을 등록하실 수 있습니다." onclick="newEvent();"  style="z-index:1001;">
     <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;"></i>
 </a>
 
 <!-- eventNew Modal -->
 <div class="sky-form modal fade" id="eventNew" tabindex="-1" role="dialog" aria-labelledby="eventNew" aria-hidden="true">
+	<%= form_tag "/calendar", method: :post, id: 'new_event_form' do %>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 id="eventNew1" class="modal-title" style="font-weight:bold">일정등록</h4>
+                <h4 class="modal-title" style="font-weight:bold">일정등록<em style="font-size:small; font-weight:normal;">(일정등록 시 모든 회원들이 알림을 받습니다.)</em></h4>
             </div>
             <div class="modal-body">
             	<div class="form-group">
 	                <h4>* 제목:</h4>
-	                <p><input class="form-control" type="text" maxlength="255"></p>
+	                <p><%= text_field_tag 'event[title]', '',class: 'form-control', maxlength: "255" %><em id="title_required" style='font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393; display:none;'>This is a required field.</em></p>
+
 	            </div>
 
 	            <div class="form-group">
 	                <h4>* 일시:</h4>
 	                <div class="row">
-	                	<div class="col-lg-4" id="sandbox-container"><input type="text" class="form-control"></div>
-	                	<div class="col-lg-4"><input type="text" class="form-control"></div>
-	                	<section class="col col-3"><label class="toggle"><input type="checkbox" name="checkbox-toggle" checked=""><i class="rounded-4x"></i>종일</label></section>
+	                	<div class="col-lg-4" id="sandbox-container"><%= text_field_tag 'event[start_day]', '', class: 'form-control', maxlength: "255" %>
+	                		<em id="start_day_required" style='font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393; display:none;'>This is a required field.</em>
+	                	</div>
+	                	<div class="col-lg-4">
+	                		<section>
+	                			<label class="select">
+			                		<select name="event[start_time]" id="event_start_time" style="border-color:#ccc;">
+										<option value="12:00">오전 12:00</option>
+										<option value="12:30">오전 12:30</option>
+										<option value="01:00">오전 01:00</option>
+										<option value="01:30">오전 01:30</option>
+										<option value="02:00">오전 02:00</option>
+										<option value="02:30">오전 02:30</option>
+										<option value="03:00">오전 03:00</option>
+										<option value="03:30">오전 03:30</option>
+										<option value="04:00">오전 04:00</option>
+										<option value="04:30">오전 04:30</option>
+										<option value="05:00">오전 05:00</option>
+										<option value="05:30">오전 05:30</option>
+										<option value="06:00">오전 06:00</option>
+										<option value="06:30">오전 06:30</option>
+										<option value="07:00">오전 07:00</option>
+										<option value="07:30">오전 07:30</option>
+										<option value="08:00">오전 08:00</option>
+										<option value="08:30">오전 08:30</option>
+										<option value="09:00">오전 09:00</option>
+										<option value="09:30">오전 09:30</option>
+										<option value="10:00">오전 10:00</option>
+										<option value="10:30">오전 10:30</option>
+										<option value="11:00">오전 11:00</option>
+										<option value="11:30">오전 11:30</option>
+										<option value="12:00">오후 12:00</option>
+										<option value="12:30">오후 12:30</option>
+										<option value="13:00">오후 01:00</option>
+										<option value="13:30">오후 01:30</option>
+										<option value="14:00">오후 02:00</option>
+										<option value="14:30">오후 02:30</option>
+										<option value="15:00">오후 03:00</option>
+										<option value="15:30">오후 03:30</option>
+										<option value="16:00">오후 04:00</option>
+										<option value="16:30">오후 04:30</option>
+										<option value="17:00">오후 05:00</option>
+										<option value="17:30">오후 05:30</option>
+										<option value="18:00">오후 06:00</option>
+										<option value="18:30">오후 06:30</option>
+										<option value="19:00">오후 07:00</option>
+										<option value="19:30">오후 07:30</option>
+										<option value="20:00">오후 08:00</option>
+										<option value="20:30">오후 08:30</option>
+										<option value="21:00">오후 09:00</option>
+										<option value="21:30">오후 09:30</option>
+										<option value="22:00">오후 10:00</option>
+										<option value="22:30">오후 10:30</option>
+										<option value="23:00">오후 11:00</option>
+										<option value="23:30">오후 11:30</option>
+									</select>
+									<i></i>
+								</label>
+							</section>
+	                	</div>
+	                	<section class="col col-3"><label class="toggle"><%= check_box_tag 'event[start_allday]', 'false', false,  onchange: "checkbox_handler1(this)" %><i class="rounded-4x"></i>종일</label></section>
 	                </div>
 	                <p style="text-align:center;">~</p>
 	                <div class="row">
-	                	<div class="col-lg-4" id="sandbox-container2"><input type="text" class="form-control"></div>
-	                	<div class="col-lg-4"><input type="text" class="form-control"></div>
-	                	<section class="col col-3"><label class="toggle"><input type="checkbox" name="checkbox-toggle" checked=""><i class="rounded-4x"></i>종일</label></section>
+	                	<div class="col-lg-4" id="sandbox-container2"><%= text_field_tag 'event[end_day]', '', class: 'form-control', maxlength: "255" %>
+	                		<em id="end_day_required" style='font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393; display:none;'>This is a required field.</em>
+	                	</div>
+	                	<div class="col-lg-4">
+	                		<section>
+	                			<label class="select">
+			                		<select name="event[end_time]" id="event_end_time" style="border-color:#ccc;">
+										<option value="12:00">오전 12:00</option>
+										<option value="12:30">오전 12:30</option>
+										<option value="01:00">오전 01:00</option>
+										<option value="01:30">오전 01:30</option>
+										<option value="02:00">오전 02:00</option>
+										<option value="02:30">오전 02:30</option>
+										<option value="03:00">오전 03:00</option>
+										<option value="03:30">오전 03:30</option>
+										<option value="04:00">오전 04:00</option>
+										<option value="04:30">오전 04:30</option>
+										<option value="05:00">오전 05:00</option>
+										<option value="05:30">오전 05:30</option>
+										<option value="06:00">오전 06:00</option>
+										<option value="06:30">오전 06:30</option>
+										<option value="07:00">오전 07:00</option>
+										<option value="07:30">오전 07:30</option>
+										<option value="08:00">오전 08:00</option>
+										<option value="08:30">오전 08:30</option>
+										<option value="09:00">오전 09:00</option>
+										<option value="09:30">오전 09:30</option>
+										<option value="10:00">오전 10:00</option>
+										<option value="10:30">오전 10:30</option>
+										<option value="11:00">오전 11:00</option>
+										<option value="11:30">오전 11:30</option>
+										<option value="12:00">오후 12:00</option>
+										<option value="12:30">오후 12:30</option>
+										<option value="13:00">오후 01:00</option>
+										<option value="13:30">오후 01:30</option>
+										<option value="14:00">오후 02:00</option>
+										<option value="14:30">오후 02:30</option>
+										<option value="15:00">오후 03:00</option>
+										<option value="15:30">오후 03:30</option>
+										<option value="16:00">오후 04:00</option>
+										<option value="16:30">오후 04:30</option>
+										<option value="17:00">오후 05:00</option>
+										<option value="17:30">오후 05:30</option>
+										<option value="18:00">오후 06:00</option>
+										<option value="18:30">오후 06:30</option>
+										<option value="19:00">오후 07:00</option>
+										<option value="19:30">오후 07:30</option>
+										<option value="20:00">오후 08:00</option>
+										<option value="20:30">오후 08:30</option>
+										<option value="21:00">오후 09:00</option>
+										<option value="21:30">오후 09:30</option>
+										<option value="22:00">오후 10:00</option>
+										<option value="22:30">오후 10:30</option>
+										<option value="23:00">오후 11:00</option>
+										<option value="23:30">오후 11:30</option>
+									</select>
+									<i></i>
+								</label>
+							</section>
+	                	</div>
+	                	<section class="col col-3"><label class="toggle"><%= check_box_tag 'event[end_allday]', 'false', false,  onchange: "checkbox_handler2(this)" %><i class="rounded-4x"></i>종일</label></section>
 	                </div>
 	            </div>
 
 	            <div class="form-group">
 	                <h4>장소:</h4>
-	                <p><input class="form-control" type="text"></p>
+	                <p><%= text_field_tag 'event[location]', '', class: 'form-control', maxlength: "255" %></p>
 	            </div>
 
 	            <div class="form-group">
 	                <h4>설명:</h4>
-	                <p><textarea class="form-control" rows="7"></textarea></p>
+	                <p><%= text_area_tag 'event[description]', '', class: 'form-control', maxlength: "65535", rows: 7 %></p>
 	            </div>
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
-                <button class="btn-u" type="button">Save</button>
+                <button class="btn-u" type="button" onclick="new_event_submit(event);">Save</button>
             </div>
           </div>
     </div>
+    <% end %>
 </div>
 <!-- end -->
 
@@ -122,27 +241,109 @@
 	    if(mm<10){
 	        mm='0'+mm
 	    } 
-	    var today = yyyy+'/'+mm+'/'+dd;
+	    var today = yyyy+'-'+mm+'-'+dd;
 	    return today;
 	};
 
+	function newEvent() {
+		modal_init();
+		$('#eventNew').modal('show');
+		$('#sandbox-container input').val(getToday());
+    	$('#sandbox-container2 input').val(getToday());
+	};
+
+	function checkbox_handler1(element) {
+		element.checked ? $(element).val('true') : $(element).val('false');
+		if (element.checked) {
+			$('#event_start_time').attr('disabled', 'disabled');
+			$('#event_start_time').css('cursor', 'not-allowed');
+			$('#event_start_time').css('background-color', '#eee');
+		}
+		else {
+			$('#event_start_time').removeAttr('disabled');
+			$('#event_start_time').css('cursor', 'default');
+			$('#event_start_time').css('background-color', '#fff');
+		}
+	};
+
+	function checkbox_handler2(element) {
+		element.checked ? $(element).val('true') : $(element).val('false');
+		if (element.checked) {
+			$('#event_end_time').attr('disabled', 'disabled');
+			$('#event_end_time').css('cursor', 'not-allowed');
+			$('#event_end_time').css('background-color', '#eee');
+		}
+		else {
+			$('#event_end_time').removeAttr('disabled');
+			$('#event_end_time').css('cursor', 'default');
+			$('#event_end_time').css('background-color', '#fff');
+		}
+	};
+
+	function new_event_submit(event) {
+		if( (!$('#event_title').val()) || (!$('#event_start_day').val()) || (!$('#event_end_day').val()) ) {
+				event.preventDefault();
+			if ( !$('#event_title').val() ) {
+				$('#event_title').css('background-color', '#fff0f0');
+				$('#title_required').show();
+			} else {
+				$('#event_title').css('background-color', '#fff');
+				$('#title_required').css('display', 'none');
+			}
+
+			if ( !$('#event_start_day').val() ) {
+				$('#event_start_day').css('background-color', '#fff0f0');
+				$('#start_day_required').show();
+			} else {
+				$('#event_start_day').css('background-color', '#fff');
+				$('#start_day_required').css('display', 'none');
+			}
+
+			if ( !$('#event_end_day').val() ) {
+				$('#event_end_day').css('background-color', '#fff0f0');
+				$('#end_day_required').show();
+			} else {
+				$('#event_end_day').css('background-color', '#fff');
+				$('#end_day_required').css('display', 'none');
+			}
+
+		} else {
+			$('#new_event_form').submit();
+		}
+	};
+
+	function modal_init() {
+		$('#event_title').val('');
+		$('#event_title').css('background-color', '#fff');
+		$('#title_required').css('display', 'none');
+		$('#event_start_day').css('background-color', '#fff');
+		$('#start_day_required').css('display', 'none');
+		$('#event_end_day').css('background-color', '#fff');
+		$('#end_day_required').css('display', 'none');
+		$('#event_start_allday').attr('checked', false);
+		$('#event_end_allday').attr('checked', false);
+		$('#event_location').val('');
+		$('#event_description').val('');
+		$('#event_start_time').removeAttr('disabled');
+		$('#event_start_time').css('cursor', 'default');
+		$('#event_start_time').css('background-color', '#fff');
+		$('#event_end_time').removeAttr('disabled');
+		$('#event_end_time').css('cursor', 'default');
+		$('#event_end_time').css('background-color', '#fff');
+	};
 
     jQuery(document).ready(function() {
 
-    	$('#sandbox-container input').val(getToday());
-    	$('#sandbox-container2 input').val(getToday());
-
     	$('#sandbox-container input').datepicker({
     		language: "ko",
-    		format: "yyyy/mm/dd",
+    		format: "yyyy-mm-dd",
 		    autoclose: true,
-		    todayHighlight: true,
-		    todayBtn: "linked"
+		    todayHighlight: true
     	});
 
     	$('#sandbox-container2 input').datepicker({
     		language: "ko",
-    		format: "yyyy/mm/dd",
+    		format: "yyyy-mm-dd",
 		    autoclose: true,
 		    todayHighlight: true,
 		    todayBtn: "linked"
@@ -160,17 +361,24 @@
 			events: [
 				{
 					title: 'All Day Event',
-					start: '2016-01-01'
+					start: '2015/12/31',
+					allday: true
+				},
+				{
+					title: 'All Day Event',
+					start: '2016/01/01',
+					allday: true
 				},
 				{
 					title: 'Long Event',
-					start: '2016-01-07T16:00:00',
-					end: '2016-01-10T17:00:00'
+					start: '2016-01-07T13:00',
+					end: '2016-01-10T17:00'
 				},
 				{
 					id: 999,
 					title: 'Repeating Event',
-					start: '2016-01-09T16:00:00'
+					start: '2016-01-09T16:00:00',
+					allDay: true
 				},
 				{
 					id: 999,
@@ -214,8 +422,11 @@
 				}
 			],
 			dayClick: function(date, jsEvent, view, resourceObj) {
-		        console.log('Date: ' + date.format());
+		        var theday = date.format();
+		        modal_init();
 		        $('#eventNew').modal('show');
+		        $('#sandbox-container input').val(theday);
+		        $('#sandbox-container2 input').val(theday);
 		    },
 		    eventClick: function(calEvent, jsEvent, view) {
 

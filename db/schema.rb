@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107113015) do
+ActiveRecord::Schema.define(version: 20160118121439) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -56,6 +56,20 @@ ActiveRecord::Schema.define(version: 20160107113015) do
   add_index "comments", ["board_id"], name: "index_comments_on_board_id", using: :btree
   add_index "comments", ["comment_id"], name: "index_comments_on_comment_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",        limit: 255,                   null: false
+    t.datetime "start_day",                                  null: false
+    t.string   "start_time",   limit: 255
+    t.datetime "end_day",                                    null: false
+    t.string   "end_time",     limit: 255
+    t.boolean  "start_allday", limit: 1,     default: false
+    t.boolean  "end_allday",   limit: 1,     default: false
+    t.string   "location",     limit: 255
+    t.text     "description",  limit: 65535
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
 
   create_table "likes", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
