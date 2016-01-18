@@ -19,7 +19,7 @@
                 <!--Inputs-->
                 <h4>Title</h4>
                 <div id="board-title" class=""> 
-                    <%= f.text_field :title , class: "form-control" %>
+                    <%= f.text_field :title , class: "form-control", maxlength: "255" %>
                 </div>
                 <!--End Inputs-->
 
@@ -28,7 +28,7 @@
                 <!--Textarea-->
                 <h4>Contents</h4>
                 <div id="summernote" class=""></div>
-                <%= f.hidden_field :contents %>
+                <%= f.hidden_field :contents, maxlength: "65535" %>
                 <!--End Textarea-->
 
                 <div class="margin-bottom-40"></div>

@@ -22,22 +22,22 @@
 
                 <div id="uid-form" class="">
                     <label class="control-label">ID <span class="color-red">*</span></label></label>
-                    <%= f.text_field :uid, class: "form-control margin-bottom-20 has-error", autofocus: true %>
+                    <%= f.text_field :uid, class: "form-control margin-bottom-20 has-error", autofocus: true, maxlength: "20" %>
                 </div>
                
                 <div id="realname-form" class="">
                     <label class="control-label">Real Name <span class="color-red">*</span></label></label>
-                    <%= f.text_field :realname, class: "form-control margin-bottom-20" %>
+                    <%= f.text_field :realname, class: "form-control margin-bottom-20", maxlength: "20" %>
                 </div>
                
                 <div id="email-form" class="">
                     <label class="control-label">Email Address <span class="color-red">*</span></label>
-                    <%= f.email_field :email, class: "form-control margin-bottom-20" %>
+                    <%= f.email_field :email, class: "form-control margin-bottom-20", maxlength: "100" %>
                 </div>
 
                 <div id="phone-form" class="">
                     <label class="control-label">Phone Number <span class="color-red">*</span></label></label>
-                    <%= f.phone_field :phone, class: "form-control margin-bottom-20", placeholder: "ex. 01012341234" %>
+                    <%= f.phone_field :phone, class: "form-control margin-bottom-20", placeholder: "ex. 01012341234", maxlength: "11" %>
                 </div>
 
                 <div id="password-form" class="row">

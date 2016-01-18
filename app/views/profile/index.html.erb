@@ -87,10 +87,10 @@
                                                     <p><input class="form-control" type="text" value="<%= @user.uid %>" readonly/></p>
 
                                                     <h4>닉네임</h4>
-                                                    <p><%= text_field_tag 'profile[nickname]', "#{@user.nickname}", class: 'form-control' %></p>
+                                                    <p><%= text_field_tag 'profile[nickname]', "#{@user.nickname}", class: 'form-control', maxlength: "20" %></p>
 
                                                     <h4>한 줄 소개</h4>
-                                                    <p><%= text_field_tag 'profile[introduce]', "#{@user.introduce}", class: 'form-control' %></p>
+                                                    <p><%= text_field_tag 'profile[introduce]', "#{@user.introduce}", class: 'form-control', maxlength: "255" %></p>
                                                 </div>
                                             </div>
                                         </div>

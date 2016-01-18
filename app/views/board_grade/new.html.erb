@@ -14,7 +14,7 @@
                 <!--Inputs-->
                 <h4>Title <span style="color:#ee9393;font-size:15px;">(자유롭게 작성해주세요.)</span></h4>
                 <div id="board-title" class=""> 
-                    <%= f.text_field :title , class: "form-control" %>
+                    <%= f.text_field :title , class: "form-control", maxlength: "255" %>
                 </div>
                 <!--End Inputs-->
 
@@ -22,7 +22,7 @@
 
                 <!--Textarea-->
                 <h4>Contents <span style="color:#ee9393;font-size:15px;">(기입된 형식을 수정하면 등업심사 시 불이익을 받을 수 있습니다.)</span></h4>
-                <%= f.text_area :contents, class: "form-control", rows: 15 %>
+                <%= f.text_area :contents, class: "form-control", rows: 15, maxlength: "65535" %>
                 <!--End Textarea-->
 
                 <div class="margin-bottom-40"></div>

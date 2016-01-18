@@ -41,4 +41,7 @@
  *= require bootstrap/css/pages/profile.css
  *= require bootstrap/css/pages/shortcode_timeline1.css
  *= require bootstrap/css/pages/shortcode_timeline2.css
+
+ * Boostrap Datepicker
+ *= require bootstrap/datepicker/bootstrap-datepicker3.min.css
  */

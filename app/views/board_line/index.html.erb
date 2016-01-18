@@ -35,7 +35,7 @@
                                     <strong><a href="#"><%= current_user.uid %></a></strong> @EvaNelson
                                 </h4>
                                 <p>
-                                    <%= f.text_field :title, class: "form-control"  %>
+                                    <%= f.text_field :title, class: "form-control", maxlength: "255"  %>
                                 </p>  
                                 <ul class="list-inline pull-right">
                                     <%= f.submit 'Submit', class: "btn-u" %>

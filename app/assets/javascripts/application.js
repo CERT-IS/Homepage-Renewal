@@ -55,4 +55,8 @@
 //= require bootstrap/fullcalendar/moment.js
 //= require bootstrap/fullcalendar/fullcalendar.min.js
 
+// Bootstrap Datepicker
+//= require bootstrap/datepicker/bootstrap-datepicker.min.js
+//= require bootstrap/datepicker/bootstrap-datepicker.ko.min.js
+
 //= require turbolinks

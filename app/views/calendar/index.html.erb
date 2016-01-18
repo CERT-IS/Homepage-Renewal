@@ -15,21 +15,147 @@
 	<div class="margin-bottom-50"></div>
 </div>
 
-<a class="create-board" href="/calendar/new">
-    <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;" href="<%= new_calendar_path %>"></i>
+<a class="create-board tooltips" data-toggle="tooltip" data-original-title="달력에서 해당 날짜의 공간을 클릭하시면 좀 더 편리하게 일정을 등록하실 수 있습니다." onclick="$('#eventNew').modal('show');">
+    <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;"></i>
 </a>
 
+<!-- eventNew Modal -->
+<div class="sky-form modal fade" id="eventNew" tabindex="-1" role="dialog" aria-labelledby="eventNew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="eventNew1" class="modal-title" style="font-weight:bold">일정등록</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="form-group">
+	                <h4>* 제목:</h4>
+	                <p><input class="form-control" type="text" maxlength="255"></p>
+	            </div>
+
+	            <div class="form-group">
+	                <h4>* 일시:</h4>
+	                <div class="row">
+	                	<div class="col-lg-4" id="sandbox-container"><input type="text" class="form-control"></div>
+	                	<div class="col-lg-4"><input type="text" class="form-control"></div>
+	                	<section class="col col-3"><label class="toggle"><input type="checkbox" name="checkbox-toggle" checked=""><i class="rounded-4x"></i>종일</label></section>
+	                </div>
+	                <p style="text-align:center;">~</p>
+	                <div class="row">
+	                	<div class="col-lg-4" id="sandbox-container2"><input type="text" class="form-control"></div>
+	                	<div class="col-lg-4"><input type="text" class="form-control"></div>
+	                	<section class="col col-3"><label class="toggle"><input type="checkbox" name="checkbox-toggle" checked=""><i class="rounded-4x"></i>종일</label></section>
+	                </div>
+	            </div>
+
+	            <div class="form-group">
+	                <h4>장소:</h4>
+	                <p><input class="form-control" type="text"></p>
+	            </div>
+
+	            <div class="form-group">
+	                <h4>설명:</h4>
+	                <p><textarea class="form-control" rows="7"></textarea></p>
+	            </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
+                <button class="btn-u" type="button">Save</button>
+            </div>
+          </div>
+    </div>
+</div>
+<!-- end -->
+
+<!-- eventShow Modal -->
+<div class="modal fade" id="eventShow" tabindex="-1" role="dialog" aria-labelledby="eventShowLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="eventShowLabel1" class="modal-title">Modal Heading</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Text in a modal</h4>
+                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+                <h4>Popover in a modal</h4>
+                <p>This <a data-content="And here's some amazing content. It's very engaging. right?" title="" class="btn-u btn-u-default popover-test" role="button" href="#" data-original-title="A Title">button</a> should trigger a popover on click.</p>
+
+                <h4>Tooltips in a modal</h4>
+                <p><a title="" class="tooltip-test" href="#" data-original-title="Tooltip">This link</a> and <a title="" class="tooltip-test" href="#" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
+
+                <hr>
+
+                <h4>Overflowing text to show scroll behavior</h4>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
+                <button class="btn-u" type="button">Save changes</button>
+            </div>
+          </div>
+    </div>
+</div>
+<!-- end -->
+
+
+
 <script type="text/javascript">
+	function getToday() {
+		var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth()+1; //January is 0!
+
+	    var yyyy = today.getFullYear();
+	    if(dd<10){
+	        dd='0'+dd
+	    } 
+	    if(mm<10){
+	        mm='0'+mm
+	    } 
+	    var today = yyyy+'/'+mm+'/'+dd;
+	    return today;
+	};
+
+
     jQuery(document).ready(function() {
-    	console.log("11");
+
+    	$('#sandbox-container input').val(getToday());
+    	$('#sandbox-container2 input').val(getToday());
+
+    	$('#sandbox-container input').datepicker({
+    		language: "ko",
+    		format: "yyyy/mm/dd",
+		    autoclose: true,
+		    todayHighlight: true,
+		    todayBtn: "linked"
+    	});
+
+    	$('#sandbox-container2 input').datepicker({
+    		language: "ko",
+    		format: "yyyy/mm/dd",
+		    autoclose: true,
+		    todayHighlight: true,
+		    todayBtn: "linked"
+    	});
+
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			defaultDate: '2016-01-12',
-			editable: true,
+			// defaultDate: '2016-01-12',
+			editable: false,
 			eventLimit: true, // allow "more" link when too many events
 			events: [
 				{
@@ -38,8 +164,8 @@
 				},
 				{
 					title: 'Long Event',
-					start: '2016-01-07',
-					end: '2016-01-10'
+					start: '2016-01-07T16:00:00',
+					end: '2016-01-10T17:00:00'
 				},
 				{
 					id: 999,
@@ -86,7 +212,20 @@
 					url: 'http://google.com/',
 					start: '2016-01-28'
 				}
-			]
+			],
+			dayClick: function(date, jsEvent, view, resourceObj) {
+		        console.log('Date: ' + date.format());
+		        $('#eventNew').modal('show');
+		    },
+		    eventClick: function(calEvent, jsEvent, view) {
+
+		        console.log('Event: ' + calEvent.title);
+		        console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+		        console.log('View: ' + view.name);
+
+		        $('#eventShow').modal('show');
+		    }
+
 		});
 	});
 </script>
