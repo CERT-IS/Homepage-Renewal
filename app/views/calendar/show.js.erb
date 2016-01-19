@@ -8,7 +8,11 @@ $('#eventShowLoc').text('');
 <% end %>
 
 <% if @event.description.present? %>
-$('#eventShowDes').html('설명: <br><br> <%=h simple_format @event.description.html_safe %>');
+<% description   = @event.description.gsub(/(?:\n\r?|\r\n?)/, "<br>") %>
+<% description   = auto_link(description, :html => { :target => '_blank' }) do |text| %>
+						<% truncate(text, :length => 50) %>
+				   <% end %>
+$('#eventShowDes').html('설명: <br><br> <%=h simple_format description.html_safe %>');
 <% else %>
 $('#eventShowDes').text('');
 <% end %>

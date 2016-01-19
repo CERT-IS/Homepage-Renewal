@@ -24,6 +24,7 @@
 <!-- eventNew Modal -->
 <div class="sky-form modal fade" id="eventNew" tabindex="-1" role="dialog" aria-labelledby="eventNew" aria-hidden="true">
 	<%= form_tag "/calendar", method: :post, id: 'new_event_form' do %>
+	<input id="event_form_method" type="hidden" name="_method" value="post">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -179,8 +180,9 @@
 	            </div>
             </div>
             <div class="modal-footer">
+            	<input type="hidden" id="event_form_id" value=""></input>
                 <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
-                <button class="btn-u" type="button" onclick="new_event_submit(event);">Save</button>
+                <button id="btn_modal_event" class="btn-u" type="button" onclick="new_event_submit(event);">Save</button>
             </div>
           </div>
     </div>
@@ -206,7 +208,7 @@
                 <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
                 <% if current_user.operator? %>
                 	<button class="btn-u btn-u-red" type="button" onclick="destroy_event();">Delete</button>
-                	<button class="btn-u" type="button">Edit</button>
+                	<button class="btn-u" type="button" onclick="edit_event();">Edit</button>
                 <% end %>
             </div>
           </div>
@@ -300,13 +302,21 @@
 		}
 	};
 
+	function update_event_submit(event) {
+		var event_id = $('#event_form_id').val();
+		$('#new_event_form').attr('action', '/calendar/' + event_id);
+		$('#new_event_form').submit();
+	};
+
 	function modal_init() {
 		$('#event_title').val('');
 		$('#event_title').css('background-color', '#fff');
 		$('#title_required').css('display', 'none');
 		$('#event_start_day').css('background-color', '#fff');
+		$('#event_start_day').val('');
 		$('#start_day_required').css('display', 'none');
 		$('#event_end_day').css('background-color', '#fff');
+		$('#event_end_day').val('');
 		$('#end_day_required').css('display', 'none');
 		$('#event_start_allday').attr('checked', false);
 		$('#event_end_allday').attr('checked', false);
@@ -315,21 +325,42 @@
 		$('#event_start_time').removeAttr('disabled');
 		$('#event_start_time').css('cursor', 'default');
 		$('#event_start_time').css('background-color', '#fff');
+		$('#event_start_time').val('12:00');
 		$('#event_end_time').removeAttr('disabled');
 		$('#event_end_time').css('cursor', 'default');
 		$('#event_end_time').css('background-color', '#fff');
+		$('#event_end_time').val('12:00');
+		$('#btn_modal_event').text("Save");
+		$('#btn_modal_event').attr('onclick', 'new_event_submit(event);');
+		$('#event_form_method').val('post');
+		$('#new_event_form').attr('action', '/calendar');
 	};
 
 	function destroy_event() {
+		if (confirm("정말 삭제하시겠습니까??") == true){ 
+			var event_id = $('#event_show_id').val();
+			$.ajax({
+		    	url: "/calendar/" + event_id,
+		    	type: 'DELETE',
+		    	dataType: 'script',
+		    	data: {},
+		    	success: function(data){}
+		    });
+		}
+	};
+
+	function edit_event() {
+		modal_init();
 		var event_id = $('#event_show_id').val();
+		$('#eventShow').modal('hide');
+		$('#eventNew').modal('show');
 		$.ajax({
-	    	url: "/calendar/" + event_id,
-	    	type: 'DELETE',
+	    	url: "/calendar/" + event_id + "/edit",
 	    	dataType: 'script',
 	    	data: {},
 	    	success: function(data){}
 	    });
-	}
+	};
 
     jQuery(document).ready(function() {
 
@@ -417,7 +448,8 @@
 						title: '<%= eventc.title %>',
 						start: '<%= eventc.start_allday? ? eventc.start_day.strftime("%Y-%m-%d") : eventc.start_day.strftime("%Y-%m-%d")+"T"+eventc.start_time %>'
 						<% unless (eventc.start_day == eventc.end_day) && eventc.start_allday %> ,
-						end: '<%= eventc.end_allday? ? eventc.end_day.strftime("%Y-%m-%d") : eventc.end_day.strftime("%Y-%m-%d")+"T"+eventc.end_time %>'<% end %>
+						end: '<%= eventc.end_allday? ? eventc.end_day.strftime("%Y-%m-%d") : eventc.end_day.strftime("%Y-%m-%d")+"T"+eventc.end_time %>'<% end %>,
+						allDay: <%= eventc.start_allday? ? true : false %>
 					}<% unless eventc == @events.last %>,<% end %>
 				<% end %>
 			],

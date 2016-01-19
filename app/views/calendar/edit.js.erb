@@ -1,0 +1,32 @@
+$('#event_title').val('<%= @event.title %>');
+$('#event_start_day').val('<%= @event.start_day.strftime("%Y-%m-%d") %>');
+$('#event_start_time').val('<%= @event.start_time.present? ? @event.start_time : "12:00" %>');
+<% if @event.start_allday %>
+$('#event_start_allday').prop('checked', true);
+$('#event_start_time').attr('disabled', 'disabled');
+$('#event_start_time').css('cursor', 'not-allowed');
+$('#event_start_time').css('background-color', '#eee');
+$('#event_start_allday').val('true');
+<% else %>
+$('#event_start_allday').prop('checked', false);
+$('#event_start_allday').val('false');
+<% end %>
+$('#event_end_day').val('<%= @event.end_day.strftime("%Y-%m-%d") %>');
+$('#event_end_time').val('<%= @event.end_time.present? ? @event.end_time : "12:00" %>');
+
+<% if @event.end_allday %>
+$('#event_end_allday').prop('checked', true);
+$('#event_end_time').attr('disabled', 'disabled');
+$('#event_end_time').css('cursor', 'not-allowed');
+$('#event_end_time').css('background-color', '#eee');
+$('#event_end_allday').val('true');
+<% else %>
+$('#event_end_allday').prop('checked', false);
+$('#event_end_allday').val('false');
+<% end %>
+$('#event_location').val('<%= @event.location %>');
+$('#event_description').val("<%=j @event.description %>");
+$('#btn_modal_event').text("Update");
+$('#btn_modal_event').attr('onclick', 'update_event_submit(event);');
+$('#event_form_method').val('patch');
+$('#event_form_id').val('<%= @event.id %>');

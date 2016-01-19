@@ -1,8 +1,8 @@
 class CalendarController < ApplicationController
 	include ActionView::Helpers::TextHelper
 	before_action :authenticate_user!
-	before_action :get_event, only: [:show, :update, :destroy]
-	before_action :check_auth, only: [:update, :destroy]
+	before_action :get_event, only: [:show, :edit, :update, :destroy]
+	before_action :check_auth, only: [:edit, :update, :destroy]
 	
 	def index
 		@date = Date.today
@@ -43,10 +43,6 @@ class CalendarController < ApplicationController
 
 	def create
 		start_day_var = DateTime.parse(params[:event][:start_day])
-		description   = params[:event][:description].gsub(/(?:\n\r?|\r\n?)/, "<br>")
-		description   = auto_link(description, :html => { :target => '_blank' }) do |text|
-							truncate(text, :length => 50)
-						end
 
 		Event.create(
 			title: 			params[:event][:title],
@@ -55,7 +51,7 @@ class CalendarController < ApplicationController
 			end_day: 		DateTime.parse(params[:event][:end_day]),
 			end_time: 		params[:event][:end_time],
 			location: 		params[:event][:location],
-			description: 	description,
+			description: 	 params[:event][:description],
 			start_allday: 	params[:event].has_key?(:start_allday) ? (params[:event][:start_allday].eql?("true") ? true : false) : false,
 			end_allday: 	params[:event].has_key?(:end_allday) ? (params[:event][:end_allday].eql?("true") ? true : false) : false
 		)
@@ -66,6 +62,20 @@ class CalendarController < ApplicationController
 	end
 
 	def update
+		start_day_var = DateTime.parse(params[:event][:start_day])
+
+		@event.update(
+			title: 			params[:event][:title],
+			start_day: 		start_day_var,
+			start_time: 	params[:event][:start_time],
+			end_day: 		DateTime.parse(params[:event][:end_day]),
+			end_time: 		params[:event][:end_time],
+			location: 		params[:event][:location],
+			description: 	 params[:event][:description],
+			start_allday: 	params[:event].has_key?(:start_allday) ? (params[:event][:start_allday].eql?("true") ? true : false) : false,
+			end_allday: 	params[:event].has_key?(:end_allday) ? (params[:event][:end_allday].eql?("true") ? true : false) : false
+		)
+		redirect_to calendar_index_path(year: start_day_var.year, month: start_day_var.month)
 	end
 
 	def destroy
