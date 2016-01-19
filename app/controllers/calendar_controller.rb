@@ -43,12 +43,15 @@ class CalendarController < ApplicationController
 
 	def create
 		start_day_var = DateTime.parse(params[:event][:start_day])
+		end_day_var   = DateTime.parse(params[:event][:end_day])
+
+		end_day_var   = start_day_var if start_day_var > end_day_var
 
 		Event.create(
 			title: 			params[:event][:title],
 			start_day: 		start_day_var,
 			start_time: 	params[:event][:start_time],
-			end_day: 		DateTime.parse(params[:event][:end_day]),
+			end_day: 		end_day_var,
 			end_time: 		params[:event][:end_time],
 			location: 		params[:event][:location],
 			description: 	 params[:event][:description],
@@ -63,12 +66,15 @@ class CalendarController < ApplicationController
 
 	def update
 		start_day_var = DateTime.parse(params[:event][:start_day])
+		end_day_var   = DateTime.parse(params[:event][:end_day])
+
+		end_day_var   = start_day_var if start_day_var > end_day_var
 
 		@event.update(
 			title: 			params[:event][:title],
 			start_day: 		start_day_var,
 			start_time: 	params[:event][:start_time],
-			end_day: 		DateTime.parse(params[:event][:end_day]),
+			end_day: 		end_day_var,
 			end_time: 		params[:event][:end_time],
 			location: 		params[:event][:location],
 			description: 	 params[:event][:description],
