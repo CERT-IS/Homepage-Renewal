@@ -15,9 +15,11 @@
 	<div class="margin-bottom-50"></div>
 </div>
 
+<% if current_user.operator? %>
 <a class="create-board tooltips" data-toggle="tooltip" data-original-title="달력에서 해당 날짜의 공간을 클릭하시면 좀 더 편리하게 일정을 등록하실 수 있습니다." onclick="newEvent();"  style="z-index:1001;">
     <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;"></i>
 </a>
+<% end %>
 
 <!-- eventNew Modal -->
 <div class="sky-form modal fade" id="eventNew" tabindex="-1" role="dialog" aria-labelledby="eventNew" aria-hidden="true">
@@ -200,8 +202,12 @@
                 <h4 id="eventShowDes"></h4>
             </div>
             <div class="modal-footer">
+            	<input type="hidden" id="event_show_id" value=""></input>
                 <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
-                <button class="btn-u" type="button">Save changes</button>
+                <% if current_user.operator? %>
+                	<button class="btn-u btn-u-red" type="button" onclick="destroy_event();">Delete</button>
+                	<button class="btn-u" type="button">Edit</button>
+                <% end %>
             </div>
           </div>
     </div>
@@ -314,6 +320,17 @@
 		$('#event_end_time').css('background-color', '#fff');
 	};
 
+	function destroy_event() {
+		var event_id = $('#event_show_id').val();
+		$.ajax({
+	    	url: "/calendar/" + event_id,
+	    	type: 'DELETE',
+	    	dataType: 'script',
+	    	data: {},
+	    	success: function(data){}
+	    });
+	}
+
     jQuery(document).ready(function() {
 
     	$('#sandbox-container input').datepicker({
@@ -405,6 +422,9 @@
 				<% end %>
 			],
 			dayClick: function(date, jsEvent, view, resourceObj) {
+				<% unless current_user.operator? %>
+		    		return;
+		    	<% end %>
 		        var theday = date.format();
 		        modal_init();
 		        $('#eventNew').modal('show');
@@ -418,8 +438,6 @@
 			    	data: {},
 			    	success: function(data){$('#eventShow').modal('show');}
 			    });
-
-		        
 		    }
 
 		});

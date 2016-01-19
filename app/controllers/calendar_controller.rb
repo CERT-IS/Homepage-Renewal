@@ -1,6 +1,8 @@
 class CalendarController < ApplicationController
 	include ActionView::Helpers::TextHelper
 	before_action :authenticate_user!
+	before_action :get_event, only: [:show, :update, :destroy]
+	before_action :check_auth, only: [:update, :destroy]
 	
 	def index
 		@date = Date.today
@@ -18,7 +20,6 @@ class CalendarController < ApplicationController
 	end
 
 	def show
-		@event = Event.where(id: params[:id]).first
 		@event_day = @event.start_day.strftime("%y.%m.%d ")
 		if @event.start_allday
 			@event_day += "종일"
@@ -68,5 +69,17 @@ class CalendarController < ApplicationController
 	end
 
 	def destroy
+		@event_id = @event.id
+		@event.destroy
+	end
+
+	private
+
+	def get_event
+		@event = Event.where(id: params[:id]).first
+	end
+
+	def check_auth
+		authorize_action_for @event
 	end
 end

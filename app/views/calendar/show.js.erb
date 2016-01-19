@@ -1,5 +1,6 @@
 $('#eventShowTitle').text('<%= @event.title %>');
 $('#eventShowDate').text('일시: <%= @event_day%>');
+$('#event_show_id').val('<%= @event.id %>');
 <% if @event.location.present? %>
 $('#eventShowLoc').text('장소: <%= @event.location %>')
 <% else %>

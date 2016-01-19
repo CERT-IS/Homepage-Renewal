@@ -1,4 +1,8 @@
 class Event < ActiveRecord::Base
+	resourcify
+  	include Authority::Abilities
+  	self.authorizer_name = 'EventAuthorizer'
+
 	validates :title, presence: true
 	validates :start_day, presence: true
 	validates :end_day, presence: true
