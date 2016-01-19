@@ -1,4 +1,5 @@
 class CalendarController < ApplicationController
+	include ActionView::Helpers::TextHelper
 	before_action :authenticate_user!
 	
 	def index
@@ -17,10 +18,35 @@ class CalendarController < ApplicationController
 	end
 
 	def show
+		@event = Event.where(id: params[:id]).first
+		@event_day = @event.start_day.strftime("%y.%m.%d ")
+		if @event.start_allday
+			@event_day += "종일"
+		else
+			@event_day += @event.start_time
+		end
+
+		unless (@event.start_day == @event.end_day)
+			@event_day += " - #{@event.end_day.strftime("%y.%m.%d ")}"
+			if @event.end_allday
+				@event_day += "종일"
+			else
+				@event_day += @event.end_time
+			end
+		else
+			unless @event.start_allday
+				@event_day += " - #{@event.end_time}"
+			end
+		end
 	end
 
 	def create
 		start_day_var = DateTime.parse(params[:event][:start_day])
+		description   = params[:event][:description].gsub(/(?:\n\r?|\r\n?)/, "<br>")
+		description   = auto_link(description, :html => { :target => '_blank' }) do |text|
+							truncate(text, :length => 50)
+						end
+
 		Event.create(
 			title: 			params[:event][:title],
 			start_day: 		start_day_var,
@@ -28,7 +54,7 @@ class CalendarController < ApplicationController
 			end_day: 		DateTime.parse(params[:event][:end_day]),
 			end_time: 		params[:event][:end_time],
 			location: 		params[:event][:location],
-			description: 	params[:event][:description],
+			description: 	description,
 			start_allday: 	params[:event].has_key?(:start_allday) ? (params[:event][:start_allday].eql?("true") ? true : false) : false,
 			end_allday: 	params[:event].has_key?(:end_allday) ? (params[:event][:end_allday].eql?("true") ? true : false) : false
 		)

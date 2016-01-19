@@ -1,0 +1,13 @@
+$('#eventShowTitle').text('<%= @event.title %>');
+$('#eventShowDate').text('일시: <%= @event_day%>');
+<% if @event.location.present? %>
+$('#eventShowLoc').text('장소: <%= @event.location %>')
+<% else %>
+$('#eventShowLoc').text('');
+<% end %>
+
+<% if @event.description.present? %>
+$('#eventShowDes').html('설명: <br><br> <%=h simple_format @event.description.html_safe %>');
+<% else %>
+$('#eventShowDes').text('');
+<% end %>

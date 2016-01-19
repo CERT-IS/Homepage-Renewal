@@ -192,30 +192,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 id="eventShowLabel1" class="modal-title">Modal Heading</h4>
+                <h4 id="eventShowTitle" class="modal-title" style="font-weight:bold"></h4>
             </div>
             <div class="modal-body">
-                <h4>Text in a modal</h4>
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-                <h4>Popover in a modal</h4>
-                <p>This <a data-content="And here's some amazing content. It's very engaging. right?" title="" class="btn-u btn-u-default popover-test" role="button" href="#" data-original-title="A Title">button</a> should trigger a popover on click.</p>
-
-                <h4>Tooltips in a modal</h4>
-                <p><a title="" class="tooltip-test" href="#" data-original-title="Tooltip">This link</a> and <a title="" class="tooltip-test" href="#" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
-
-                <hr>
-
-                <h4>Overflowing text to show scroll behavior</h4>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <h4 id="eventShowDate"></h4>
+                <h4 id="eventShowLoc"></h4>
+                <h4 id="eventShowDes"></h4>
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
@@ -365,7 +347,7 @@
 					    		"month" : month
 					    	},
 					    	success: function(data){}
-					    })
+					    });
 		            }
 		        },
 		        next: {
@@ -382,7 +364,7 @@
 					    		"month" : month
 					    	},
 					    	success: function(data){}
-					    })
+					    });
 		            }
 		        },
 		        today: {
@@ -399,7 +381,7 @@
 					    		"month" : month
 					    	},
 					    	success: function(data){}
-					    })
+					    });
 		            }
 		        }
 		    },
@@ -416,8 +398,9 @@
 					{
 						id: <%= eventc.id %>,
 						title: '<%= eventc.title %>',
-						start: '<%= eventc.start_allday? ? eventc.start_day : eventc.start_day.strftime("%Y-%m-%d")+"T"+eventc.start_time %>',
-						end: '<%= eventc.end_allday? ? eventc.end_day : eventc.end_day.strftime("%Y-%m-%d")+"T"+eventc.end_time %>'
+						start: '<%= eventc.start_allday? ? eventc.start_day.strftime("%Y-%m-%d") : eventc.start_day.strftime("%Y-%m-%d")+"T"+eventc.start_time %>'
+						<% unless (eventc.start_day == eventc.end_day) && eventc.start_allday %> ,
+						end: '<%= eventc.end_allday? ? eventc.end_day.strftime("%Y-%m-%d") : eventc.end_day.strftime("%Y-%m-%d")+"T"+eventc.end_time %>'<% end %>
 					}<% unless eventc == @events.last %>,<% end %>
 				<% end %>
 			],
@@ -429,12 +412,14 @@
 		        $('#sandbox-container2 input').val(theday);
 		    },
 		    eventClick: function(calEvent, jsEvent, view) {
+		        $.ajax({
+			    	url: "/calendar/"+calEvent.id,
+			    	dataType: 'script',
+			    	data: {},
+			    	success: function(data){$('#eventShow').modal('show');}
+			    });
 
-		        console.log('Event: ' + calEvent.title);
-		        console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-		        console.log('View: ' + view.name);
-
-		        $('#eventShow').modal('show');
+		        
 		    }
 
 		});
