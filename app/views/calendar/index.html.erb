@@ -350,12 +350,65 @@
     	});
 
 		$('#calendar').fullCalendar({
+			customButtons: {
+				prev: {
+		            icon: 'left-single-arrow',
+		            click: function() {
+		                $('#calendar').fullCalendar('prev');
+					    var month = $('#calendar').fullCalendar( 'getDate' ).format("MM");
+					    var year  = $('#calendar').fullCalendar( 'getDate' ).format("YYYY");
+					    $.ajax({
+					    	url: "/calendar",
+					    	dataType: 'script',
+					    	data: {
+					    		"year"  : year,
+					    		"month" : month
+					    	},
+					    	success: function(data){}
+					    })
+		            }
+		        },
+		        next: {
+		            icon: 'right-single-arrow',
+		            click: function() {
+		                $('#calendar').fullCalendar('next');
+					    var month = $('#calendar').fullCalendar( 'getDate' ).format("MM");
+					    var year  = $('#calendar').fullCalendar( 'getDate' ).format("YYYY");
+					    $.ajax({
+					    	url: "/calendar",
+					    	dataType: 'script',
+					    	data: {
+					    		"year"  : year,
+					    		"month" : month
+					    	},
+					    	success: function(data){}
+					    })
+		            }
+		        },
+		        today: {
+		        	text: 'today',
+		        	click: function() {
+		                $('#calendar').fullCalendar('today');
+					    var month = moment().format("MM");
+					    var year  = moment().format("YYYY");
+					    $.ajax({
+					    	url: "/calendar",
+					    	dataType: 'script',
+					    	data: {
+					    		"year"  : year,
+					    		"month" : month
+					    	},
+					    	success: function(data){}
+					    })
+		            }
+		        }
+		    },
 			header: {
-				left: 'prev,next today',
+				left: 'prev,next today myCustomButton',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			// defaultDate: '2016-01-12',
+			defaultDate: '<%= @date %>',
 			editable: false,
 			eventLimit: true, // allow "more" link when too many events
 			events: [
@@ -365,13 +418,8 @@
 						title: '<%= eventc.title %>',
 						start: '<%= eventc.start_allday? ? eventc.start_day : eventc.start_day.strftime("%Y-%m-%d")+"T"+eventc.start_time %>',
 						end: '<%= eventc.end_allday? ? eventc.end_day : eventc.end_day.strftime("%Y-%m-%d")+"T"+eventc.end_time %>'
-					},
+					}<% unless eventc == @events.last %>,<% end %>
 				<% end %>
-				{
-					title: 'All Day Event',
-					start: '2015/12/31',
-					allday: true
-				},
 			],
 			dayClick: function(date, jsEvent, view, resourceObj) {
 		        var theday = date.format();

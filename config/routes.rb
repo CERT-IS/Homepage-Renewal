@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :grades, controller: 'board_grade', except: [:index]
 
   # 캘린더
-  resources :calendar, only: [:index, :create, :update, :destroy]
+  resources :calendar, except: :new
 
   # Static Pages
   get '/privacy_policy' => 'base#privacy'
