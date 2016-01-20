@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   # 캘린더
   resources :calendar, except: :new
 
+  # Project
+  resources :projects
+
   # Static Pages
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
