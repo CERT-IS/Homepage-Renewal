@@ -32,7 +32,6 @@ module API
 			end
 
 			def destroy
-				redirect_to "/#{@board.board_type.name}"
 				@board.destroy
 			end
 

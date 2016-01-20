@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate_user!
-	
+
 	def index
 	end
 
 	def new
+		@project = current_user.projects.new
 	end
 
 	def create

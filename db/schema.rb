@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118121439) do
+ActiveRecord::Schema.define(version: 20160120094758) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -81,6 +81,15 @@ ActiveRecord::Schema.define(version: 20160118121439) do
   add_index "likes", ["board_id"], name: "index_likes_on_board_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
     t.integer  "resource_id",   limit: 4
@@ -101,6 +110,17 @@ ActiveRecord::Schema.define(version: 20160118121439) do
 
   add_index "shares", ["board_id"], name: "index_shares_on_board_id", using: :btree
   add_index "shares", ["user_id"], name: "index_shares_on_user_id", using: :btree
+
+  create_table "user_project_mappeds", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "project_id", limit: 4
+    t.boolean  "master",     limit: 1, default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "user_project_mappeds", ["project_id"], name: "index_user_project_mappeds_on_project_id", using: :btree
+  add_index "user_project_mappeds", ["user_id"], name: "index_user_project_mappeds_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -149,4 +169,6 @@ ActiveRecord::Schema.define(version: 20160118121439) do
   add_foreign_key "likes", "users"
   add_foreign_key "shares", "boards"
   add_foreign_key "shares", "users"
+  add_foreign_key "user_project_mappeds", "projects"
+  add_foreign_key "user_project_mappeds", "users"
 end

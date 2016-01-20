@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :boards, dependent: :nullify
   has_many :comments, dependent: :nullify
 
+  # Project N:M Association
+  has_many :user_project_mappeds
+  has_many :projects, through: "user_project_mappeds"
+
   has_attached_file :avatar,
     :path => ":rails_root/public/avatar/:id/:filename",
     :url  => "/avatar/:id/:filename",
