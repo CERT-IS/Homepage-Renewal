@@ -47,15 +47,14 @@
 
         <!-- Content Info -->        
         <div class="col-md-5">
-        	<h2>Portfolio Item Information</h2>
-            <p>At vero eos et accusamus et iusto odio dignissimos <a href="#">ducimus qui blanditiis</a> praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum Fusce condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus.</p>
-            <p>Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus.</p>
+        	<h2><%= @project.title %></h2>
+            <p><%= @project.description %></p>
             <ul class="list-unstyled">
-            	<li><i class="fa fa-user color-green"></i> Jack Baur</li>
-            	<li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
+            	<li><i class="fa fa-user color-green"></i> <%= @project_master.nickname %> / <%= @project_master.realname %></li>
+            	<li><i class="fa fa-calendar color-green"></i> <%= @project.start_date.strftime("%Y.%m.%d") %></li>
             	<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>
             </ul>
-            <a href="#" class="btn-u btn-u-large">VISIT THE PROJECT</a>
+            <a href="#" class="btn-u btn-u-large">JOIN THE PROJECT</a>
         </div>
         <!-- End Content Info -->        
     </div><!--/row-->
@@ -68,128 +67,62 @@
 
     <!-- Recent Works -->
     <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
-        <div class="headline"><h2 class="pull-left">Recent Works</h2>
+        <div class="headline"><h2 class="pull-left">Members</h2>
             <div class="owl-navigation">
                 <div class="customNavigation">
-                    <a class="owl-btn prev-v2"><i class="fa fa-angle-left"></i></a>
-                    <a class="owl-btn next-v2"><i class="fa fa-angle-right"></i></a>
+                    <a class="owl-btn" style="visibility:hidden;"></a>
+                    <a class="owl-btn" style="visibility:hidden;"></a>
                 </div>
             </div><!--/navigation-->
         </div>
-        <!-- 
-        <div class="owl-recent-works-v1">
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img1.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Happy New Year</strong>
-                        <i>Anim pariatur cliche reprehenderit</i>
-                    </span>
-                </a>    
+
+        <div class="row team-v6 margin-bottom-60">
+            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
+                <img class="img-responsive" src="/assets/bootstrap/team/img6-md.jpg" alt="">
+                <span>Marketing</span>
+                <small>Graphic Designer</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img2.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Award Winning Agency</strong>
-                        <i>Responsive Bootstrap Template</i>
-                    </span>
-                </a>    
+            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
+                <img class="img-responsive" src="/assets/bootstrap/team/img4-md.jpg" alt="">
+                <span>Sara Lisbon</span>
+                <small>Community</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img3.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Wolf Moon Officia</strong>
-                        <i>Pariatur prehe cliche reprehrit</i>
-                    </span>
-                </a>    
+            <div class="col-md-3 col-sm-6 sm-margin-bottom-50">
+                <img class="img-responsive" src="/assets/bootstrap/team/img2-md.jpg" alt="">
+                <span>John Doe</span>
+                <small>Support</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img4.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Food Truck Quinoa Nesciunt</strong>
-                        <i>Craft labore wes anderson cred</i>
-                    </span>
-                </a>    
+            <div class="col-md-3 col-sm-6">
+                <img class="img-responsive" src="/assets/bootstrap/team/img1-md.jpg" alt="">
+                <span>Alice Williams</span>
+                <small>Marketing</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img5.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Happy New Year</strong>
-                        <i>Anim pariatur cliche reprehenderit</i>
-                    </span>
-                </a>    
+        </div><!--/end team v6-->
+
+        <div class="row team-v6 margin-bottom-60">
+            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
+                <img class="img-responsive" src="/assets/bootstrap/team/img3-md.jpg" alt="">
+                <span>Marketing</span>
+                <small>Graphic Designer</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img1.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Happy New Year</strong>
-                        <i>Anim pariatur cliche reprehenderit</i>
-                    </span>
-                </a>    
+            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
+                <img class="img-responsive" src="/assets/bootstrap/team/img7-md.jpg" alt="">
+                <span>Sara Lisbon</span>
+                <small>Community</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img2.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Award Winning Agency</strong>
-                        <i>Responsive Bootstrap Template</i>
-                    </span>
-                </a>    
+            <div class="col-md-3 col-sm-6 sm-margin-bottom-50">
+                <img class="img-responsive" src="/assets/bootstrap/team/img1-md.jpg" alt="">
+                <span>John Doe</span>
+                <small>Support</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img3.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Wolf Moon Officia</strong>
-                        <i>Pariatur prehe cliche reprehrit</i>
-                    </span>
-                </a>    
+            <div class="col-md-3 col-sm-6">
+                <img class="img-responsive" src="/assets/bootstrap/team/img5-md.jpg" alt="">
+                <span>Alice Williams</span>
+                <small>Marketing</small>
             </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img4.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Food Truck Quinoa Nesciunt</strong>
-                        <i>Craft labore wes anderson cred</i>
-                    </span>
-                </a>    
-            </div>
-            <div class="item">
-                <a href="#">
-                    <em class="overflow-hidden">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img5.jpg" alt="">
-                    </em>    
-                    <span>
-                        <strong>Happy New Year</strong>
-                        <i>Anim pariatur cliche reprehenderit</i>
-                    </span>
-                </a>    
-            </div>
-        </div>    -->
-    </div> 
+        </div><!--/end team v6-->
+
+    </div>    
     <!-- End Recent Works -->
 </div><!--/container-->	 	
 <!--=== End Content Part ===-->
