@@ -49,14 +49,14 @@
                         </li>
 
                         <!-- 수정 및 삭제 -->
-                        <% if @board.deletable_by? current_user %>
-                            <li style="float: right;">
-                                <%= link_to '<i class="rounded-x icon-trash"></i>'.html_safe, "/#{@board.board_type.name}/#{@board.id}", method: :delete, data: { confirm: "정말 삭제 하시겠습니까?" } %>
+                        <% if @board.updatable_by? current_user %>
+                            <li>
+                                <%= link_to '<i class="rounded-x icon-pencil"></i>'.html_safe, "/#{@board.board_type.name}/#{@board.id}/edit" %>
                             </li>
                         <% end %>
-                        <% if @board.updatable_by? current_user %>
-                            <li style="float: right;">
-                                <%= link_to '<i class="rounded-x icon-pencil"></i>'.html_safe, "/#{@board.board_type.name}/#{@board.id}/edit" %>
+                        <% if @board.deletable_by? current_user %>
+                            <li>
+                                <%= link_to '<i class="rounded-x icon-trash"></i>'.html_safe, "/#{@board.board_type.name}/#{@board.id}", method: :delete, data: { confirm: "정말 삭제 하시겠습니까?" } %>
                             </li>
                         <% end %>
                     </ul>
