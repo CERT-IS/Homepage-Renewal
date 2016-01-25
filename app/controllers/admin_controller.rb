@@ -16,7 +16,9 @@ class AdminController < ApplicationController
 		end
 
 		if params[:commit].eql?("강제 탈퇴")
-			members.delete_all
+			members.each do |member|
+				member.destroy
+			end
 		end
 
 		redirect_to admin_membership_path
