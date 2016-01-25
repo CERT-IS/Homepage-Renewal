@@ -8,7 +8,7 @@
             <div class="comments-itself">
                 <h4>
                     <%= comment.user.uid %>
-                    <span><%= time_ago_in_words(comment.created_at) %> ago / <a href="javscript:{};" onclick="reply_new(<%= comment.id %>);">Reply</a></span>
+                    <span><%= time_ago_in_words(comment.created_at) %> ago / <a href="javascript:{};" onclick="reply_new(<%= comment.id %>);">Reply</a></span>
                 </h4>
                 <p><%= comment.contents %></p>
             </div>
