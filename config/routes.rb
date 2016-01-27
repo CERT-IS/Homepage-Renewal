@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get 'manage'
       get 'receive'
       get 'approval'
+      delete 'leave'
     end
   end
 

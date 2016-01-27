@@ -61,6 +61,15 @@ class ProjectsController < ApplicationController
 		redirect_to manage_project_path
 	end
 
+	# 멤버 강퇴
+	def leave
+		@project.user_project_mappeds
+		 		.where(user_id: params[:user_id])
+		 		.first
+		 		.destroy
+		redirect_to manage_project_path
+	end
+
 	# 승인 및 멤버 관리
 	def manage
 		@unreceiveds = @project.unreceived
