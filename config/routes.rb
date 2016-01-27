@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   # Project
   resources :projects
 
+  # 문의
+  resources :inquiries, only: [:show, :create, :destroy]
+
   # Static Pages
   get '/privacy_policy' => 'base#privacy'
   get '/terms_service' => 'base#terms'
@@ -53,6 +56,7 @@ Rails.application.routes.draw do
   get '/admin/grades'
   patch '/admin/grades' => 'admin#grades_update'
   put '/admin/grades' => 'admin#grades_update'
+  get '/admin/inquiries'
   
   # API ROUTES
   namespace :api, path: '/', constraints: { subdomain: 'api' } do

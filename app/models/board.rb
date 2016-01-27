@@ -10,7 +10,7 @@ class Board < ActiveRecord::Base
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 255 }
 
   def like_members
     User.joins(:likes).merge(self.likes)

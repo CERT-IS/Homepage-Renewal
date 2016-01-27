@@ -17,7 +17,7 @@
             <ul class="list-unstyled">
             	<li><i class="fa fa-user color-green"></i> <%= @project.master.nickname %> / <%= @project.master.realname %></li>
             	<li><i class="fa fa-calendar color-green"></i> <%= @project.start_date.strftime("%Y.%m.%d") %> ~ <%= @project.end_date.strftime("%Y.%m.%d") %></li>
-            	<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>
+            	<!--<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>-->
             </ul>
             <a href="#" class="btn-u btn-u-large">JOIN THE PROJECT</a>
             <% if current_user == @project.master %>

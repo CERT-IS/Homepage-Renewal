@@ -5,7 +5,7 @@
     </div>
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
-
+<% if @projects.present? %>
 <div class="container content profile">
     <div class="row">
         <!-- Project Content -->            
@@ -72,11 +72,14 @@
             </div>
         </div>
         <!-- End Project Content -->
-
-        <!-- New Project Button -->
-        <a class="create-board" href="<%= new_project_path %>" style="z-index:1001;">
-            <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;" href="<%= new_notice_path %>"></i>
-        </a>
-        <!-- End New Project Button -->
     </div>
 </div>
+<% else %>
+    <%= render 'noresults' %>
+<% end %>
+
+<!-- New Project Button -->
+<a class="create-board" href="<%= new_project_path %>" style="z-index:1001;">
+    <i class="icon-custom icon-lg rounded-x icon-bg-u glyphicon glyphicon-plus" style="line-height: 57px;font-size: 20px;" href="<%= new_notice_path %>"></i>
+</a>
+<!-- End New Project Button -->

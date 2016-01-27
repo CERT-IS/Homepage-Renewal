@@ -1,0 +1,24 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Inquiry</h1>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<!--=== Content Part ===-->
+<div class="container content"> 	
+	<div class="row portfolio-item margin-bottom-50"> 
+
+        <!-- Content Info -->        
+        <div class="col-md-12">
+        	<h2>이름:  <%= @inquiry.name %></h2>
+            <h2>이메일: <%=  @inquiry.email %></h2>
+            <h2>문의내용: <%=  @inquiry.content %></h2>
+            <h2>문의날짜: <%=  @inquiry.created_at.strftime("%Y.%m.%d") %></h2>
+            <%= link_to "돌아가기", admin_inquiries_path, class: "btn-u btn-u-large" %>
+            <%= link_to "Delete", inquiry_path(@inquiry), data: { confirm: "Are you sure?" }, class: "btn-u btn-u-large btn-u-red" ,method: :delete %>
+        </div>
+        <!-- End Content Info -->        
+    </div><!--/row-->
+</div>
