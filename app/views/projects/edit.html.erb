@@ -1,0 +1,77 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Projects</h1>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<div class="bg-color-light">
+    <div class="container content-sm">
+        <div class="tag-box tag-box-v3 form-page">
+            <div class="headline"><h3>New Project</h3></div>                
+            <%= form_for @project do |f| %>
+                <!--Inputs-->
+                <h4>주제</h4>
+                <div id="board-title" class=""> 
+                    <%= f.text_field :title , class: "form-control", maxlength: "255" %>
+                </div>
+                <!--End Inputs-->
+
+                <div class="margin-bottom-40"></div>
+
+                <h4>프로젝트 진행 기간</h4>
+                <div class="row">
+                	<div class="col-lg-3" id="sandbox-container"><%= f.text_field :start_date, class: 'form-control', maxlength: "255" %>
+	            		<em id="end_day_required" style='font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393; display:none;'>This is a required field.</em>
+	            	</div>
+	            	<div class="col-lg-1" style="text-align:center;"><p>~</p></div>
+	                <div class="col-lg-3" id="sandbox-container2"><%= f.text_field :end_date, class: 'form-control', maxlength: "255" %>
+	            		<em id="end_day_required" style='font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393; display:none;'>This is a required field.</em>
+	            	</div>
+	            </div>
+
+	            <div class="margin-bottom-40"></div>
+
+                <!--Textarea-->
+                <h4>프로젝트 설명</h4>
+                <%= f.text_area :description, class: "form-control", rows: "20", maxlength: "65535" %>
+                <!--End Textarea-->
+
+                <div class="margin-bottom-40"></div>
+
+                <footer style="text-align: right;">
+                    <div class="ladda-btn">
+                        <button type="submit" class="btn-u pull-right ladda-button" data-style="slide-down" style="border:0;font-weight:400;margin-left:5px;">Submit</button>
+                    </div>
+
+                    <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                </footer>
+
+            <% end %>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+jQuery(document).ready(function() {
+
+	$('#sandbox-container input').datepicker({
+		language: "ko",
+		format: "yyyy-mm-dd",
+	    autoclose: true,
+	    todayHighlight: true,
+	    todayBtn: "linked"
+	});
+
+	$('#sandbox-container2 input').datepicker({
+		language: "ko",
+		format: "yyyy-mm-dd",
+	    autoclose: true,
+	    todayHighlight: true,
+	    todayBtn: "linked"
+	});
+
+});
+</script>

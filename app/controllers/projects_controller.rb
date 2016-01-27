@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_project, only: [:show]
+	before_action :get_project, only: [:show, :edit, :update, :destroy]
 
 	def index
+		@projects = Project.all
 	end
 
 	def new
@@ -24,19 +25,18 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project_master = 	@project.users.where(
-								"user_project_mappeds.master = ?",
-								true
-							).first
+		redirect_to root_path unless @project.present?
 	end
 
 	def edit
 	end
 
 	def update
+		@project.update!(project_params)
+		redirect_to @project
 	end
 
-	def destory
+	def destroy
 	end
 
 	private
