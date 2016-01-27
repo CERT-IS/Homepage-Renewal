@@ -22,7 +22,7 @@
             <a href="#" class="btn-u btn-u-large">JOIN THE PROJECT</a>
             <% if current_user == @project.master %>
             <a href="<%= edit_project_path(@project) %>" class="btn-u btn-u-large btn-u-default">EDIT</a>
-            <a href="<%= edit_project_path(@project) %>" class="btn-u btn-u-large btn-u-red">DELETE</a>
+            <%= link_to "Delete", project_path(@project), data: { confirm: "Are you sure?" }, class: "btn-u btn-u-large btn-u-red" ,method: :delete %>
             <% end %>
         </div>
         <!-- End Content Info -->        

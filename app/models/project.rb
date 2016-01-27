@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
 	default_scope -> { order('created_at DESC') }
 	
-	has_many :user_project_mappeds
+	has_many :user_project_mappeds, dependent: :destroy
 	has_many :users, through: :user_project_mappeds
 
 	validates :title, presence: true
