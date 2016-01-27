@@ -19,8 +19,18 @@
             	<li><i class="fa fa-calendar color-green"></i> <%= @project.start_date.strftime("%Y.%m.%d") %> ~ <%= @project.end_date.strftime("%Y.%m.%d") %></li>
             	<!--<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>-->
             </ul>
-            <a href="#" class="btn-u btn-u-large">JOIN THE PROJECT</a>
+            <% unless @project.joined?(current_user) %>
+            <a href="<%= receive_project_path(@project) %>" class="btn-u btn-u-large">JOIN THE PROJECT</a>
+            <% else %>
+                <% if @project.unreceived.include?(current_user) %>
+                    <br><h4>상태: 프로젝트 가입 승인대기 중입니다.</h4>
+                <% else %>
+                    <br><h4>상태: 프로젝트 멤버입니다.</h4>
+                <% end %>
+            <% end %>
+
             <% if current_user == @project.master %>
+            <a href="<%= manage_project_path(@project) %>" class="btn-u btn-u-large btn-u-blue">MANAGE MEMBERS</a>
             <a href="<%= edit_project_path(@project) %>" class="btn-u btn-u-large btn-u-default">EDIT</a>
             <%= link_to "Delete", project_path(@project), data: { confirm: "Are you sure?" }, class: "btn-u btn-u-large btn-u-red" ,method: :delete %>
             <% end %>

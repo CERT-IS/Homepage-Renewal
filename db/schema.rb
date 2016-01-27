@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127150214) do
+ActiveRecord::Schema.define(version: 20160127160239) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20160127150214) do
     t.boolean  "master",     limit: 1, default: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.boolean  "approval",   limit: 1, default: false
   end
 
   add_index "user_project_mappeds", ["project_id"], name: "index_user_project_mappeds_on_project_id", using: :btree

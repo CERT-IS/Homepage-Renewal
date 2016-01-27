@@ -37,7 +37,13 @@ Rails.application.routes.draw do
   resources :calendar, except: :new
 
   # Project
-  resources :projects
+  resources :projects do
+    member do
+      get 'manage'
+      get 'receive'
+      get 'approval'
+    end
+  end
 
   # 문의
   resources :inquiries, only: [:show, :create, :destroy]

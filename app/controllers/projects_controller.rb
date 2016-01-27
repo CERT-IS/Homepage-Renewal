@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_project, only: [:show, :edit, :update, :destroy]
+	before_action :get_project, except: [:index, :new]
 
 	def index
 		@projects = Project.all
@@ -16,7 +16,8 @@ class ProjectsController < ApplicationController
 			UserProjectMapped.create(
 				user: current_user,
 				project: @project,
-				master: true
+				master: true,
+				approval: true
 			)
 			redirect_to @project
 		else
@@ -39,6 +40,31 @@ class ProjectsController < ApplicationController
 	def destroy
 		@project.destroy
 		redirect_to projects_path
+	end
+
+	# 승인요청
+	def receive
+		@project.user_project_mappeds.create(
+			user: current_user,
+			master: false,
+			approval: false
+		)
+		redirect_to @project
+	end
+
+	# 승인허가
+	def approval
+		@project.user_project_mappeds
+		 		.where(user_id: params[:user_id])
+		 		.first
+		 		.update_attributes(approval: true)
+		redirect_to manage_project_path
+	end
+
+	# 승인 및 멤버 관리
+	def manage
+		@unreceiveds = @project.unreceived
+		@members     = @project.members
 	end
 
 	private

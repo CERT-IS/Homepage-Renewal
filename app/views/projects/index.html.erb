@@ -27,7 +27,7 @@
                             <br>
 
                             <% completeness =  ((Time.zone.now - project.start_date) / (project.end_date - project.start_date) * 100).to_i %>
-                            <h3 class="heading-xs">Project Completeness <span class="pull-right"><%= completeness %>%</span></h3>
+                            <h3 class="heading-xs">Project Completeness <span class="pull-right"><%= completeness<0 ? 0 : completeness %>%</span></h3>
                             <div class="progress progress-u progress-xxs">
                                 <div class="progress-bar progress-bar-u" role="progressbar" aria-valuenow="<%= completeness %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= completeness %>%">
                                 </div>

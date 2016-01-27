@@ -15,4 +15,22 @@ class Project < ActiveRecord::Base
 			true
 		).first
 	end
+
+	def members
+		users.where(
+			"user_project_mappeds.approval = ?",
+			true
+		)
+	end
+
+	def joined?(user)
+		users.include?(user)
+	end
+
+	def unreceived
+		users.where(
+			"user_project_mappeds.approval = ?",
+			false
+		)
+	end
 end
