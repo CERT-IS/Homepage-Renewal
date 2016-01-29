@@ -14,11 +14,46 @@
         <div class="col-md-12">
         	<h2><%= @project.title %></h2>
             <p><%=h simple_format @project.description.html_safe %></p>
-            <ul class="list-unstyled">
+            <ul class="list-unstyled" style="margin-bottom:0px;">
             	<li><i class="fa fa-user color-green"></i> <%= @project.master.nickname %> / <%= @project.master.realname %></li>
             	<li><i class="fa fa-calendar color-green"></i> <%= @project.start_date.strftime("%Y.%m.%d") %> ~ <%= @project.end_date.strftime("%Y.%m.%d") %></li>
             	<!--<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>-->
             </ul>
+            <ul class="list-inline star-vote" style="margin-left:0px;">
+                <li style="font-size:14px;margin-right:10px;font-family:nanumbarunpenr;">난이도<li>
+                <% if @project.rating5 %>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                <% elsif @project.rating4 %>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                <% elsif @project.rating3 %>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                <% elsif @project.rating2 %>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                <% elsif @project.rating1 %>
+                    <li><i class="color-green fa fa-star"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                    <li><i class="color-green fa fa-star-o"></i></li>
+                <% end %>
+            </ul>
+
             <% unless @project.joined?(current_user) %>
             <a href="<%= receive_project_path(@project) %>" class="btn-u btn-u-large">JOIN THE PROJECT</a>
             <% else %>
@@ -55,51 +90,18 @@
             </div><!--/navigation-->
         </div>
 
+        <% @project.members.each_slice(6) do |members| %>
         <div class="row team-v6 margin-bottom-60">
-            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
-                <img class="img-responsive" src="/assets/bootstrap/team/img6-md.jpg" alt="">
-                <span>Marketing</span>
-                <small>Graphic Designer</small>
+            <% members.each do |member| %>
+            <div class="col-md-2 col-sm-6 md-margin-bottom-50">
+                <%= image_tag member.avatar.url, class: "img-responsive", style: "height:166px; width:166px;" %>
+                <span><%= member.nickname %></span>
+                <small><%= user_roles(member) %></small>
             </div>
-            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
-                <img class="img-responsive" src="/assets/bootstrap/team/img4-md.jpg" alt="">
-                <span>Sara Lisbon</span>
-                <small>Community</small>
-            </div>
-            <div class="col-md-3 col-sm-6 sm-margin-bottom-50">
-                <img class="img-responsive" src="/assets/bootstrap/team/img2-md.jpg" alt="">
-                <span>John Doe</span>
-                <small>Support</small>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <img class="img-responsive" src="/assets/bootstrap/team/img1-md.jpg" alt="">
-                <span>Alice Williams</span>
-                <small>Marketing</small>
-            </div>
+            <% end %>
         </div><!--/end team v6-->
 
-        <div class="row team-v6 margin-bottom-60">
-            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
-                <img class="img-responsive" src="/assets/bootstrap/team/img3-md.jpg" alt="">
-                <span>Marketing</span>
-                <small>Graphic Designer</small>
-            </div>
-            <div class="col-md-3 col-sm-6 md-margin-bottom-50">
-                <img class="img-responsive" src="/assets/bootstrap/team/img7-md.jpg" alt="">
-                <span>Sara Lisbon</span>
-                <small>Community</small>
-            </div>
-            <div class="col-md-3 col-sm-6 sm-margin-bottom-50">
-                <img class="img-responsive" src="/assets/bootstrap/team/img1-md.jpg" alt="">
-                <span>John Doe</span>
-                <small>Support</small>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <img class="img-responsive" src="/assets/bootstrap/team/img5-md.jpg" alt="">
-                <span>Alice Williams</span>
-                <small>Marketing</small>
-            </div>
-        </div><!--/end team v6-->
+        <% end %>
 
     </div>    
     <!-- End Recent Works -->

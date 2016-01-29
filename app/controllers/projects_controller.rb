@@ -27,12 +27,20 @@ class ProjectsController < ApplicationController
 
 	def show
 		redirect_to root_path unless @project.present?
+		@project.update_attributes(views: @project.views+1)
 	end
 
 	def edit
 	end
 
 	def update
+		@project.update_attributes(
+			rating1: true,
+			rating2: false,
+			rating3: false,
+			rating4: false,
+			rating5: false
+		)
 		@project.update!(project_params)
 		redirect_to @project
 	end
@@ -87,7 +95,12 @@ class ProjectsController < ApplicationController
 			:title,
 			:description,
 			:start_date,
-			:end_date
+			:end_date,
+			:rating1,
+			:rating2,
+			:rating3,
+			:rating4,
+			:rating5
 		)
 	end
 end

@@ -10,9 +10,9 @@
     <div class="container content-sm">
         <div class="tag-box tag-box-v3 form-page">
             <div class="headline"><h3>New Project</h3></div>                
-            <%= form_for @project do |f| %>
+            <%= form_for @project, html: {class: "sky-form", style: "border:none;"} do |f| %>
                 <!--Inputs-->
-                <h4>주제</h4>
+                <h4>* 주제</h4>
                 <div id="board-title" class=""> 
                     <%= f.text_field :title , class: "form-control", maxlength: "255" %>
                 </div>
@@ -20,7 +20,7 @@
 
                 <div class="margin-bottom-40"></div>
 
-                <h4>프로젝트 진행 기간</h4>
+                <h4>* 프로젝트 진행 기간</h4>
                 <div class="row">
                 	<div class="col-lg-3" id="sandbox-container"><%= f.text_field :start_date, class: 'form-control', maxlength: "255" %>
 	            		<em id="end_day_required" style='font-style: normal;font-size: 11px;line-height: 15px;color: #ee9393; display:none;'>This is a required field.</em>
@@ -31,10 +31,28 @@
 	            	</div>
 	            </div>
 
+                <div class="margin-bottom-40"></div>
+
+                <section>
+                    <div class="rating">
+                        <input type="radio" name="project[rating5]" id="stars-rating-5">
+                        <label for="stars-rating-5"><i class="fa fa-star"></i></label>
+                        <input type="radio" name="project[rating4]" id="stars-rating-4">
+                        <label for="stars-rating-4"><i class="fa fa-star"></i></label>
+                        <input type="radio" name="project[rating3]" id="stars-rating-3">
+                        <label for="stars-rating-3"><i class="fa fa-star"></i></label>
+                        <input type="radio" name="project[rating2]" id="stars-rating-2">
+                        <label for="stars-rating-2"><i class="fa fa-star"></i></label>
+                        <input type="radio" name="project[rating1]" id="stars-rating-1">
+                        <label for="stars-rating-1"><i class="fa fa-star"></i></label>
+                        <h4>* 난이도</h4>
+                    </div>
+                </section>
+
 	            <div class="margin-bottom-40"></div>
 
                 <!--Textarea-->
-                <h4>프로젝트 설명</h4>
+                <h4>* 프로젝트 설명</h4>
                 <%= f.text_area :description, class: "form-control", rows: "20", maxlength: "65535" %>
                 <!--End Textarea-->
 
