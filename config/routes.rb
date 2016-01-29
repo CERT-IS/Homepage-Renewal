@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     # 프로필 정보 수정 (닉네임, 한줄소개)
     put   '/profile' => 'profile#update'
     patch '/profile' => 'profile#update'
+    # Social 정보 수정
+    post  '/social'  => 'profile#social'
   end
 
   # 게시판 형태

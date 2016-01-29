@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129053001) do
+ActiveRecord::Schema.define(version: 20160129134911) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -161,6 +161,10 @@ ActiveRecord::Schema.define(version: 20160129053001) do
     t.datetime "avatar_updated_at"
     t.string   "nickname",               limit: 255
     t.string   "introduce",              limit: 255
+    t.string   "twitter",                limit: 255, default: ""
+    t.string   "facebook",               limit: 255, default: ""
+    t.string   "github",                 limit: 255, default: ""
+    t.string   "blog",                   limit: 255, default: ""
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
