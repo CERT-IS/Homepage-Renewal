@@ -47,10 +47,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        $('#summernote').summernote({
-            height: 500
-        });
-        $('#summernote').code('<%= @board.contents.gsub(/^\s+|\n|\s+$/, "").html_safe %>');
+    $('#summernote').summernote({
+        height: 500
     });
+    $('#summernote').code('<%= @board.contents.gsub(/^\s+|\n|\s+$/, "").html_safe %>');
+
 </script>

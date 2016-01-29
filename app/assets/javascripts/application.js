@@ -27,7 +27,6 @@
 //= require bootstrap/modernizr.js
 //= require bootstrap/jquery.cslider.js
 //= require bootstrap/owl.carousel.js
-//= require bootstrap/plugins/circles-master/circles.js
 //= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js
 //= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js
 //= require bootstrap/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js
@@ -48,7 +47,6 @@
 //= require bootstrap/plugins/ladda-buttons/spin.min.js
 //= require bootstrap/plugins/ladda-buttons/ladda.min.js
 //= require bootstrap/plugins/datepicker.js
-//= require bootstrap/plugins/circles-master.js
 //= require bootstrap/plugins/validation.js
 
 // Bootstrap fullcalendar

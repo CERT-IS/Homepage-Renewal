@@ -284,10 +284,11 @@
     </div>
 </div>		
 <!--=== End Profile ===-->
+
+<%= javascript_include_tag "bootstrap/plugins/circles-master/circles.js" %>
+<%= javascript_include_tag "bootstrap/plugins/circles-master.js" %>
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        App.initScrollBar();
-        CirclesMaster.initCirclesMaster1();
-        CirclesMaster.initCirclesMaster2();
-        });
+    App.initScrollBar();
+    CirclesMaster.initCirclesMaster1();
+    CirclesMaster.initCirclesMaster2();
 </script>
