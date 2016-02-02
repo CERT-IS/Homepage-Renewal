@@ -59,4 +59,7 @@
 //= require bootstrap/datepicker/bootstrap-datepicker.min.js
 //= require bootstrap/datepicker/bootstrap-datepicker.ko.min.js
 
+// DaumMap
+//= require bootstrap/plugins/roughmapLoader.js
+
 //= require turbolinks

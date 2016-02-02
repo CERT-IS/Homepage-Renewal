@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_project, only: [:show]
+	before_action :get_project, except: [:index, :new]
 
 	def index
+		@projects = Project.all
 	end
 
 	def new
@@ -15,7 +16,8 @@ class ProjectsController < ApplicationController
 			UserProjectMapped.create(
 				user: current_user,
 				project: @project,
-				master: true
+				master: true,
+				approval: true
 			)
 			redirect_to @project
 		else
@@ -24,19 +26,62 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project_master = 	@project.users.where(
-								"user_project_mappeds.master = ?",
-								true
-							).first
+		redirect_to root_path unless @project.present?
+		@project.update_attributes(views: @project.views+1)
 	end
 
 	def edit
 	end
 
 	def update
+		@project.update_attributes(
+			rating1: true,
+			rating2: false,
+			rating3: false,
+			rating4: false,
+			rating5: false
+		)
+		@project.update!(project_params)
+		redirect_to @project
 	end
 
-	def destory
+	def destroy
+		@project.destroy
+		redirect_to projects_path
+	end
+
+	# 승인요청
+	def receive
+		@project.user_project_mappeds.create(
+			user: current_user,
+			master: false,
+			approval: false
+		)
+		redirect_to @project
+	end
+
+	# 승인허가
+	def approval
+		@project.user_project_mappeds
+		 		.where(user_id: params[:user_id])
+		 		.first
+		 		.update_attributes(approval: true)
+		redirect_to manage_project_path
+	end
+
+	# 멤버 강퇴
+	def leave
+		@project.user_project_mappeds
+		 		.where(user_id: params[:user_id])
+		 		.first
+		 		.destroy
+		redirect_to manage_project_path
+	end
+
+	# 승인 및 멤버 관리
+	def manage
+		@unreceiveds = @project.unreceived
+		@members     = @project.members
 	end
 
 	private
@@ -50,7 +95,12 @@ class ProjectsController < ApplicationController
 			:title,
 			:description,
 			:start_date,
-			:end_date
+			:end_date,
+			:rating1,
+			:rating2,
+			:rating3,
+			:rating4,
+			:rating5
 		)
 	end
 end

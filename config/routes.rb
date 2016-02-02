@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     # 프로필 정보 수정 (닉네임, 한줄소개)
     put   '/profile' => 'profile#update'
     patch '/profile' => 'profile#update'
+    # Social 정보 수정
+    post  '/social'  => 'profile#social'
   end
 
   # 게시판 형태
@@ -37,7 +39,17 @@ Rails.application.routes.draw do
   resources :calendar, except: :new
 
   # Project
-  resources :projects
+  resources :projects do
+    member do
+      get 'manage'
+      get 'receive'
+      get 'approval'
+      delete 'leave'
+    end
+  end
+
+  # 문의
+  resources :inquiries, only: [:show, :create, :destroy]
 
   # Static Pages
   get '/privacy_policy' => 'base#privacy'
@@ -53,6 +65,7 @@ Rails.application.routes.draw do
   get '/admin/grades'
   patch '/admin/grades' => 'admin#grades_update'
   put '/admin/grades' => 'admin#grades_update'
+  get '/admin/inquiries'
   
   # API ROUTES
   namespace :api, path: '/', constraints: { subdomain: 'api' } do

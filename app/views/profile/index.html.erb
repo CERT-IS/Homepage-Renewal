@@ -52,13 +52,60 @@
             <div class="panel panel-profile">
                 <div class="panel-heading overflow-h">
                     <h2 class="panel-title heading-sm pull-left"><i class="fa fa-lightbulb-o"></i> Social Contacts </h2>
-                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                    <% if @user == current_user %>
+                    <a href="javascript:{};" data-toggle="modal" data-target="#social_edit"><i class="fa fa-cog pull-right"></i></a>
+                    <div class="modal fade bs-example-modal-sm" id="social_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <%= form_tag "/users/#{current_user.uid}/social", method: :post do %>
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel4">소셜 정보 수정</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>트위터(ID만 기입)</h4>
+                                                <p><%= text_field_tag 'social[twitter]', "#{@user.twitter}", class: 'form-control', maxlength: "255" %></p>
+
+                                                <h4>페이스북(ID만 기입)</h4>
+                                                <p><%= text_field_tag 'social[facebook]', "#{@user.facebook}", class: 'form-control', maxlength: "255" %></p>
+
+                                                <h4>깃허브(ID만 기입)</h4>
+                                                <p><%= text_field_tag 'social[github]', "#{@user.github}", class: 'form-control', maxlength: "255" %></p>
+
+                                                <h4>블로그(전체 URL를 기입)</h4>
+                                                <p><%= text_field_tag 'social[blog]', "#{@user.blog}", class: 'form-control', maxlength: "255" %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn-u btn-u-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                    <% end %>
                 </div>
                 <div class="panel-body">
                     <ul class="list-unstyled social-contacts-v3">
-                        <li><i class="rounded-x tw fa fa-twitter"></i> <a href="#">edward.rooster</a></li>
-                        <li><i class="rounded-x fb fa fa-facebook"></i> <a href="#">Edward Rooster</a></li>
-                        <li><i class="rounded-x gh fa fa-github"></i> <a href="#">edwardRooster77</a></li>
+                        <% if @user.twitter.present? %>
+                        <li><i class="rounded-x tw fa fa-twitter"></i> <a href="http://twitter.com/<%= @user.twitter %>" target="_blank"><%= @user.twitter %></a></li>
+                        <% end %>
+
+                        <% if @user.facebook.present? %>
+                        <li><i class="rounded-x fb fa fa-facebook"></i> <a href="http://www.facebook.com/<%= @user.facebook %>" target="_blank"><%= @user.facebook %></a></li>
+                        <% end %>
+
+                        <% if @user.github.present? %>
+                        <li><i class="rounded-x gh fa fa-github"></i> <a href="http://github.com/<%= @user.github %>" target="_blank"><%= @user.github %></a></li>
+                        <% end %>
+
+                        <% if @user.blog.present? %>
+                        <li><i class="rounded-x gm fa fa-bold"></i> <a href="@user.blog" target="_blank"><%= truncate(@user.blog, length: 25) %></a></li>
+                        <% end %>
                     </ul>
                 </div>
             </div>
@@ -71,9 +118,10 @@
                 <div class="panel panel-profile">
                     <div class="panel-heading overflow-h">
                         <h2 class="panel-title heading-sm pull-left"><i class="fa fa-user"></i> Profile </h2>
+                        <% if @user == current_user %>
                         <a href="javascript:{};" data-toggle="modal" data-target="#profile_edit"><i class="fa fa-cog pull-right"></i></a>
                         <div class="modal fade bs-example-modal-sm" id="profile_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <%= form_tag "/users/#{current_user.uid}/profile", method: :put, remote: true do %>
+                            <%= form_tag "/users/#{current_user.uid}/profile", method: :put do %>
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -96,12 +144,13 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn-u btn-u-primary" data-dismiss="modal">Save changes</button>
+                                            <button type="submit" class="btn-u btn-u-primary">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
                             <% end %>
                         </div>
+                        <% end %>
                     </div>
                     <div class="panel-body">
                         <div class="profile-bio">
@@ -235,10 +284,9 @@
     </div>
 </div>		
 <!--=== End Profile ===-->
+
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        App.initScrollBar();
-        CirclesMaster.initCirclesMaster1();
-        CirclesMaster.initCirclesMaster2();
-        });
+    App.initScrollBar();
+    CirclesMaster.initCirclesMaster1();
+    CirclesMaster.initCirclesMaster2();
 </script>

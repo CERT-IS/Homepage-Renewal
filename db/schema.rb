@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120094758) do
+ActiveRecord::Schema.define(version: 20160129134911) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 20160120094758) do
     t.datetime "updated_at",                                 null: false
   end
 
+  create_table "inquiries", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
+    t.string   "content",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "board_id",   limit: 4
@@ -86,8 +94,15 @@ ActiveRecord::Schema.define(version: 20160120094758) do
     t.text     "description", limit: 65535
     t.datetime "start_date"
     t.datetime "end_date"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "keyword",     limit: 255
+    t.boolean  "rating1",     limit: 1,     default: true
+    t.boolean  "rating2",     limit: 1,     default: false
+    t.boolean  "rating3",     limit: 1,     default: false
+    t.boolean  "rating4",     limit: 1,     default: false
+    t.boolean  "rating5",     limit: 1,     default: false
+    t.integer  "views",       limit: 4,     default: 0
   end
 
   create_table "roles", force: :cascade do |t|
@@ -117,6 +132,7 @@ ActiveRecord::Schema.define(version: 20160120094758) do
     t.boolean  "master",     limit: 1, default: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.boolean  "approval",   limit: 1, default: false
   end
 
   add_index "user_project_mappeds", ["project_id"], name: "index_user_project_mappeds_on_project_id", using: :btree
@@ -145,6 +161,10 @@ ActiveRecord::Schema.define(version: 20160120094758) do
     t.datetime "avatar_updated_at"
     t.string   "nickname",               limit: 255
     t.string   "introduce",              limit: 255
+    t.string   "twitter",                limit: 255, default: ""
+    t.string   "facebook",               limit: 255, default: ""
+    t.string   "github",                 limit: 255, default: ""
+    t.string   "blog",                   limit: 255, default: ""
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree

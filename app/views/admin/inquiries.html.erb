@@ -1,0 +1,91 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Admin Dashboard</h1>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row">
+        <!-- Begin Sidebar Menu -->
+        <div class="col-md-3">
+            <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
+
+                <!-- 멤버·스텝 -->
+                <li class="list-group-item"><a href="<%= admin_membership_path %>">멤버·스텝</a></li>
+                <!-- End 멤버·스텝 -->
+
+                <!-- 멤버·스텝 -->
+                <li class="list-group-item"><a href="<%= admin_grades_path %>">등업신청</a></li>
+                <!-- End 멤버·스텝 -->
+
+                <!-- 문의관리-->
+                <li class="list-group-item active"><a href="<%= admin_inquiries_path %>">문의관리</a></li>
+                <!-- End 문의관리 -->
+
+                <!-- Maps -->                    
+                <li class="list-group-item list-toggle">                   
+                    <a class="accordion-toggle" href="#collapse-maps" data-toggle="collapse">Maps</a>
+                    <ul id="collapse-maps" class="collapse">
+                        <li>
+                            <span class="badge badge-u">New</span>
+                            <a href="shortcode_maps_google.html"><i class="fa fa-map-marker"></i> Google Maps</a>
+                        </li>
+                        <li>
+                            <span class="badge badge-u">New</span>                            
+                            <a href="shortcode_maps_vector.html"><i class="fa fa-align-center"></i> Vector Maps</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Maps -->                    
+
+                <!-- Charts -->
+                <li class="list-group-item">
+                    <span class="badge badge-u">New</span>                    
+                    <a href="shortcode_compo_charts.html">Charts &amp; Countdowns</a>
+                </li>
+                <!-- End Charts -->
+            </ul>
+        </div>
+        <!-- End Sidebar Menu -->
+
+        <!-- Begin Content -->
+        <div class="col-md-9">
+
+            <div class="headline"><h2>문의관리</h2></div>
+
+            <div class="margin-bottom-40"></div>
+
+            <!--Table Striped-->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>IDX</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @inquiries.each do |inquiry| %>
+                        <tr>
+                            <td><%= inquiry.id %></td>
+                            <td><%= inquiry.name %></td>
+                            <td><%= inquiry.email %></td>
+                            <td><%= inquiry.created_at.strftime("%Y.%m.%-d") %></td>
+                            <td><%= link_to '<i class="rounded-x fa fa-eye"></i>'.html_safe, inquiry_path(inquiry) %></td>
+                            <td><%= link_to '<i class="rounded-x fa fa-trash"></i>'.html_safe, inquiry_path(inquiry), method: :delete, data: { confirm: "정말 삭제 하시겠습니까?" } %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <!--End Table Striped-->
+        </div>
+        <!-- End Content -->
+    </div>          
+</div><!--/container-->     
+<!--=== End Content Part ===-->

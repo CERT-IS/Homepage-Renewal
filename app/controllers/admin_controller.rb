@@ -48,4 +48,8 @@ class AdminController < ApplicationController
 
 		redirect_to admin_grades_path
 	end
+
+	def inquiries
+		@inquiries = Inquiry.all
+	end
 end

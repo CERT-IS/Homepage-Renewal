@@ -31,7 +31,7 @@
 	            	</div>
 	            </div>
 
-	            <div class="margin-bottom-40"></div>
+                <div class="margin-bottom-40"></div>
 
                 <section>
                     <div class="rating">
@@ -49,14 +49,12 @@
                     </div>
                 </section>
 
-                <div class="margin-bottom-40"></div>
+	            <div class="margin-bottom-40"></div>
 
                 <!--Textarea-->
                 <h4>* 프로젝트 설명</h4>
-                <%= f.text_area :description, class: "form-control", rows: "20", maxlength: "3000" %>
+                <%= f.text_area :description, class: "form-control", rows: "20", maxlength: "65535" %>
                 <!--End Textarea-->
-
-                
 
                 <div class="margin-bottom-40"></div>
 
