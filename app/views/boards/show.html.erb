@@ -22,7 +22,7 @@
                         <li>By <a href="#"><%= @board.user.present? ? @board.user.uid : "탈퇴회원" %></a></li>
                         <li>Posted <%= @board.created_at.strftime("%B %-d, %Y") %></li>
                     </ul>
-                    <h2><a href="/<%= @board.board_type.name %>/<%= @board.id %>"><%= @board.title %></a></h2>
+                    <h2><a href="/<%= @board.board_type.name %>/<%= @board.id %>"><%= truncate @board.title, length: 75 %></a></h2>
                     <div class="bg-color-white">
                         <%= sanitize @board.contents.html_safe %>
                     </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129134911) do
+ActiveRecord::Schema.define(version: 20160209062206) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -35,13 +35,16 @@ ActiveRecord::Schema.define(version: 20160129134911) do
     t.string   "title",         limit: 255
     t.integer  "user_id",       limit: 4
     t.text     "contents",      limit: 4294967295
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "board_type_id", limit: 4
     t.integer  "share_counts",  limit: 4,          default: 0
+    t.integer  "label_id",      limit: 4
+    t.boolean  "isopen",        limit: 1,          default: true
   end
 
   add_index "boards", ["board_type_id"], name: "index_boards_on_board_type_id", using: :btree
+  add_index "boards", ["label_id"], name: "index_boards_on_label_id", using: :btree
   add_index "boards", ["user_id"], name: "index_boards_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
@@ -75,6 +78,12 @@ ActiveRecord::Schema.define(version: 20160129134911) do
     t.string   "name",       limit: 255
     t.string   "email",      limit: 255
     t.string   "content",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -181,6 +190,7 @@ ActiveRecord::Schema.define(version: 20160129134911) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "boards", "board_types"
+  add_foreign_key "boards", "labels"
   add_foreign_key "boards", "users"
   add_foreign_key "comments", "boards"
   add_foreign_key "comments", "comments"

@@ -10,6 +10,8 @@
 admin_user = User.create( uid: "admin", realname: "관리자", email: 'admin@email.com', password: '12341234', phone: "01012341234" )
 admin_user.add_role :admin
 
+
+# for Board
 BoardType.create(
 	name: "notices",
 	realname: "공지사항")
@@ -49,3 +51,15 @@ BoardType.create(
 BoardType.create(
 	name: "documents",
 	realname: "공문자료")
+
+BoardType.create(
+	name: "reports",
+	realname: "버그 리포트")
+
+
+# for Label
+Label.create(name: "Bug")
+Label.create(name: "Security")
+Label.create(name: "Enhancement")
+Label.create(name: "Duplicate")
+Label.create(name: "Invalid")

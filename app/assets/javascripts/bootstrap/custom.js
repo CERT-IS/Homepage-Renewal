@@ -16,6 +16,7 @@ function summernote_submit() {
 	var title      = $('#board_title').val();
 	var body_empty = $('#summernote').code().length == 0
 
+	// title or body is empty
 	if ( !title || body_empty )
 	{
 		if ( !title ) 
@@ -48,5 +49,10 @@ function summernote_submit() {
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		event.preventDefault();
+	}
+	else
+	{
+		// else
+		$('#board_contents').val($('#summernote').code());	
 	}
 }

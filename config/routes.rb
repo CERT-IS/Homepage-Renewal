@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :blogs, controller: 'board_blog'
   resources :lines, controller: 'board_line', only: [:index, :create, :destroy]
   resources :grades, controller: 'board_grade', except: [:index]
+  resources :reports, controller: 'board_report'
 
   # 캘린더
   resources :calendar, except: :new

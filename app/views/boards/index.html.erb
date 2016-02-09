@@ -56,9 +56,9 @@
                     <li>Posted <%= board.created_at.strftime("%B %-d, %Y") %></li>
                 </ul>
                 <h2>
-                    <%= link_to board.title, { controller: controller.controller_name, action: "show", id: board } %>
+                    <%= link_to truncate(board.title, length: 30), { controller: controller.controller_name, action: "show", id: board } %>
                 </h2>
-                <p><%= truncate((strip_tags board.contents), length: 350, separator: ' ', escape: false) %></p>
+                <p><%= truncate((strip_tags board.contents), length: 350, escape: false) %></p>
                 <ul class="post-shares">
                     <li>
                         <a href="/<%= board.board_type.name %>/<%= board.id %>#comments">

@@ -1,0 +1,78 @@
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left"><%= @type.realname %></h1>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<!--=== Search Block Version 2 ===-->
+<div class="search-block">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>Thanks for your report</h2>
+            <div style="text-align:center;">
+                <p>버그 리포트 게시판은 아래의 3가지 주제에 관해 제보를 받고 있습니다.</p>
+                <p>Bug(기능오류), Security(보안관련), Enhancement(기능추가, 개선, 건의)</p><br />
+                <%= link_to "제보하기", new_report_path, class: "btn-u" %>
+            </div>
+        </div>
+    </div>
+</div><!--/container-->
+<!--=== End Search Block Version 2 ===-->
+
+<div class="container content-sm">
+    <!-- Begin Table Search v2 -->
+    <div class="table-search-v2 margin-bottom-30">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>About</th>
+                        <th>Labels</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @boards.each do |board| %>
+                    <tr>
+                        <td>
+                            <div class="user-names">
+                                <span><%= board.user.nickname %></span>
+                                <small>(<%= board.user.realname %>)</small>
+                            </div>
+                        </td>
+                        <td class="td-width">
+                            <h3><a href="<%= report_path(board) %>"><%= truncate board.title, length: 36 %></a></h3>
+                            <small class="hex"><%= board.likes.count %> recommend</small>
+                        </td>
+                        <td>
+                            <% case board.label.name %>
+                            <% when "Security" %>
+                            <span class="label label-danger">Security</span>
+                            <% when "Bug" %>
+                            <span class="label label-warning">Bug</span>
+                            <% when "Enhancement" %>
+                            <span class="label label-info">Enhancement</span>
+                            <% end %>
+                        </td>
+                        <td>
+                            <% if board.isopen %>
+                            <span class="label label-light">Open</span>
+                            <% else %>
+                            <span class="label label-dark">Closed</span>
+                            <% end %>
+                        </td>
+                        <td style="text-align:center;">
+                            <p><%= board.created_at.strftime("%Y. %m. %d") %></p>
+                        </td>
+                    </tr>
+                    <% end %>             
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- End Table Search v2 -->
+</div>
