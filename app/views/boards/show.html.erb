@@ -93,55 +93,35 @@
                             <% end %>
                         </ul>
                     </div>
-                    <p><%= @board.user.introduce %></p>
+                    <p style="height:40px;"><%= @board.user.introduce.present? ? @board.user.introduce : "한줄소개말이 비어있습니다. 프로필에서 설정해보세요." %></p>
                 </div>
             </div>
             <!-- End Blog Post Author -->
 
             <!-- Authored Blog -->
+            <h3 class="margin-bottom-20">저자의 다른 글보기</h3>
             <div class="row news-v2 margin-bottom-50">
+                <% @authored_boards.each do |a| %>
                 <div class="col-sm-4 sm-margin-bottom-30">
                     <div class="news-v2-badge">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img3.jpg" alt="">
+                        <% if a.attachments.present? %>
+                            <a href="/<%= a.board_type.name %>/<%= a.id %>"><%= image_tag a.attachments.first.contents.url, class: "img-responsive", style: "width: 360px;height: 227.531px;" %></a>
+                        <% else %>
+                            <a href="/<%= a.board_type.name %>/<%= a.id %>"><img class="img-responsive" src="/assets/bootstrap/main/img3.jpg" alt=""></a>
+                        <% end %>
+
                         <p>
-                            <span>24</span>
-                            <small>Jan</small>
+                            <span><%= a.created_at.strftime("%d") %></span>
+                            <small><%= a.created_at.strftime("%b") %></small>
                         </p>
                     </div>
                     <div class="news-v2-desc">
-                        <h3><a href="#">Blog Image Post</a></h3>
-                        <small>By Admin | California, US | In <a href="#">Art</a></small>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
+                        <h3><a href="/<%= a.board_type.name %>/<%= a.id %>"><%= truncate a.title, length: 20 %></a></h3>
+                        <small>By <%= a.user.nickname %> | In <%= a.board_type.realname %></small>
+                        <p style="height:80px;"><%= truncate((strip_tags a.contents), length: 150, escape: false) %></p>
                     </div>
                 </div>
-                <div class="col-sm-4 sm-margin-bottom-30">
-                    <div class="news-v2-badge">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img6.jpg" alt="">
-                        <p>
-                            <span>23</span>
-                            <small>Jan</small>
-                        </p>
-                    </div>
-                    <div class="news-v2-desc">
-                        <h3><a href="#">Blog Image Post</a></h3>
-                        <small>By Admin | California, US | In <a href="#">Art</a></small>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="news-v2-badge">
-                        <img class="img-responsive" src="/assets/bootstrap/main/img4.jpg" alt="">
-                        <p>
-                            <span>22</span>
-                            <small>Jan</small>
-                        </p>
-                    </div>
-                    <div class="news-v2-desc">
-                        <h3><a href="#">Blog Image Post</a></h3>
-                        <small>By Admin | California, US | In <a href="#">Art</a></small>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                    </div>
-                </div>
+                <% end %>
             </div>
             <!-- End Authored Blog -->
             <% end %>

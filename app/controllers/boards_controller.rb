@@ -13,7 +13,8 @@ class BoardsController < ApplicationController
 			return
 		end
 
-		@comments = @board.comments.where(comment_id: nil)
+		@comments        = @board.comments.where(comment_id: nil)
+		@authored_boards = Board.where("board_type_id = ? AND user_id = ? AND id != ?", @board.board_type.id, @board.user.id, @board.id).limit(3)
 	end
 
 	def new
