@@ -56,6 +56,10 @@
                             <span class="label label-warning">Bug</span>
                             <% when "Enhancement" %>
                             <span class="label label-info">Enhancement</span>
+                            <% when "Duplicate" %>
+                            <span class="label label-light">Duplicate</span>
+                            <% when "Invalid" %>
+                            <span class="label label-default">Invalid</span>
                             <% end %>
                         </td>
                         <td>
@@ -75,4 +79,16 @@
         </div>
     </div>
     <!-- End Table Search v2 -->
+
+    <!-- Pager v3 -->
+    <ul class="pager pager-v3 pager-md no-margin-bottom">
+        <li class="previous">
+            <%= link_to "&larr; Older".html_safe, { controller: controller.controller_name, action: "index", page: @page-1 } if @page > 1 %>
+        </li>
+        <li class="page-amount"><%= "#{@page} of #{@page_max}" %></li>
+        <li class="next">
+            <%= link_to "Newer &rarr;".html_safe, { controller: controller.controller_name, action: "index", page: @page+1 } if @page < @page_max %>
+        </li>
+    </ul>
+    <!-- End Pager v3 -->
 </div>

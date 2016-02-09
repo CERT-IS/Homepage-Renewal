@@ -4,8 +4,8 @@ class BoardReportController < BoardsController
 		@page   	= params[:page].to_i == 0 ? 1 : params[:page].to_i
 		@type   	= BoardType.where(name: "reports").first
 		@boards  	= @type.boards
-		@page_max	= (@boards.count-1) / 4 + 1 if @boards.present?
-		@boards 	= @boards.paginate(:page => params[:page], :per_page => 30)
+		@page_max	= (@boards.count-1) / 10 + 1 if @boards.present?
+		@boards 	= @boards.paginate(:page => params[:page], :per_page => 10)
 	end
 
 	def show
@@ -30,5 +30,25 @@ class BoardReportController < BoardsController
 		)
 
 		redirect_to report_path(@board)
+	end
+
+	def destroy
+		super
+	end
+
+	def edit
+		super
+		if current_user.has_role?(:admin)
+			@labels	= Label.all
+		else
+			@labels = Label.all[0..2]
+		end
+	end
+
+	def update
+		super
+		@board.label      = Label.where(id: params[:board][:label_id]).first
+		@board.isopen	  = params[:board][:isopen].eql?("true")
+		@board.save
 	end
 end

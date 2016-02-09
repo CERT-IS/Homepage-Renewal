@@ -2,11 +2,13 @@
 <div class="breadcrumbs">
     <div class="container">
         <h1 class="pull-left"><%= @board.board_type.realname %></h1>
+        <!--
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li><a href="">Blog</a></li>
             <li class="active">Blog Item 2</li>
         </ul>
+        -->
     </div>
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
@@ -74,12 +76,24 @@
                     <div class="overflow-h">
                         <h4><%= @board.user.uid %></h4>
                         <ul class="list-inline">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <% if @board.user.facebook.present? %>
+                            <li><a href="http://www.facebook.com/<%= @board.user.facebook %>" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <% end %>
+
+                            <% if @board.user.twitter.present? %>
+                            <li><a href="http://twitter.com/<%= @board.user.twitter %>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <% end %>
+
+                            <% if @board.user.github.present? %>
+                            <li><a href="http://github.com/<%= @board.user.github %>" target="_blank"><i class="fa fa-github"></i></a></li>
+                            <% end %>
+
+                            <% if @board.user.blog.present? %>
+                            <li><a href="<%= @board.user.blog %>" target="_blank"><i class="fa fa-bold"></i></a></li>
+                            <% end %>
                         </ul>
                     </div>
-                    <p>In auctor fringilla turpis eu rhoncus. Vivamus quis nisi vel dui ultrices lacinia ac eu massa. Quis que vitae consequat sapien. Vivamus sit amet tincidunt ipsum, nec blandit ipsum. Lorem ipsu m dolor sit amet, consectetur adipiscing elit...</p>
+                    <p><%= @board.user.introduce %></p>
                 </div>
             </div>
             <!-- End Blog Post Author -->
