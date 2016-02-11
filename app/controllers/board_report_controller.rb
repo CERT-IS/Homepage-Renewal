@@ -4,7 +4,7 @@ class BoardReportController < BoardsController
 		@page   	= params[:page].to_i == 0 ? 1 : params[:page].to_i
 		@type   	= BoardType.where(name: "reports").first
 		@boards  	= @type.boards
-		@page_max	= (@boards.count-1) / 10 + 1 if @boards.present?
+		@page_max	= @boards.present? ? (@boards.count-1) / 10 + 1 : 1
 		@boards 	= @boards.paginate(:page => params[:page], :per_page => 10)
 	end
 
