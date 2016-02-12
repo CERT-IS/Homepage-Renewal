@@ -12,7 +12,7 @@ class Board < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
-  validates :contents, presence: true
+
   def like_members
     User.joins(:likes).merge(self.likes)
   end
