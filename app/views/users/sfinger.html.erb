@@ -1,0 +1,33 @@
+<div id="s_finger_login"></div>
+<script type="text/javascript">
+    var s_finger_login = new s_finger_login("fIpln3lq0NCPwPXDHabJ", "http://210.118.69.48:4389/sfinger");
+    // s_finger_login.setDomain(".service.com");
+    s_finger_login.setState("abcdefghijkmnopqrst");
+    // s_finger_login.setPopup();
+    s_finger_login.setButton("blue",3,36);
+    s_finger_login.init_s_finger_login();
+    s_finger_login.get_s_finger_userprofile(s_callback);
+
+    function s_callback() {
+        var id    = s_finger_login.getProfileData('id');
+        var email = s_finger_login.getProfileData('email');
+        var phone = s_finger_login.getProfileData('phone');
+
+        console.log(id)
+        console.log(email)
+        console.log(phone)
+
+        $.ajax({
+            type: "POST",
+            url: "/sfinger",
+            cache: false,
+            data: {
+            	id: id,
+            	email: email,
+            	phone: phone
+            },
+            success : {},
+            error: {}
+        })
+    }
+</script>

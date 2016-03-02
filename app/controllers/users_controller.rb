@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!, except: :index
+	before_action :authenticate_user!, except: [:index, :sfinger, :sfinger_register]
 
 	def index
 	end
@@ -55,6 +55,39 @@ class UsersController < ApplicationController
 
 		respond_to do |format|
 			format.js
+		end
+	end
+
+	def sfinger
+	end
+
+	def sfinger_register
+		now = DateTime.now
+
+		@user = User.where(uid: params[:id]).first
+
+		unless @user.present?
+			puts "Users#sfinger_register - create new user"
+			pw = Devise.friendly_token.first(20)
+			@user = User.create!(
+				uid: params[:id],
+				realname: params[:id],
+				email: params[:email],
+				phone: params[:phone],
+				created_at: now,
+				updated_at: now,
+				password: pw,
+				password_confirmation: pw,
+				provider: "s-finger"
+			)
+		end
+
+		puts @user.id
+
+		sign_in @user
+		respond_to do |format|
+			format.js { render js: "document.location = '#{root_path}'" }
+			format.html { redirect_to root_path }
 		end
 	end
 end

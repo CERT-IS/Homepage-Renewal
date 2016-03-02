@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # GENERAL ROUTES
-  root 'base#index'
+  root 'board_line#index'
 
   devise_for :users
   resources :users, only: [:show, :update] do
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     # Social 정보 수정
     post  '/social'  => 'profile#social'
   end
+  # S Finger login
+  get '/sfinger' => 'users#sfinger'
+  post '/sfinger' => 'users#sfinger_register'
 
   # 게시판 형태
   resources :boards, only: [] do

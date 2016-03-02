@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   private
   
   def init_user
-    add_role :associate_member if User.count > 1 
+    add_role :regular_member if User.count > 1 
     self.nickname = self.uid
     self.save
   end

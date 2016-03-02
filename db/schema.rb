@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209062206) do
+ActiveRecord::Schema.define(version: 20160302170113) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",         limit: 4
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(version: 20160209062206) do
     t.string   "facebook",               limit: 255, default: ""
     t.string   "github",                 limit: 255, default: ""
     t.string   "blog",                   limit: 255, default: ""
+    t.string   "provider",               limit: 255
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
