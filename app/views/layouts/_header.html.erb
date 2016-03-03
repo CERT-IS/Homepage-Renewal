@@ -11,11 +11,10 @@
             <div class="topbar">
                 <ul class="loginbar pull-right">
                     <% if user_signed_in? %>
-                        <% if current_user.member? %>
-                            <% if current_user.provider.eql?("s-finger") %>
+                        <% if current_user.provider.eql?("s-finger") %>
                             <li>S Finger</li>
                             <li class="topbar-devider"></li> 
-                            <% end %>
+                        <% end %>
                         <li><a href="<%= reports_path %>">Report</a></li>  
                         <li class="topbar-devider"></li>
                         <li class="hoverSelector">
@@ -26,13 +25,6 @@
                                 <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
                             </ul>
                         </li>
-                        <% else %>
-                            <li><a><%= current_user.uid %></a></li>
-                            <li class="topbar-devider"></li>
-                            <li><a style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">준회원</a></li>
-                            <li class="topbar-devider"></li>
-                            <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
-                        <% end %>
                     <% else %>
                         <li><a href="<%= new_user_session_path %>">Login</a></li>
                         <li class="topbar-devider"></li>
