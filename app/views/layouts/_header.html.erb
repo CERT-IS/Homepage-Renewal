@@ -12,19 +12,15 @@
                 <ul class="loginbar pull-right">
                     <% if user_signed_in? %>
                         <% if current_user.provider.eql?("s-finger") %>
-                            <li>S Finger</li>
-                            <li class="topbar-devider"></li> 
-                        <% end %>
+                            <li>
+                                <img src="/assets/bootstrap/sfinger.ico" alt="S Finger" style="height:12px;width:12px;margin-bottom:1px;">
+                            </li>
+                        <% end %>     
+                        <li ><a><%= current_user.uid %></a></li>
+                        <li class="topbar-devider"></li>
                         <li><a href="<%= reports_path %>">Report</a></li>  
                         <li class="topbar-devider"></li>
-                        <li class="hoverSelector">
-                            <a><%= current_user.uid %></a>
-                            <ul class="languages hoverSelectorBlock">
-                                <li><a href="<%= user_path(current_user.uid) %>">Profile</a> </li>
-                                <li><a href="#">Settings</a></li>
-                                <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
-                            </ul>
-                        </li>
+                        <li><li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, data: { confirm: "정말 로그아웃 하시겠습니까?" } %></li>
                     <% else %>
                         <li><a href="<%= new_user_session_path %>">Login</a></li>
                         <li class="topbar-devider"></li>
@@ -75,20 +71,6 @@
                             </a> 
                         </li>
                     <% end %>                     
-
-                    <!-- Search Block -->
-                    <li>
-                        <i class="search fa fa-search search-btn"></i>
-                        <div class="search-open">
-                            <div class="input-group animated fadeInDown">
-                                <input type="text" class="form-control" placeholder="Search">
-                                <span class="input-group-btn">
-                                    <button class="btn-u" type="button">Go</button>
-                                </span>
-                            </div>
-                        </div>    
-                    </li>
-                    <!-- End Search Block -->
 
                     <% else %>
                     <!-- 비회원일 경우 -->

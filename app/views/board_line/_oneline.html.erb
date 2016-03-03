@@ -4,7 +4,7 @@
     </a>
     <div class="media-body">
         <h4 class="media-heading">
-            <strong><a href="#"><%= board.user.uid %></a></strong> @FLennon 
+            <strong><a><%= board.user.uid %></a></strong> @<%= board.user.phone %>
             <small><%= time_ago_in_words(board.created_at) %> ago</small>
         </h4>
         <p><%= board.title %></p>
@@ -22,7 +22,6 @@
                     <%= render 'like', board: board %>
                 <% end %>
             </li>
-            <li><a href="#"><i class="expand-list rounded-x fa fa-retweet"></i></a></li>
             <% if board.deletable_by? current_user %>
                 <li>
                     <%= link_to '<i class="expand-list rounded-x fa fa-trash"></i>'.html_safe, "/#{board.board_type.name}/#{board.id}", method: :delete, data: { confirm: "정말 삭제 하시겠습니까?" } %>
