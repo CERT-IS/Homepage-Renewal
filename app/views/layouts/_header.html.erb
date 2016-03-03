@@ -57,44 +57,16 @@
 
                     <!-- 회원일 경우 -->
                     <% if user_signed_in? and current_user.member? %>
-                     
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            Notice
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="<%= notices_path %>">공지사항</a></li>
-                            <li><a href="<%= calendar_index_path %>">일정표</a></li>
-                        </ul>    
-                    </li>
 
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            Community
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="<%= frees_path %>">자유게시판</a></li>
-                            <li><a href="<%= lines_path %>">한줄게시판</a></li>
-                            <li><a href="<%= reviews_path %>">후기게시판</a></li>                            
-                            <li><a href="<%= genealogies_path %>">족보게시판</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            Data
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="<%= galleries_path %>">사진첩</a></li>
-                            <li><a href="<%= presentations_path %>">정기 발표자료</a></li>
-                            <li><a href="<%= documents_path %>">공문자료</a></li>
-                            <li><a href="<%= blogs_path %>">기술블로그</a></li>
-                        </ul>
+                    <li>
+                        <a href="<%= frees_path %>">
+                            자유게시판
+                        </a> 
                     </li>
 
                     <li>
-                        <a href="<%= projects_path %>">
-                            Project
+                        <a href="<%= lines_path %>">
+                            한줄게시판
                         </a> 
                     </li>
 
